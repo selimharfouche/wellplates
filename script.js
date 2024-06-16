@@ -53,8 +53,3 @@ function highlightText(text, searchTerm) {
     const regex = new RegExp(`(${searchTerm})`, 'gi');
     return text.replace(regex, '<span class="highlight">$1</span>');
 }
-
-function clearSearch() {
-    document.getElementById('searchInput').value = '';
-    document.getElementById('results').innerHTML = '';
-}
