@@ -10,6 +10,8 @@ async function fetchDatabase() {
 
 async function searchDatabase() {
     const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const materialFilter = document.getElementById('materialFilter').value;
+    const wellsFilter = document.getElementById('wellsFilter').value;
     const database = await fetchDatabase();
 
     if (!database) {
@@ -17,10 +19,14 @@ async function searchDatabase() {
         return;
     }
 
-    const results = database.wellplates.filter(wellplate => 
-        wellplate.name.toLowerCase().includes(searchInput) ||
-        wellplate.brand.toLowerCase().includes(searchInput)
-    );
+    const results = database.wellplates.filter(wellplate => {
+        return (
+            (wellplate.name.toLowerCase().includes(searchInput) ||
+            wellplate.brand.toLowerCase().includes(searchInput)) &&
+            (materialFilter === '' || wellplate.material === materialFilter) &&
+            (wellsFilter === '' || wellplate.number_of_wells == wellsFilter)
+        );
+    });
 
     displayResults(results, searchInput);
 }
