@@ -13,7 +13,7 @@ async function searchDatabase() {
     const database = await fetchDatabase();
 
     if (!database) {
-        document.getElementById('results').innerHTML = 'Error loading the database.';
+        document.getElementById('results').innerHTML = '<div class="alert alert-danger">Error loading the database.</div>';
         return;
     }
 
@@ -30,13 +30,15 @@ function displayResults(results, searchTerm) {
     resultsContainer.innerHTML = '';
 
     if (results.length === 0) {
-        resultsContainer.innerHTML = 'No results found.';
+        resultsContainer.innerHTML = '<div class="alert alert-warning">No results found.</div>';
         return;
     }
 
     const resultsList = document.createElement('ul');
+    resultsList.classList.add('list-group');
     results.forEach(result => {
         const listItem = document.createElement('li');
+        listItem.classList.add('list-group-item');
         const highlightedName = highlightText(result.name, searchTerm);
         const highlightedBrand = highlightText(result.brand, searchTerm);
         listItem.innerHTML = `${highlightedName} - ${highlightedBrand} (${result.material}, ${result.number_of_wells} wells)`;

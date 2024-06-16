@@ -4,17 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wellplates Database</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .highlight {
             background-color: yellow;
         }
+        .container {
+            margin-top: 50px;
+        }
     </style>
 </head>
 <body>
-    <h1>Search Wellplates</h1>
-    <input type="text" id="searchInput" placeholder="Search by name or brand" oninput="searchDatabase()">
-    <button onclick="clearSearch()">Clear</button>
-    <div id="results"></div>
+    <div class="container">
+        <h1 class="text-center">Search Wellplates</h1>
+        <div class="form-group">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search by name or brand" oninput="searchDatabase()">
+        </div>
+        <button class="btn btn-secondary" onclick="clearSearch()">Clear</button>
+        <div id="results" class="mt-4"></div>
+    </div>
 
     <script src="script.js"></script>
 </body>
