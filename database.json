@@ -1,0 +1,65 @@
+{
+  "wellplates": [
+    {
+      "name": "Standard 96-Well Plate",
+      "number_of_wells": 96,
+      "material": "Polystyrene",
+      "brand": "Corning"
+    },
+    {
+      "name": "Deep 96-Well Plate",
+      "number_of_wells": 96,
+      "material": "Polypropylene",
+      "brand": "Eppendorf"
+    },
+    {
+      "name": "384-Well Microplate",
+      "number_of_wells": 384,
+      "material": "Polystyrene",
+      "brand": "Thermo Fisher Scientific"
+    },
+    {
+      "name": "24-Well Cell Culture Plate",
+      "number_of_wells": 24,
+      "material": "Polystyrene",
+      "brand": "Greiner Bio-One"
+    },
+    {
+      "name": "1536-Well Plate",
+      "number_of_wells": 1536,
+      "material": "Polystyrene",
+      "brand": "PerkinElmer"
+    },
+    {
+      "name": "6-Well Plate",
+      "number_of_wells": 6,
+      "material": "Polycarbonate",
+      "brand": "BD Biosciences"
+    },
+    {
+      "name": "12-Well Plate",
+      "number_of_wells": 12,
+      "material": "Polystyrene",
+      "brand": "Nunc"
+    },
+    {
+      "name": "48-Well Plate",
+      "number_of_wells": 48,
+      "material": "Polypropylene",
+      "brand": "Corning"
+    },
+    {
+      "name": "384-Well Low Volume Plate",
+      "number_of_wells": 384,
+      "material": "Polypropylene",
+      "brand": "Bio-Rad"
+    },
+    {
+      "name": "96-Well Black/Clear Plate",
+      "number_of_wells": 96,
+      "material": "Polystyrene",
+      "brand": "Thermo Fisher Scientific"
+    }
+  ]
+}
+
