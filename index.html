@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wellplates Database</title>
+    <style>
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
 </head>
 <body>
     <h1>Search Wellplates</h1>
-    <input type="text" id="searchInput" placeholder="Search by name or brand">
-    <button onclick="searchDatabase()">Search</button>
+    <input type="text" id="searchInput" placeholder="Search by name or brand" oninput="searchDatabase()">
+    <button onclick="clearSearch()">Clear</button>
     <div id="results"></div>
 
     <script src="script.js"></script>

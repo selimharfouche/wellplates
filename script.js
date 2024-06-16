@@ -22,10 +22,10 @@ async function searchDatabase() {
         wellplate.brand.toLowerCase().includes(searchInput)
     );
 
-    displayResults(results);
+    displayResults(results, searchInput);
 }
 
-function displayResults(results) {
+function displayResults(results, searchTerm) {
     const resultsContainer = document.getElementById('results');
     resultsContainer.innerHTML = '';
 
@@ -37,9 +37,22 @@ function displayResults(results) {
     const resultsList = document.createElement('ul');
     results.forEach(result => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${result.name} - ${result.brand} (${result.material}, ${result.number_of_wells} wells)`;
+        const highlightedName = highlightText(result.name, searchTerm);
+        const highlightedBrand = highlightText(result.brand, searchTerm);
+        listItem.innerHTML = `${highlightedName} - ${highlightedBrand} (${result.material}, ${result.number_of_wells} wells)`;
         resultsList.appendChild(listItem);
     });
 
     resultsContainer.appendChild(resultsList);
+}
+
+function highlightText(text, searchTerm) {
+    if (!searchTerm) return text;
+    const regex = new RegExp(`(${searchTerm})`, 'gi');
+    return text.replace(regex, '<span class="highlight">$1</span>');
+}
+
+function clearSearch() {
+    document.getElementById('searchInput').value = '';
+    document.getElementById('results').innerHTML = '';
 }
