@@ -1,7 +1,6 @@
 {
   "name": "Wellplates",
   "version": "0.1.0",
-  "homepage": "https://selimharfouche.github.io/wellplates",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
