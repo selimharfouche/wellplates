@@ -1,15 +1,14 @@
 {
   "files": {
-    "main.css": "/wellplates/static/css/main.0659233d.css",
-    "main.js": "/wellplates/static/js/main.5da3a809.js",
+    "main.css": "/wellplates/static/css/main.31d6cfe0.css",
+    "main.js": "/wellplates/static/js/main.2ab30a00.js",
     "static/js/453.40a3e1cd.chunk.js": "/wellplates/static/js/453.40a3e1cd.chunk.js",
     "index.html": "/wellplates/index.html",
-    "main.0659233d.css.map": "/wellplates/static/css/main.0659233d.css.map",
-    "main.5da3a809.js.map": "/wellplates/static/js/main.5da3a809.js.map",
+    "main.2ab30a00.js.map": "/wellplates/static/js/main.2ab30a00.js.map",
     "453.40a3e1cd.chunk.js.map": "/wellplates/static/js/453.40a3e1cd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0659233d.css",
-    "static/js/main.5da3a809.js"
+    "static/css/main.31d6cfe0.css",
+    "static/js/main.2ab30a00.js"
   ]
 }
