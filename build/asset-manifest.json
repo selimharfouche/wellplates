@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/wellplates/static/css/main.31d6cfe0.css",
+    "main.js": "/wellplates/static/js/main.9f06dd5f.js",
+    "static/js/453.866b59ed.chunk.js": "/wellplates/static/js/453.866b59ed.chunk.js",
+    "index.html": "/wellplates/index.html",
+    "main.9f06dd5f.js.map": "/wellplates/static/js/main.9f06dd5f.js.map",
+    "453.866b59ed.chunk.js.map": "/wellplates/static/js/453.866b59ed.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31d6cfe0.css",
+    "static/js/main.9f06dd5f.js"
+  ]
+}
