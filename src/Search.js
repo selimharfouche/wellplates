@@ -1,15 +1,17 @@
-// src/Search.js
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Search = ({ data }) => {
-  const [query, setQuery] = useState('');
+  //https://react.dev/reference/react/useState
+  const [query, setQuery] = useState("");
 
+  //On each input on the search box, setQuery will update the value of query with the current innput
   const handleChange = (e) => {
     setQuery(e.target.value);
   };
 
-  const filteredData = data.filter(item =>
+  //returns search result
+  const filteredData = data.filter((item) =>
     item.name.toLowerCase().includes(query.toLowerCase())
   );
 
@@ -22,7 +24,8 @@ const Search = ({ data }) => {
         onChange={handleChange}
       />
       <ul>
-        {filteredData.map(item => (
+        {/* for each item return name and number of wells, clickable */}
+        {filteredData.map((item) => (
           <li key={item.name}>
             <Link to={`/item/${encodeURIComponent(item.name)}`}>
               {item.name} - {item.number_of_wells} wells
