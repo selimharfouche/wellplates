@@ -34,8 +34,9 @@ const ItemDetail = ({ data }) => {
       <p>Material: {item.material}</p>
       <p>Brand: {item.brand}</p>
       <p>Comment: {item.comment}</p>
+
     </div>
   );
 };
 
-export default ItemDetail; // Export the ItemDetail component as the default export
+export default ItemDetail;

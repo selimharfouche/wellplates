@@ -4,18 +4,16 @@
   "homepage": "https://wellplates.selimharfouche.com/",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.23.1",
-    "react-scripts": "^3.0.1",
-    "web-vitals": "^2.1.4"
+    "three": "^0.165.0",
+    "web-vitals": "^4.1.1"
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
-    
     "predeploy": "npm run build",
     "build": "react-scripts --openssl-legacy-provider build",
     "add-domain": "echo \"wellplates.selimharfouche.com\" > build/CNAME",
@@ -23,7 +21,6 @@
     "bd": "npm run build && npm run deploy",
     "test": "react-scripts test --openssl-legacy-provider test",
     "eject": "react-scripts eject"
-    
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +41,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "react-scripts": "^5.0.1"
   }
 }
