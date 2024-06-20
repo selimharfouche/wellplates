@@ -34,7 +34,8 @@ const ItemDetail = ({ data }) => {
       <p>Material: {item.material}</p>
       <p>Brand: {item.brand}</p>
       <p>Comment: {item.comment}</p>
-
+      {item.image && <img src={item.image} alt={item.name} style={{ width: '300px', height: 'auto' }} />}
+      
     </div>
   );
 };
