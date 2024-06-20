@@ -1,22 +1,43 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+// Search.js
 
+// Summary:
+// This file defines the Search component which includes a search bar to filter through the wellplates data.
+// It imports necessary hooks and components, manages the search query state, handles input changes,
+// and renders a list of filtered wellplates with links to their detail pages.
+
+// Includes
+import React, { useState } from "react"; // Importing React library and useState hook
+import { Link } from "react-router-dom"; // Importing Link component from react-router-dom for navigation
+
+// Search Component
+/**
+ * The Search component provides a search bar to filter through the wellplates data.
+ * 
+ * @param {Array} data - Array of wellplate objects passed as a prop
+ */
 const Search = ({ data }) => {
-  //https://react.dev/reference/react/useState
+  // useState hook to manage the search query state
+  // Reference: https://react.dev/reference/react/useState
   const [query, setQuery] = useState("");
 
-  //On each input on the search box, setQuery will update the value of query with the current innput
+  // Event handler for input changes in the search box
+  /**
+   * Updates the query state with the current input value.
+   * 
+   * @param {Object} e - Event object from the input field
+   */
   const handleChange = (e) => {
     setQuery(e.target.value);
   };
 
-  //returns search result
+  // Filters the data based on the current query
   const filteredData = data.filter((item) =>
     item.name.toLowerCase().includes(query.toLowerCase())
   );
 
   return (
     <div>
+      {/* Input field for the search query */}
       <input
         type="text"
         placeholder="Search..."
@@ -24,7 +45,7 @@ const Search = ({ data }) => {
         onChange={handleChange}
       />
       <ul>
-        {/* for each item return name and number of wells, clickable */}
+        {/* For each filtered item, return a list item with a link to the detail page */}
         {filteredData.map((item) => (
           <li key={item.name}>
             <Link to={`/item/${encodeURIComponent(item.name)}`}>
@@ -37,4 +58,4 @@ const Search = ({ data }) => {
   );
 };
 
-export default Search;
+export default Search; // Exporting the Search component as the default export
