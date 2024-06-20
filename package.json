@@ -10,18 +10,20 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.23.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^3.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
+    
     "predeploy": "npm run build",
-    "build": "react-scripts build",
+    "build": "react-scripts --openssl-legacy-provider build",
     "add-domain": "echo \"wellplates.selimharfouche.com\" > build/CNAME",
     "deploy": "npm run add-domain && gh-pages -d build",
     "bd": "npm run build && npm run deploy",
-    "test": "react-scripts test",
+    "test": "react-scripts test --openssl-legacy-provider test",
     "eject": "react-scripts eject"
+    
   },
   "eslintConfig": {
     "extends": [
@@ -40,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
