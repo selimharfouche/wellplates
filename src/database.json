@@ -6,7 +6,7 @@
       "material": "Polystyrene",
       "brand": "Corning",
       "image": "/images/standard-96-well-plate.png",
-      "model3D": "public/models/standard-96-well-plate.glb",
+      "model3D": "/models/standard-96-well-plate.glb",
       "comment": "Not a real well plate"
     },
     {

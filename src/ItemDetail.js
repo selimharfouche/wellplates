@@ -8,6 +8,7 @@
 // Import necessary libraries and hooks
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import ModelViewer from './ModelViewer'; // Import the ModelViewer component
 
 // ItemDetail Component
 // This component displays detailed information about a specific wellplate.
@@ -26,7 +27,7 @@ const ItemDetail = ({ data }) => {
     return <div>Item not found</div>;
   }
 
-  // Render the details of the found item
+  // Render the details of the found item, including the image and model
   return (
     <div>
       <h2>{item.name}</h2>
@@ -35,7 +36,7 @@ const ItemDetail = ({ data }) => {
       <p>Brand: {item.brand}</p>
       <p>Comment: {item.comment}</p>
       {item.image && <img src={item.image} alt={item.name} style={{ width: '300px', height: 'auto' }} />}
-      
+      {item.model3D && <ModelViewer modelPath={item.model3D} />}
     </div>
   );
 };
