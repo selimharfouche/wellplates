@@ -5,6 +5,8 @@
       "number_of_wells": 96,
       "material": "Polystyrene",
       "brand": "Corning",
+      "model_2d": "public/models/standard-96-well-plate.png",
+      "model_3d": "public/models/standard-96-well-plate.glb",
       "comment": "Not a real well plate"
     },
     {
