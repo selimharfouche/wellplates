@@ -30,7 +30,16 @@ const ImageViewer = ({ imagePath, altText }) => {
       >
         {isFullScreen ? 'Exit Full Screen' : 'Full Screen'}
       </button>
-      <img src={imagePath} alt={altText} style={{ maxWidth: '100%', height: 'auto' }} />
+      <img 
+        src={imagePath} 
+        alt={altText} 
+        style={{ 
+          maxWidth: isFullScreen ? '100%' : '600px', 
+          maxHeight: isFullScreen ? '100vh' : '400px', 
+          height: 'auto',
+          width: 'auto' 
+        }} 
+      />
     </div>
   );
 };
