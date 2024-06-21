@@ -17,3 +17,11 @@ img {
   display: block;
   margin: 0 auto;
 }
+/* App.css */
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
