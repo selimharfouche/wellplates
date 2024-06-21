@@ -7,8 +7,6 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import data from "../data/database.json";
-import filters from "../data/filters.json";
 
 /**
  * The Search component provides a search bar to filter through the wellplates data.
@@ -107,7 +105,7 @@ const Search = ({ data }) => {
         {filteredData.map((item) => (
           <li key={item.name}>
             <Link to={`/item/${encodeURIComponent(item.name)}`}>
-              {item.name} - {item.number_of_wells} wells
+              {item.name}
             </Link>
           </li>
         ))}
