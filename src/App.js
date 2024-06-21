@@ -23,10 +23,7 @@ function App() {
           <h1>Search App</h1>
           <Routes>
             <Route path="/" element={<Search data={data.wellplates} />} />
-            <Route
-              path="/item/:name"
-              element={<ItemDetail data={data.wellplates} />}
-            />
+            <Route path="/item/:name" element={<ItemDetail data={data.wellplates} />} />
           </Routes>
         </header>
       </div>

@@ -1,0 +1,27 @@
+{
+    "materials": [
+      "Polystyrene",
+      "Polypropylene",
+      "Polycarbonate"
+    ],
+    "brands": [
+      "Corning",
+      "Eppendorf",
+      "Thermo Fisher Scientific",
+      "Greiner Bio-One",
+      "PerkinElmer",
+      "BD Biosciences",
+      "Nunc",
+      "Bio-Rad"
+    ],
+    "number_of_wells": [
+      6,
+      12,
+      24,
+      48,
+      96,
+      384,
+      1536
+    ]
+  }
+  
