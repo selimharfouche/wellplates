@@ -2,6 +2,7 @@
 import React, { Suspense, useRef, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Html } from '@react-three/drei';
+import { addFullscreenChangeListener, requestFullscreen, exitFullscreen } from '../utils/fullscreen';
 
 const Model = ({ modelPath }) => {
   const { scene } = useGLTF(modelPath);
@@ -13,49 +14,18 @@ const ModelViewer = ({ modelPath }) => {
   const [isFullScreen, setIsFullScreen] = useState(false);
 
   useEffect(() => {
-    const handleFullScreenChange = () => {
-      setIsFullScreen(
-        document.fullscreenElement === canvasRef.current ||
-        document.webkitFullscreenElement === canvasRef.current ||
-        document.mozFullScreenElement === canvasRef.current ||
-        document.msFullscreenElement === canvasRef.current
-      );
-    };
+    const cleanup = addFullscreenChangeListener((isFullScreen) => {
+      setIsFullScreen(!!isFullScreen);
+    });
 
-    document.addEventListener('fullscreenchange', handleFullScreenChange);
-    document.addEventListener('webkitfullscreenchange', handleFullScreenChange);
-    document.addEventListener('mozfullscreenchange', handleFullScreenChange);
-    document.addEventListener('MSFullscreenChange', handleFullScreenChange);
-
-    return () => {
-      document.removeEventListener('fullscreenchange', handleFullScreenChange);
-      document.removeEventListener('webkitfullscreenchange', handleFullScreenChange);
-      document.removeEventListener('mozfullscreenchange', handleFullScreenChange);
-      document.removeEventListener('MSFullscreenChange', handleFullScreenChange);
-    };
+    return cleanup;
   }, []);
 
   const handleFullScreen = () => {
     if (!isFullScreen) {
-      if (canvasRef.current.requestFullscreen) {
-        canvasRef.current.requestFullscreen();
-      } else if (canvasRef.current.mozRequestFullScreen) { // Firefox
-        canvasRef.current.mozRequestFullScreen();
-      } else if (canvasRef.current.webkitRequestFullscreen) { // Chrome, Safari, and Opera
-        canvasRef.current.webkitRequestFullscreen();
-      } else if (canvasRef.current.msRequestFullscreen) { // IE/Edge
-        canvasRef.current.msRequestFullscreen();
-      }
+      requestFullscreen(canvasRef.current);
     } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.mozCancelFullScreen) { // Firefox
-        document.mozCancelFullScreen();
-      } else if (document.webkitExitFullscreen) { // Chrome, Safari, and Opera
-        document.webkitExitFullscreen();
-      } else if (document.msExitFullscreen) { // IE/Edge
-        document.msExitFullscreen();
-      }
+      exitFullscreen();
     }
   };
 
