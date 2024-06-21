@@ -8,8 +8,8 @@
 // Import necessary libraries and hooks
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import ModelViewer from './ModelViewer'; // Import the ModelViewer component
-import ImageViewer from './ImageViewer'; // Import the ImageViewer component
+import ModelViewer from './ModelViewer'; 
+import ImageViewer from './ImageViewer'; 
 
 // ItemDetail Component
 // This component displays detailed information about a specific wellplate.
