@@ -9,6 +9,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import ModelViewer from './ModelViewer'; // Import the ModelViewer component
+import ImageViewer from './ImageViewer'; // Import the ImageViewer component
 
 // ItemDetail Component
 // This component displays detailed information about a specific wellplate.
@@ -35,7 +36,7 @@ const ItemDetail = ({ data }) => {
       <p>Material: {item.material}</p>
       <p>Brand: {item.brand}</p>
       <p>Comment: {item.comment}</p>
-      {item.image && <img src={item.image} alt={item.name} style={{ width: '300px', height: 'auto' }} />}
+      {item.image && <ImageViewer imagePath={item.image} altText={item.name} />}
       {item.model3D && <ModelViewer modelPath={item.model3D} />}
     </div>
   );
