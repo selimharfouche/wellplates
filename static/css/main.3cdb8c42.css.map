@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/main.3cdb8c42.css","mappings":"AACA,qBACE,WAAY,CACZ,QAAS,CAET,eAAgB,CADhB,SAEF,CAEA,OACE,aACF","sources":["App.css"],"sourcesContent":["/* src/App.css */\nhtml, body, #root, .App {\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n}\n\ncanvas {\n  display: block;\n}\n"],"names":[],"sourceRoot":""}
