@@ -23,7 +23,6 @@ const ItemDetail = ({ data }) => {
   // Find the item in the data array that matches the decoded name
   const item = data.find((item) => item.name === decodedName);
 
-  // If no item is found, display an error message
   if (!item) {
     return <div>Item not found</div>;
   }
