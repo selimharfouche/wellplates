@@ -23,4 +23,11 @@ This block of code iterates over the `filteredData` array using the `map` method
 - `key={item.name}`: Each list item is given a unique `key` prop using the wellplate name to help React identify which items have changed, are added, or are removed.
 - `encodeURIComponent(item.name)`: This function encodes the wellplate name to ensure that special characters are properly formatted for the URL.
 
+### Link Explanation
+
+The `Link` component from `react-router-dom` is used to create navigation links that enable client-side routing in a React application. In this case, the `Link` component is used to generate links to the detail pages of each wellplate. When a user clicks on one of these links, the URL changes to `/item/<wellplate-name>`, and the corresponding `ItemDetail` component is rendered.
+
+- **URL Encoding**: `encodeURIComponent(item.name)` is used to encode the wellplate name so that it can be safely included in the URL. This ensures that special characters in the wellplate name are properly formatted for the URL.
+- **Navigation**: Clicking on the `Link` navigates the user to the detail page of the selected wellplate, where the `ItemDetail` component is rendered with the relevant data.
+
 By iterating over `filteredData`, this block dynamically generates the list of wellplates that match the search query, updating in real-time as the user types.

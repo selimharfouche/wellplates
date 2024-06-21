@@ -38,7 +38,7 @@ const Search = ({ data }) => {
         {filteredData.map((item) => (
           <li key={item.name}>
             <Link to={`/item/${encodeURIComponent(item.name)}`}>
-              {item.name} - {item.number_of_wells} wells
+              {item.name}
             </Link>
           </li>
         ))}
