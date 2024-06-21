@@ -1,5 +1,11 @@
-/* Style for the main title */
-/*.App-header h1 {
-    color: red;
-  }
-  */
+/* src/App.css */
+html, body, #root, .App {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+}
