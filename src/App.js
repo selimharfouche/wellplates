@@ -9,9 +9,9 @@
 import React from 'react'; // Importing React library
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Importing components from react-router-dom for routing
 import './App.css'; // Importing the CSS file for styling
-import data from './database.json'; // Importing the JSON data
-import Search from './Search'; // Importing the Search component
-import ItemDetail from './ItemDetail'; // Importing the ItemDetail component
+import data from './data/database.json'; // Importing the JSON data
+import Search from './components/Search'; // Importing the Search component
+import ItemDetail from './components/ItemDetail'; // Importing the ItemDetail component
 
 // App Component
 /**
