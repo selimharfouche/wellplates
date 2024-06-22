@@ -9,8 +9,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import data from './data/database.json';
-import Search from './components/Search';
-import ItemDetail from './components/ItemDetail';
+import Search from './components/search/Search';
+import ItemDetail from './components/views/ItemDetail';
 
 /**
  * The main App component that sets up the router and routes.
