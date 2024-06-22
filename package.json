@@ -14,8 +14,8 @@
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
-    "predeploy": "npm run build && cp build/index.html build/404.html",
-    "build": "react-scripts --openssl-legacy-provider build",
+    "predeploy": "npm run build",
+    "build": "react-scripts --openssl-legacy-provider build && cp build/index.html build/404.html",
     "add-domain": "echo \"wellplates.selimharfouche.com\" > build/CNAME",
     "deploy": "npm run add-domain && gh-pages -d build",
     "bd": "npm run build && npm run deploy",

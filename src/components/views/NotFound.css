@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,500');
 
+/* Scope all styles to the .not-found-page class */
 .not-found-page {
   width: 100%;
   height: 100%;
@@ -12,21 +13,21 @@
   background-size: cover;
   background-repeat: no-repeat;
   font-family: "Roboto Mono", "Liberation Mono", Consolas, monospace;
-  color: rgba(255,255,255,.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 
-.mx-auto {
+.not-found-page .mx-auto {
   margin-left: auto;
   margin-right: auto;
 }
 
-.container,
-.container > .row,
-.container > .row > div {
+.not-found-page .container,
+.not-found-page .container > .row,
+.not-found-page .container > .row > div {
   height: 100%;
 }
 
-#countUp {
+.not-found-page #countUp {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,23 +35,23 @@
   height: 100%;
 }
 
-.number {
+.not-found-page .number {
   font-size: 4rem;
   font-weight: 500;
   margin-bottom: 1rem;
 }
 
-.text {
+.not-found-page .text {
   font-weight: 300;
   text-align: center;
 }
 
-/* Custom styles for the link */
-a {
+/* Custom styles for the link within .not-found-page */
+.not-found-page a {
   color: #ffcc00; /* Change this to your desired color */
   text-decoration: underline;
 }
 
-a:hover {
+.not-found-page a:hover {
   color: #ffffff; /* Change this to your desired hover color */
 }
