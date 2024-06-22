@@ -11,6 +11,7 @@ import './App.css';
 import data from './data/database.json';
 import Search from './components/search/Search';
 import ItemDetail from './components/views/ItemDetail';
+import NotFound from './components/views/NotFound';
 
 /**
  * The main App component that sets up the router and routes.
@@ -20,10 +21,10 @@ function App() {
     <Router>
       <div className="App">
         <header className="App-header">
-          <h1>Search App</h1>
           <Routes>
             <Route path="/" element={<Search data={data.wellplates} />} />
             <Route path="/item/:name" element={<ItemDetail data={data.wellplates} />} />
+            <Route path="*" element={<NotFound />} /> {/* Catch-all route for 404 page */}
           </Routes>
         </header>
       </div>

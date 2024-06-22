@@ -69,7 +69,9 @@ const Search = ({ data }) => {
   ).map(item => item.number_of_wells))];
 
   return (
+    
     <div>
+      <h1>Search App</h1>
       <SearchInput query={query} onChange={handleChange} />
       <FilterSelect value={selectedMaterial} onChange={handleMaterialChange} options={availableMaterials} defaultOption="All Materials" />
       <FilterSelect value={selectedBrand} onChange={handleBrandChange} options={availableBrands} defaultOption="All Brands" />

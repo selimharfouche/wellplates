@@ -13,7 +13,7 @@
 
 // Import necessary libraries and hooks
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import ModelViewer from './ModelViewer'; 
 import ImageViewer from './ImageViewer'; 
 
@@ -35,7 +35,7 @@ const ItemDetail = ({ data }) => {
   const item = data.find((item) => item.name === decodedName);
 
   if (!item) {
-    return <div>Item not found</div>;
+    return <Navigate to="/404" replace/>;
   }
 
   // Render the details of the found item dynamically
