@@ -15,7 +15,7 @@
   
   /* Styles for ModelDisplay */
   .model-display {
-    height: 400px;
-    width: 100%;
+    height: 400px !important;
+    width: 100% !important;
   }
   
