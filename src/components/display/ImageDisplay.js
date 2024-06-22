@@ -11,6 +11,7 @@
 
 // Import necessary libraries
 import React from 'react';
+import './DisplayComponents.css'; // Import the merged CSS file
 
 // ImageDisplay Component
 //
@@ -25,12 +26,7 @@ const ImageDisplay = ({ imagePath, altText, isFullScreen }) => (
   <img 
     src={imagePath} 
     alt={altText} 
-    style={{ 
-      maxWidth: isFullScreen ? '100%' : '600px', 
-      maxHeight: isFullScreen ? '100vh' : '400px', 
-      height: 'auto',
-      width: 'auto' 
-    }} 
+    className={`image-display ${isFullScreen ? 'fullscreen' : ''}`}
   />
 );
 

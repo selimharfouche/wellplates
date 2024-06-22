@@ -14,8 +14,7 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Html } from '@react-three/drei';
-
-// -------------------- functions --------------------
+import './DisplayComponents.css'; // Import the merged CSS file
 
 // Model Component
 //
@@ -28,8 +27,6 @@ const Model = ({ modelPath }) => {
   return <primitive object={scene} scale={[0.5, 0.5, 0.5]} />;
 };
 
-// -------------------- main component --------------------
-
 // ModelDisplay Component
 //
 // This component sets up the Canvas for rendering the 3D model and includes controls for interaction.
@@ -38,7 +35,7 @@ const Model = ({ modelPath }) => {
 //
 const ModelDisplay = ({ modelPath }) => (
   <Canvas
-    style={{ height: '400px', width: '100%' }}
+    className="model-display"
     camera={{ position: [0, 0, 100], fov: 50 }}  
   >
     <Suspense fallback={<Html><div>Loading...</div></Html>}>

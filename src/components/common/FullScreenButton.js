@@ -13,6 +13,7 @@
 // Import necessary libraries and utility functions
 import React from 'react';
 import { requestFullscreen, exitFullscreen } from '../../utils/fullscreen';
+import './FullScreenButton.css'; // Import the CSS file
 
 // FullScreenButton Component
 //
@@ -38,10 +39,10 @@ const FullScreenButton = ({ isFullScreen, toggleFullScreen }) => {
   };
 
   return (
-    // Render the button with an inline style for positioning
+    // Render the button with a class name for styling
     <button 
       onClick={handleFullScreen} 
-      style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1 }}
+      className="fullscreen-button"
     >
       {isFullScreen ? 'Exit Full Screen' : 'Full Screen'}
     </button>
