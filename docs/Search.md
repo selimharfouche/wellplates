@@ -1,33 +1,54 @@
-# Detailed Explanation of Key Code Sections in `Search.js`
 
-## Component Definition
+# Search Component Documentation
 
-### `const Search = ({ data }) =>`
-This line defines the `Search` component as a functional component in React. The component takes a single prop, `data`, which is an array of wellplate objects. The `data` prop is used within the component to filter and display wellplate information based on the user's search query.
+## Summary
 
-## State Management
+The `Search` component provides a search bar and filters to filter through the wellplates data. It manages the search query state, handles input changes, and renders a list of filtered wellplates with links to their detail pages.
 
-### `const [query, setQuery] = useState("");`
-This line uses the `useState` hook to create a state variable `query` and a function `setQuery` to update its value. The initial state of `query` is an empty string. The `query` state is used to store the current value of the search input, allowing the component to re-render and filter the wellplates as the user types.
+## Components
 
-## Data Filtering
+The `Search` component is composed of several subcomponents:
 
-### `const filteredData = data.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()));`
-This line creates a new array `filteredData` that contains only the wellplates whose names include the current search query. The `filter` method iterates over each item in the `data` array, and the `includes` method checks if the `name` property of the item (converted to lowercase) contains the search query (also converted to lowercase). This makes the search case-insensitive.
+- `SearchInput`
+- `FilterSelect`
+- `FilteredList`
 
-## Rendering Filtered Data
+### `SearchInput`
 
-### `{filteredData.map((item) => ( <li key={item.name}> <Link to={`/item/${encodeURIComponent(item.name)}`}> {item.name} - {item.number_of_wells} wells </Link> </li> ))}`
-This block of code iterates over the `filteredData` array using the `map` method, rendering a list item (`<li>`) for each wellplate. Each list item contains a `Link` component from `react-router-dom`, which creates a clickable link to the detail page of the wellplate. The `to` prop of the `Link` component is set to the URL path `/item/${encodeURIComponent(item.name)}`, where `item.name` is URL-encoded to ensure it is a valid URL segment. Inside the `Link`, the name of the wellplate and the number of wells are displayed.
+**File**: `src/components/search/SearchInput.js`
 
-- `key={item.name}`: Each list item is given a unique `key` prop using the wellplate name to help React identify which items have changed, are added, or are removed.
-- `encodeURIComponent(item.name)`: This function encodes the wellplate name to ensure that special characters are properly formatted for the URL.
+The `SearchInput` component renders a search input field and handles input changes. It updates the query state in the parent component.
 
-### Link Explanation
+**Props:**
+- `query` (string): The current search query.
+- `onChange` (function): The function to call when the input value changes.
 
-The `Link` component from `react-router-dom` is used to create navigation links that enable client-side routing in a React application. In this case, the `Link` component is used to generate links to the detail pages of each wellplate. When a user clicks on one of these links, the URL changes to `/item/<wellplate-name>`, and the corresponding `ItemDetail` component is rendered.
+### `FilterSelect`
 
-- **URL Encoding**: `encodeURIComponent(item.name)` is used to encode the wellplate name so that it can be safely included in the URL. This ensures that special characters in the wellplate name are properly formatted for the URL.
-- **Navigation**: Clicking on the `Link` navigates the user to the detail page of the selected wellplate, where the `ItemDetail` component is rendered with the relevant data.
+**File**: `src/components/search/FilterSelect.js`
 
-By iterating over `filteredData`, this block dynamically generates the list of wellplates that match the search query, updating in real-time as the user types.
+The `FilterSelect` component renders a dropdown select element for filtering. It updates the selected filter state in the parent component.
+
+**Props:**
+- `value` (string): The current selected value.
+- `onChange` (function): The function to call when the select value changes.
+- `options` (Array): The options to display in the select dropdown.
+- `defaultOption` (string): The default option to display.
+
+### `FilteredList`
+
+**File**: `src/components/search/FilteredList.js`
+
+The `FilteredList` component renders a list of filtered items with links to their detail pages.
+
+**Props:**
+- `filteredData` (Array): The array of filtered items.
+
+## How It Works
+
+1. **State Management**: The `Search` component manages the state for the search query and selected filters using React's `useState` hook.
+2. **Input Handling**: The component includes handlers for input changes (`handleChange`, `handleMaterialChange`, `handleBrandChange`, and `handleNumberOfWellsChange`), which update the corresponding state.
+3. **Filtering Data**: The `filteredData` variable filters the `data` prop based on the current state of the search query and selected filters. This is done using a single `.filter` method that combines all the filtering conditions.
+4. **Dynamic Filter Options**: The component dynamically generates the available filter options (`availableMaterials`, `availableBrands`, `availableNumberOfWells`) based on the current selection to ensure relevant options are displayed.
+5. **Rendering**: The component renders the `SearchInput`, three `FilterSelect` components for materials, brands, and number of wells, and the `FilteredList` component to display the filtered data.
+

@@ -1,15 +1,23 @@
 // Search.js
+//
+// ## Summary
+//
+// The Search component provides a search bar and filters to filter through the wellplates data.
+// It manages the search query state, handles input changes, and renders a list of filtered wellplates with links to their detail pages.
+//
+// ## References:
+//
+// * https://reactjs.org/docs/hooks-state.html
+// * https://reactrouter.com/web/api/Link
 
-// Summary:
-// This file defines the Search component which includes a search bar to filter through the wellplates data.
-// It imports necessary hooks and components, manages the search query state, handles input changes,
-// and renders a list of filtered wellplates with links to their detail pages.
-
+// Import necessary libraries and components
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import SearchInput from './SearchInput';
+import FilterSelect from './FilterSelect';
+import FilteredList from './FilteredList';
 
 /**
- * The Search component provides a search bar to filter through the wellplates data.
+ * The Search component provides a search bar and filters to filter through the wellplates data.
  * 
  * @param {Array} data - Array of wellplate objects passed as a prop
  */
@@ -35,19 +43,14 @@ const Search = ({ data }) => {
     setSelectedNumberOfWells(e.target.value);
   };
 
-  const filteredData = data
-    .filter((item) =>
-      item.name.toLowerCase().includes(query.toLowerCase())
-    )
-    .filter((item) =>
-      selectedMaterial ? item.material === selectedMaterial : true
-    )
-    .filter((item) =>
-      selectedBrand ? item.brand === selectedBrand : true
-    )
-    .filter((item) =>
-      selectedNumberOfWells ? item.number_of_wells === parseInt(selectedNumberOfWells) : true
+  const filteredData = data.filter((item) => {
+    return (
+      item.name.toLowerCase().includes(query.toLowerCase()) &&
+      (selectedMaterial ? item.material === selectedMaterial : true) &&
+      (selectedBrand ? item.brand === selectedBrand : true) &&
+      (selectedNumberOfWells ? item.number_of_wells === parseInt(selectedNumberOfWells) : true)
     );
+  });
 
   // Generate dynamic options for remaining filters based on current selection
   const availableMaterials = [...new Set(data.filter(item => 
@@ -67,49 +70,11 @@ const Search = ({ data }) => {
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Search..."
-        value={query}
-        onChange={handleChange}
-      />
-
-      <select value={selectedMaterial} onChange={handleMaterialChange}>
-        <option value="">All Materials</option>
-        {availableMaterials.map((material) => (
-          <option key={material} value={material}>
-            {material}
-          </option>
-        ))}
-      </select>
-
-      <select value={selectedBrand} onChange={handleBrandChange}>
-        <option value="">All Brands</option>
-        {availableBrands.map((brand) => (
-          <option key={brand} value={brand}>
-            {brand}
-          </option>
-        ))}
-      </select>
-
-      <select value={selectedNumberOfWells} onChange={handleNumberOfWellsChange}>
-        <option value="">All Numbers of Wells</option>
-        {availableNumberOfWells.map((number) => (
-          <option key={number} value={number}>
-            {number}
-          </option>
-        ))}
-      </select>
-
-      <ul>
-        {filteredData.map((item) => (
-          <li key={item.name}>
-            <Link to={`/item/${encodeURIComponent(item.name)}`}>
-              {item.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <SearchInput query={query} onChange={handleChange} />
+      <FilterSelect value={selectedMaterial} onChange={handleMaterialChange} options={availableMaterials} defaultOption="All Materials" />
+      <FilterSelect value={selectedBrand} onChange={handleBrandChange} options={availableBrands} defaultOption="All Brands" />
+      <FilterSelect value={selectedNumberOfWells} onChange={handleNumberOfWellsChange} options={availableNumberOfWells} defaultOption="All Numbers of Wells" />
+      <FilteredList filteredData={filteredData} />
     </div>
   );
 };
