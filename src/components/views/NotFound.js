@@ -47,7 +47,6 @@ const NotFound = () => {
               <div className="number" data-count="404">0</div>
               <div className="text">Page not found</div>
               <div className="text">The page you tried to access doesn't exist.</div>
-              <div className="text">You may have tried to access an item page directly via its URL.</div>
               <div className="text">Please go to the <a href="/">main page</a> and navigate from there.</div>
             </div>
           </div>
