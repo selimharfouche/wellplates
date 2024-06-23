@@ -46,6 +46,7 @@ To get started with the Wellplate Viewer Application, follow these steps:
 4. **Fullscreen Mode**: Click the fullscreen button on images and 3D models to view them in fullscreen.
 
 ## Project Structure
+``` bash
 wellplates/
 │
 ├── public/
@@ -88,6 +89,7 @@ wellplates/
 │   └── [documentation files]
 ├── package.json
 └── README.md
+```
 ## Usage
 
 The application allows users to:
