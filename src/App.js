@@ -5,17 +5,18 @@
 // It imports necessary components and data, and defines the main `App` component that wraps everything
 // within a router context and sets up the navigation.
 
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
-import data from './data/database.json';
-import Search from './components/search/Search';
-import ItemDetail from './components/views/ItemDetail';
-import NotFound from './components/views/NotFound';
+import React from 'react'; //Necessary for creating react components.
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; //handle client-side routing.
+//BrowserRouter (aliased as Router): manages the routing in the application using the HTML5 history API.
+//Route: Used to define individual routes in the application.
+//Routes: container for all the **Route** components.
+import './App.css'; //styling
+import data from './data/database.json';//wellplates database
+import Search from './components/search/Search'; //provides the interface for searching and filtering well plates.
+import ItemDetail from './components/views/ItemDetail';//displays detailed information about a selected well plate item.
+import NotFound from './components/views/NotFound';//when the requested item cannnot be found.
 
-/**
- * The main App component that sets up the router and routes.
- */
+// The main App component that sets up the router and routes.
 function App() {
   return (
     <Router>
