@@ -13,7 +13,7 @@
 // Import necessary libraries and utility functions
 import React from 'react';
 import { requestFullscreen, exitFullscreen } from '../../utils/fullscreen';
-import './FullScreenButton.css'; // Import the CSS file
+import '../../styles/FullScreenButton.css'; 
 
 // FullScreenButton Component
 //
