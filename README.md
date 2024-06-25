@@ -4,15 +4,6 @@
 The Wellplate Viewer Application is a React-based application designed to help users search, filter, and view detailed information about various wellplates. The application includes features such as a search bar, filters, detailed item views, and the ability to view images and 3D models in fullscreen.
 
 ## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Components Overview](#components-overview)
-- [Data](#data)
-- [Utilities](#utilities)
-
 
 ## Features
 - **Search Functionality**: Easily search for wellplates using a search bar.
@@ -40,10 +31,6 @@ To get started with the Wellplate Viewer Application, follow these steps:
     ```
 
 ## Usage
-1. **Search for Wellplates**: Use the search bar on the home page to search for specific wellplates by name.
-2. **Filter Wellplates**: Apply filters for material, brand, and number of wells to narrow down the search results.
-3. **View Details**: Click on a wellplate name to view detailed information, including images and 3D models.
-4. **Fullscreen Mode**: Click the fullscreen button on images and 3D models to view them in fullscreen.
 
 ## Project Structure
 ``` bash
@@ -90,83 +77,49 @@ wellplates/
 ├── package.json
 └── README.md
 ```
-## Usage
 
-The application allows users to:
-- Search for wellplates by name.
-- Filter wellplates by material, brand, and number of wells.
-- View detailed information about each wellplate, including images and 3D models.
+## Main
+### App.js
+This is the main structure of the application, it includes routing.
+Renders:
+1. **Search.js**: landing page, /src/components/search/Search.js
+2. **ItemDetail.js**: item page, /src/components/views/ItemDetail.js
+3. **NotFound.js**: for 404, /src/components/views/NotFound.js
 
-## Components Overview
+### database.json
+Contains the wellplate data used in the application
 
-### Common Components
+## Search
+**components/search/**: This directory contains all the scripts related to the search feature
 
-- **FullScreenButton**: A button to toggle fullscreen mode for a given element.
+### Search.js
+**Purpose**: provides a search bar and filters to filter through the well plates data
+**Key features**:
+1. Manages serch query and filter states usinng 'useState;
+2. Filters wellplate data based onn current query and selected filters
+3. Dynamically generates filter options based on current selections.
 
-### Display Components
+### SearchInput.js
+**Purpose**: renders a search input field and handles input changes.
+**Props**:
+1. query: Current search query.
+2. onChange: Function to update the query state.
 
-- **ImageDisplay**: Displays an image with dynamic styling based on fullscreen state.
-- **ModelDisplay**: Renders a 3D model using `@react-three/fiber` and `@react-three/drei`.
+### FilterSelect.js
 
-### Search Components
+**Purpose**: renders a dropdown select element for filtering and updates the selected filter state.
 
-- **Search**: Provides a search bar and filters to filter through the wellplates data.
-- **SearchInput**: Renders a search input field.
-- **FilterSelect**: Renders a dropdown select element for filtering.
-- **FilteredList**: Renders a list of filtered items with links to their detail pages.
+**Props**:
+1. value: Current selected value.
+2. onChange: Function to update the selected value.
+3. options: Array of options for the dropdown.
+4. defaultOption: Default option displayed in the dropdown.
 
-### Views
+### FilteredList.js
 
-- **ImageViewer**: Manages and displays an image that can be toggled to fullscreen mode.
-- **ItemDetail**: Displays detailed information about a specific wellplate.
-- **ModelViewer**: Displays a 3D model of a wellplate.
-- **NotFound**: A simple 404 page for undefined routes.
+**Purpose**: renders a list of filtered wellplate items with links to their detail pages.
 
-## Data
-
-- **database.json**: Contains wellplate data including name, number of wells, material, brand, image path, 3D model path, and comments.
-- **filters.json**: Contains arrays of materials, brands, and numbers of wells used in wellplates.
-
-## Utilities
-
-- **fullscreen.js**: Provides functions to handle fullscreen functionality, including entering, exiting, and listening for changes in fullscreen state
+**Props**:
+filteredData : Array of filtered wellplate items.
 
 
-
-## Components Overview
-
-### Common Components
-
-- **FullScreenButton**: A button to toggle fullscreen mode for a given element.
-
-### Display Components
-
-- **ImageDisplay**: Displays an image with dynamic styling based on fullscreen state.
-- **ModelDisplay**: Renders a 3D model using `@react-three/fiber` and `@react-three/drei`.
-
-### Search Components
-
-- **Search**: Provides a search bar and filters to filter through the wellplates data.
-- **SearchInput**: Renders a search input field.
-- **FilterSelect**: Renders a dropdown select element for filtering.
-- **FilteredList**: Renders a list of filtered items with links to their detail pages.
-
-### Views
-
-- **ImageViewer**: Manages and displays an image that can be toggled to fullscreen mode.
-- **ItemDetail**: Displays detailed information about a specific wellplate.
-- **ModelViewer**: Displays a 3D model of a wellplate.
-- **NotFound**: A simple 404 page for undefined routes.
-
-## Data
-
-- **database.json**: Contains wellplate data including name, number of wells, material, brand, image path, 3D model path, and comments.
-- **filters.json**: Contains arrays of materials, brands, and numbers of wells used in wellplates.
-
-## Utilities
-
-- **fullscreen.js**: Provides functions to handle fullscreen functionality, including entering, exiting, and listening for changes in fullscreen state.
-
-## Additional Documentation
-
-For detailed documentation on each component and feature, please refer to the `docs` directory.
