@@ -12,7 +12,7 @@
 
 // Import necessary libraries and components
 import React, { useState } from "react";
-import SearchInput from '../search/FilterSelect';
+import SearchInput from '../search/SearchInput';
 import FilterSelect from '../search/FilterSelect';
 import FilteredList from '../search/FilteredList';
 import filters from '../../data/filters.json';//to be used later on, 

@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; //han
 //Routes: container for all the **Route** components.
 import './App.css'; //styling
 import data from './data/database.json';//wellplates database
-import Search from './components/search/Search'; //provides the interface for searching and filtering well plates.
+import Search from './components/views/Search'; //provides the interface for searching and filtering well plates.
 import ItemDetail from './components/views/ItemDetail';//displays detailed information about a selected well plate item.
 import NotFound from './components/views/NotFound';//when the requested item cannnot be found.
 
