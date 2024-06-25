@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; //han
 //BrowserRouter (aliased as Router): manages the routing in the application using the HTML5 history API.
 //Route: Used to define individual routes in the application.
 //Routes: container for all the **Route** components.
-import './App.css'; //styling
+import './styles/App.css'
 import data from './data/database.json';//wellplates database
 import Search from './components/views/Search'; //provides the interface for searching and filtering well plates.
 import ItemDetail from './components/views/ItemDetail';//displays detailed information about a selected well plate item.

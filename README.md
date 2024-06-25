@@ -30,67 +30,19 @@ To get started with the Wellplate Viewer Application, follow these steps:
     npm start
     ```
 
-## Usage
-
-## Project Structure
-``` bash
-wellplates/
-│
-├── public/
-│   ├── images/
-│   │   └── [image files]
-│   ├── models/
-│   │   └── [model files]
-│   ├── 404.html
-│   └── index.html
-├── src/
-│   ├── components/
-│   │   ├── common/
-│   │   │   ├── FullScreenButton.js
-│   │   │   └── FullScreenButton.css
-
-│   │   ├── display/
-│   │   │   ├── ImageDisplay.js
-│   │   │   ├── ModelDisplay.js
-│   │   │   └── DisplayComponents.css
-│   │   ├── search/
-│   │   │   ├── FilterSelect.js
-│   │   │   ├── FilteredList.js
-│   │   │   ├── Search.js
-│   │   │   └── SearchInput.js
-│   │   ├── views/
-│   │   │   ├── ImageViewer.js
-│   │   │   ├── ItemDetail.js
-│   │   │   ├── ModelViewer.js
-│   │   │   ├── NotFound.css
-│   │   │   └── NotFound.js
-│   ├── data/
-│   │   ├── database.json
-│   │   └── filters.json
-│   ├── utils/
-│   │   └── fullscreen.js
-│   ├── App.css
-│   ├── App.js
-│   ├── index.js
-│   └── reportWebVitals.js
-├── docs/
-│   └── [documentation files]
-├── package.json
-└── README.md
-```
 
 
-## src
+# Code
 ### App.js
 This is the main structure of the application, it includes routing.
+
+### database.json
+Contains the wellplate data used in the application.
 
 ## components/views
 1. **Search.js**: landing page, /src/components/search/Search.js
 2. **ItemDetail.js**: item page, /src/components/views/ItemDetail.js
 3. **NotFound.js**: for 404, /src/components/views/NotFound.js
-
-### database.json
-Contains the wellplate data used in the application.
 
 
 ### Search.js
