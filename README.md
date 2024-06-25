@@ -48,6 +48,7 @@ wellplates/
 │   │   ├── common/
 │   │   │   ├── FullScreenButton.js
 │   │   │   └── FullScreenButton.css
+
 │   │   ├── display/
 │   │   │   ├── ImageDisplay.js
 │   │   │   ├── ModelDisplay.js
@@ -78,10 +79,12 @@ wellplates/
 └── README.md
 ```
 
-## Main
+
+## src
 ### App.js
 This is the main structure of the application, it includes routing.
-Renders:
+
+## components/views
 1. **Search.js**: landing page, /src/components/search/Search.js
 2. **ItemDetail.js**: item page, /src/components/views/ItemDetail.js
 3. **NotFound.js**: for 404, /src/components/views/NotFound.js
@@ -89,8 +92,6 @@ Renders:
 ### database.json
 Contains the wellplate data used in the application.
 
-## Search
-**components/search/**: This directory contains all the scripts related to the search feature.
 
 ### Search.js
 **Purpose**: provides a search bar and filters to filter through the well plates data.
@@ -99,6 +100,20 @@ Contains the wellplate data used in the application.
 1. Manages search query and filter states using 'useState'.
 2. Filters wellplate data based on current query and selected filters.
 3. Dynamically generates filter options based on current selections.
+
+### ItemDetail.js
+
+**Purpose**: Displays detailed information about a specific wellplate based on the name parameter in the URL.
+
+**Key features**:
+1. Extracts the name parameter from the URL and decodes it to match it with the item names in the data.
+2. Finds the corresponding item in the data array using the decoded name.
+    - If the item is not found, redirects to a 404 page using the Navigate component.
+    - Else renders the details of the found item 
+### NotFound.js
+404 template
+
+## components/search
 
 ### SearchInput.js
 **Purpose**: renders a search input field and handles input changes.
@@ -124,18 +139,7 @@ Contains the wellplate data used in the application.
 **Props**:
 filteredData : Array of filtered wellplate items.
 
-## views
-
-### ItemDetail.js
-
-**Purpose**: Displays detailed information about a specific wellplate based on the name parameter in the URL.
-
-**Key features**:
-1. Extracts the name parameter from the URL and decodes it to match it with the item names in the data.
-2. Finds the corresponding item in the data array using the decoded name.
-    - If the item is not found, redirects to a 404 page using the Navigate component.
-    - Else renders the details of the found item 
-
+###
 
 ### ImageViewer.js
 
