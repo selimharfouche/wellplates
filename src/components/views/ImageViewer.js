@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { addFullscreenChangeListener } from '../../utils/fullscreen';
 import FullScreenButton from '../common/FullScreenButton';
-import ImageDisplay from '../display/ImageDisplay';
+import './DisplayComponents.css';
 
 const ImageViewer = ({ imagePath, altText }) => {
   const imageRef = useRef();
@@ -18,7 +18,11 @@ const ImageViewer = ({ imagePath, altText }) => {
   return (
     <div ref={imageRef} style={{ position: 'relative', textAlign: 'center' }}>
       <FullScreenButton isFullScreen={isFullScreen} toggleFullScreen={imageRef} />
-      <ImageDisplay imagePath={imagePath} altText={altText} isFullScreen={isFullScreen} />
+      <img 
+    src={imagePath} 
+    alt={altText} 
+    className={`image-display ${isFullScreen ? 'fullscreen' : ''}`}
+  />
     </div>
   );
 };
