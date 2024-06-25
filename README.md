@@ -94,6 +94,7 @@ Contains the wellplate data used in the application.
 
 ### Search.js
 **Purpose**: provides a search bar and filters to filter through the well plates data.
+
 **Key features**:
 1. Manages search query and filter states using 'useState'.
 2. Filters wellplate data based on current query and selected filters.
@@ -101,6 +102,7 @@ Contains the wellplate data used in the application.
 
 ### SearchInput.js
 **Purpose**: renders a search input field and handles input changes.
+
 **Props**:
 1. query: Current search query.
 2. onChange: Function to update the query state.
@@ -122,4 +124,27 @@ Contains the wellplate data used in the application.
 **Props**:
 filteredData : Array of filtered wellplate items.
 
+## views
 
+### ItemDetail.js
+
+**Purpose**: Displays detailed information about a specific wellplate based on the name parameter in the URL.
+
+**Key features**:
+1. Extracts the name parameter from the URL and decodes it to match it with the item names in the data.
+2. Finds the corresponding item in the data array using the decoded name.
+    - If the item is not found, redirects to a 404 page using the Navigate component.
+    - Else renders the details of the found item 
+
+
+### ImageViewer.js
+
+**Purpose**: Displays an image with the capability to view it in fullscreen mode.
+
+**Components Used**:
+1. ImageDisplay.js: displays the actual image
+2. FullScreenButton: Button to toggle fullscreen mode.
+    
+
+### ModelViewer.js
+Same as ImageViewer but uses ModelDisplay.js instead of ImageDisplay.js
