@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { addFullscreenChangeListener } from '../../utils/fullscreen';
 import FullScreenButton from '../common/FullScreenButton';
-import './DisplayComponents.css';
+//import './DisplayComponents.css';
 
 const ImageViewer = ({ imagePath, altText }) => {
   const imageRef = useRef();

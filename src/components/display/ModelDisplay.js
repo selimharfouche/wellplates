@@ -14,7 +14,7 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Html } from '@react-three/drei';
-import './DisplayComponents.css'; // Import the merged CSS file
+//import './DisplayComponents.css'; // Import the merged CSS file
 
 // Model Component
 //
