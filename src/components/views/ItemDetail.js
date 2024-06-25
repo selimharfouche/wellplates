@@ -15,7 +15,7 @@
 import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import ModelViewer from './ModelViewer'; 
-import ImageViewer from './ImageViewer'; 
+import ImageViewer from '../display/ImageViewer'; 
 import '../../styles/ItemDetail.css'
 
 // ItemDetail Component
