@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { addFullscreenChangeListener } from '../../utils/fullscreen';
 import FullScreenButton from '../common/FullScreenButton';
-import ModelDisplay from '../display/ModelDisplay';
+import ModelDisplay from './ModelDisplay';
 
 const ModelViewer = ({ modelPath }) => {
   const canvasRef = useRef();

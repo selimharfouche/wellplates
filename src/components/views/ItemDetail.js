@@ -14,7 +14,7 @@
 // Import necessary libraries and hooks
 import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import ModelViewer from './ModelViewer'; 
+import ModelViewer from '../display/ModelViewer'; 
 import ImageViewer from '../display/ImageViewer'; 
 import '../../styles/ItemDetail.css'
 
