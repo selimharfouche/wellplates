@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './NotFound.css'; // Import the CSS file
+import '../../styles/NotFound.css'; 
 
 const NotFound = () => {
   useEffect(() => {
