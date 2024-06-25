@@ -87,16 +87,16 @@ Renders:
 3. **NotFound.js**: for 404, /src/components/views/NotFound.js
 
 ### database.json
-Contains the wellplate data used in the application
+Contains the wellplate data used in the application.
 
 ## Search
-**components/search/**: This directory contains all the scripts related to the search feature
+**components/search/**: This directory contains all the scripts related to the search feature.
 
 ### Search.js
-**Purpose**: provides a search bar and filters to filter through the well plates data
+**Purpose**: provides a search bar and filters to filter through the well plates data.
 **Key features**:
-1. Manages serch query and filter states usinng 'useState;
-2. Filters wellplate data based onn current query and selected filters
+1. Manages search query and filter states using 'useState'.
+2. Filters wellplate data based on current query and selected filters.
 3. Dynamically generates filter options based on current selections.
 
 ### SearchInput.js
