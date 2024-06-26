@@ -118,6 +118,6 @@ wellplates/
 
 ## Documentation
 For detailed documentation on the key components, refer to the following files in the `docs` directory:
-- [search.md](docs/Search.md): Explains in depth how `Search.js` interacts with its subcomponents.
-- [itemdetail.md](./docs/ItemDetail.md): Explains in depth how `ItemDetail.js` interacts with its subcomponents.
+- [search.md](Search.md): Explains in depth how `Search.js` interacts with its subcomponents.
+- [itemdetail.md](./ItemDetail.md): Explains in depth how `ItemDetail.js` interacts with its subcomponents.
 
