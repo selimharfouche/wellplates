@@ -1,6 +1,5 @@
 // SearchInput.js
 
-// Import necessary libraries
 import React from 'react';
 
 /**
@@ -21,5 +20,4 @@ const SearchInput = ({ query, onChange }) => (
   />
 );
 
-// Export the SearchInput component as the default export
 export default SearchInput;

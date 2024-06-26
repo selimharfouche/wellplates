@@ -1,8 +1,17 @@
+//ImageViewer
+
 import React, { useRef, useState, useEffect } from 'react';
 import { addFullscreenChangeListener } from '../../utils/fullscreen';
 import FullScreenButton from '../common/FullScreenButton';
-//import './DisplayComponents.css';
 
+/**
+ * ImageViewer component renders an image with fullscreen capability.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {string} props.imagePath - Path to the image file.
+ * @param {string} props.altText - Alt text for the image.
+ * @returns {JSX.Element}
+ */
 const ImageViewer = ({ imagePath, altText }) => {
   const imageRef = useRef();
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -19,10 +28,10 @@ const ImageViewer = ({ imagePath, altText }) => {
     <div ref={imageRef} style={{ position: 'relative', textAlign: 'center' }}>
       <FullScreenButton isFullScreen={isFullScreen} toggleFullScreen={imageRef} />
       <img 
-    src={imagePath} 
-    alt={altText} 
-    className={`image-display ${isFullScreen ? 'fullscreen' : ''}`}
-  />
+        src={imagePath} 
+        alt={altText} 
+        className={`image-display ${isFullScreen ? 'fullscreen' : ''}`}
+      />
     </div>
   );
 };

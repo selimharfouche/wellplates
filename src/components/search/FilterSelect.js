@@ -1,6 +1,5 @@
 // FilterSelect.js
 
-// Import necessary libraries
 import React from 'react';
 
 /**
@@ -25,5 +24,4 @@ const FilterSelect = ({ value, onChange, options, defaultOption }) => (
   </select>
 );
 
-// Export the FilterSelect component as the default export
 export default FilterSelect;

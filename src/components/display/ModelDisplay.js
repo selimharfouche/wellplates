@@ -1,55 +1,37 @@
-// ModelDisplay.js
-//
-// ## Summary
-//
-// The ModelDisplay component uses @react-three/fiber and @react-three/drei to render a 3D model.
-// It defines a Model component to load the GLTF model and a ModelDisplay component to set up the canvas and render the model.
-//
-// ## References:
-//
-// * https://github.com/pmndrs/react-three-fiber
-// * https://github.com/pmndrs/drei
+//ModelDisplay.js
 
-// Import necessary libraries and components
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Html } from '@react-three/drei';
-//import './DisplayComponents.css'; // Import the merged CSS file
 
-// Model Component
-//
-// This component loads the 3D model using useGLTF and renders it as a primitive object.
-// 
-// @param {string} modelPath - Path to the GLTF model file.
-//
+/**
+ * Model component loads and renders a 3D model.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {string} props.modelPath - Path to the GLTF model file.
+ * @returns {JSX.Element}
+ */
 const Model = ({ modelPath }) => {
   const { scene } = useGLTF(modelPath);
   return <primitive object={scene} scale={[0.5, 0.5, 0.5]} />;
 };
 
-// ModelDisplay Component
-//
-// This component sets up the Canvas for rendering the 3D model and includes controls for interaction.
-//
-// @param {string} modelPath - Path to the GLTF model file.
-//
+/**
+ * ModelDisplay component sets up the canvas and renders the 3D model with controls.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {string} props.modelPath - Path to the GLTF model file.
+ * @returns {JSX.Element}
+ */
 const ModelDisplay = ({ modelPath }) => (
-  <Canvas
-    className="model-display"
-    camera={{ position: [0, 0, 100], fov: 50 }}  
-  >
+  <Canvas className="model-display" camera={{ position: [0, 0, 100], fov: 50 }}>
     <Suspense fallback={<Html><div>Loading...</div></Html>}>
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 5]} intensity={1} />
-      <OrbitControls 
-        enableZoom={true} 
-        minDistance={10} 
-        maxDistance={100} 
-      />
+      <OrbitControls enableZoom={true} minDistance={10} maxDistance={100} />
       <Model modelPath={modelPath} />
     </Suspense>
   </Canvas>
 );
 
-// Export the ModelDisplay component as the default export
 export default ModelDisplay;

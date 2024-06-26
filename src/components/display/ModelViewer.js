@@ -1,8 +1,17 @@
+//ModelViewer.js
+
 import React, { useRef, useState, useEffect } from 'react';
 import { addFullscreenChangeListener } from '../../utils/fullscreen';
 import FullScreenButton from '../common/FullScreenButton';
 import ModelDisplay from './ModelDisplay';
 
+/**
+ * ModelViewer component renders a 3D model with fullscreen capability.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {string} props.modelPath - Path to the 3D model file.
+ * @returns {JSX.Element}
+ */
 const ModelViewer = ({ modelPath }) => {
   const canvasRef = useRef();
   const [isFullScreen, setIsFullScreen] = useState(false);

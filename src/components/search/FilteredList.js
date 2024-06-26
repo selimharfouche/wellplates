@@ -1,6 +1,5 @@
 // FilteredList.js
 
-// Import necessary libraries
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -24,5 +23,4 @@ const FilteredList = ({ filteredData }) => (
   </ul>
 );
 
-// Export the FilteredList component as the default export
 export default FilteredList;
