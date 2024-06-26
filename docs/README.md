@@ -1,106 +1,123 @@
-# Wellplate Viewer Application
+# Wellplate Viewer React Application
 
 ## Overview
-The Wellplate Viewer Application is a React-based application designed to help users search, filter, and view detailed information about various wellplates. The application includes features such as a search bar, filters, detailed item views, and the ability to view images and 3D models in fullscreen.
+This React application allows users to search, filter, and view detailed information about wellplates. The application includes functionality for searching and filtering wellplates, as well as viewing detailed information including images and 3D models.
 
 ## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Components](#components)
+  - [Search Component](#search-component)
+  - [ItemDetail Component](#itemdetail-component)
+  - [NotFound Component](#notfound-component)
+  - [Common Components](#common-components)
+- [Data Flow](#data-flow)
+- [Documentation](#documentation)
 
-## Features
-- **Search Functionality**: Easily search for wellplates using a search bar.
-- **Filtering Options**: Filter wellplates by material, brand, and number of wells.
-- **Detailed Views**: View detailed information about each wellplate, including images and 3D models.
-- **Fullscreen Mode**: View images and 3D models in fullscreen.
 
 ## Installation
-To get started with the Wellplate Viewer Application, follow these steps:
+To set up the project locally, follow these steps:
 
-1. **Clone the repository**:
-    ```bash
-    git clone https://github.com/selimharfouche/wellplates.git
+1. Clone the repository:
+```sh
+    git clone https://github.com/selimharfouche/wellplates.git 
+```
+2. Navigate to the project directory:
+```sh
     cd wellplates
-    ```
-
-2. **Install dependencies**:
-    ```bash
+```
+3. Install dependencies:
+```sh
     npm install
-    ```
+```
 
-3. **Start the development server**:
-    ```bash
+4. Start the development server:
+```sh
     npm start
-    ```
+```
+## Usage
+After starting the development server, you can access the application in your web browser at `http://localhost:3000`.
 
+## Project Structure
+! MAY NOT BE UP TO DATE AS IT WILL ALWAYS BE UPDATED LAST
+```sh
+wellplates/
+├── public/
+│   ├── index.html
+│   └── ...
+├── src/
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── FullScreenButton.js
+│   │   │   └── ...
+│   │   ├── display/
+│   │   │   ├── ImageViewer.js
+│   │   │   ├── ModelViewer.js
+│   │   │   └── ModelDisplay.js
+│   │   ├── search/
+│   │   │   ├── FilterSelect.js
+│   │   │   ├── SearchInput.js
+│   │   │   └── FilteredList.js
+│   │   ├── views/
+│   │   │   ├── Search.js
+│   │   │   ├── ItemDetail.js
+│   │   │   └── NotFound.js
+│   │   └── ...
+│   ├── data/
+│   │   ├── database.json
+│   │   ├── filters.json
+│   │   └── ...
+│   ├── styles/
+│   │   └── ...
+│   ├── utils/
+│   │   ├── fullscreen.js
+│   │   └── ...
+│   ├── App.js
+│   ├── index.js
+│   └── ...
+└── package.json
 
+```
 
-# Code
-### App.js
-This is the main structure of the application, it includes routing.
+## Components
 
-### database.json
-Contains the wellplate data used in the application.
+### Search Component
+- **Search.js**: Manages the state for search queries and filters, and passes down the necessary state and event handler functions as props to its subcomponents.
+- **SearchInput.js**: Renders a search input field and handles input changes.
+- **FilterSelect.js**: Renders a dropdown select element for filtering.
+- **FilteredList.js**: Renders a list of filtered wellplate items with links to their detail pages.
 
-## components/views
-1. **Search.js**: landing page, /src/components/search/Search.js
-2. **ItemDetail.js**: item page, /src/components/views/ItemDetail.js
-3. **NotFound.js**: for 404, /src/components/views/NotFound.js
+### ItemDetail Component
+- **ItemDetail.js**: Displays detailed information about a specific wellplate item based on the URL parameter.
+- **ImageViewer.js**: Renders an image with fullscreen capability.
+- **ModelViewer.js**: Renders a 3D model with fullscreen capability.
+- **ModelDisplay.js**: Sets up the canvas for rendering a 3D model.
 
+### NotFound Component
+- **NotFound.js**: Displays a custom 404 error page with a count-up animation for the "404" number.
 
-### Search.js
-**Purpose**: provides a search bar and filters to filter through the well plates data.
+### Common Components
+- **FullScreenButton.js**: Provides a button to toggle fullscreen mode for a given element.
 
-**Key features**:
-1. Manages search query and filter states using 'useState'.
-2. Filters wellplate data based on current query and selected filters.
-3. Dynamically generates filter options based on current selections.
+## Data Flow
+### Search Component
+1. User types in the search input -> `SearchInput` calls `onChange` -> `Search` updates `query` state.
+2. User selects a filter option -> `FilterSelect` calls `onChange` -> `Search` updates the corresponding filter state.
+3. `Search` component filters the data based on `query` and selected filters -> passes filtered data to `FilteredList`.
+4. `FilteredList` renders the filtered items.
 
-### ItemDetail.js
+### ItemDetail Component
+1. `ItemDetail` extracts the `name` parameter from the URL.
+2. `ItemDetail` finds the item in the data array that matches the decoded `name`.
+3. If the item has an `image` property:
+   - `ItemDetail` renders `ImageViewer`, passing `imagePath` and `altText` props.
+4. If the item has a `model3D` property:
+   - `ItemDetail` renders `ModelViewer`, passing the `modelPath` prop.
+   - `ModelViewer` internally uses `ModelDisplay` to set up the canvas and render the 3D model.
 
-**Purpose**: Displays detailed information about a specific wellplate based on the name parameter in the URL.
+## Documentation
+For detailed documentation on the key components, refer to the following files in the `docs` directory:
+- [search.md](./search.md): Explains in depth how `Search.js` interacts with its subcomponents.
+- [itemdetail.md](./itemdetail.md): Explains in depth how `ItemDetail.js` interacts with its subcomponents.
 
-**Key features**:
-1. Extracts the name parameter from the URL and decodes it to match it with the item names in the data.
-2. Finds the corresponding item in the data array using the decoded name.
-    - If the item is not found, redirects to a 404 page using the Navigate component.
-    - Else renders the details of the found item 
-### NotFound.js
-404 template
-
-## components/search
-
-### SearchInput.js
-**Purpose**: renders a search input field and handles input changes.
-
-**Props**:
-1. query: Current search query.
-2. onChange: Function to update the query state.
-
-### FilterSelect.js
-
-**Purpose**: renders a dropdown select element for filtering and updates the selected filter state.
-
-**Props**:
-1. value: Current selected value.
-2. onChange: Function to update the selected value.
-3. options: Array of options for the dropdown.
-4. defaultOption: Default option displayed in the dropdown.
-
-### FilteredList.js
-
-**Purpose**: renders a list of filtered wellplate items with links to their detail pages.
-
-**Props**:
-filteredData : Array of filtered wellplate items.
-
-###
-
-### ImageViewer.js
-
-**Purpose**: Displays an image with the capability to view it in fullscreen mode.
-
-**Components Used**:
-1. ImageDisplay.js: displays the actual image
-2. FullScreenButton: Button to toggle fullscreen mode.
-    
-
-### ModelViewer.js
-Same as ImageViewer but uses ModelDisplay.js instead of ImageDisplay.js
