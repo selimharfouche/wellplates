@@ -1,23 +1,13 @@
 // Search.js
-//
-// ## Summary
-//
-// The Search component provides a search bar and filters to filter through the wellplates data.
-// It manages the search query state, handles input changes, and renders a list of filtered wellplates with links to their detail pages.
-//
-// ## References:
-// * https://react.dev/reference/react/useState
-// * https://reactjs.org/docs/hooks-state.html
 
 // Import necessary libraries and components
 import React, { useState } from "react";
 import SearchInput from '../search/SearchInput';
 import FilterSelect from '../search/FilterSelect';
 import FilteredList from '../search/FilteredList';
-import filters from '../../data/filters.json'; // to be used later on, 
-// goal is to import the first set of filters, 
-// and then generate dynamically the rest of the filters
-// thus saving time from iterating over the whole database for the first set of filters
+// eslint-disable-next-line
+import filters from '../../data/filters.json'; // to be used later on, for the first import of filters 
+
 
 /**
  * The Search component provides a search bar and filters to filter through the wellplates data.
