@@ -26,7 +26,7 @@
 3. `Search` component filters the data based on `query` and selected filters -> passes filtered data to `FilteredList`.
 4. `FilteredList` renders the filtered items.
 
-# Example Flow
+# Example Flow (will be edited once database contains real items)
 1. User types "test" in the search input.
 2. `SearchInput` calls `onChange`, `Search` updates `query` to "test".
 3. User selects "BrandA" from the brand filter.
