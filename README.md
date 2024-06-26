@@ -2,9 +2,13 @@
 information about the project in /docs.
 
 features so far:
+
 **Search Functionality**: Easily search for wellplates using a search bar.
+
 **Filtering Options**: Filter wellplates by material, brand, and number of wells.
+
 **Detailed Views**: View detailed information about each wellplate, including images and 3D models.
+
 **Fullscreen Mode**: View images and 3D models in fullscreen.
 
 What i am currently focus my work on:
