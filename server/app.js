@@ -3,7 +3,7 @@ dotenv.config(); // This should be at the top before using any environment varia
 
 const express = require('express');
 const cors = require('cors');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb'); // Ensure ObjectId is imported
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -31,15 +31,29 @@ async function main() {
                 const collection = database.collection('Wellplates_Collection');
                 const documents = await collection.find({}).toArray();
 
-                // Log the documents for debugging
-                documents.forEach(doc => {
-                    console.log("Document:", doc);
-                });
-
                 // Send the documents as the response
                 res.json(documents);
             } catch (error) {
                 console.error("Error fetching wellplates:", error);
+                res.status(500).json({ message: error.message });
+            }
+        });
+
+        app.get('/api/wellplates/:id', async (req, res) => {
+            try {
+                const database = client.db('Wellplates_Database');
+                const collection = database.collection('Wellplates_Collection');
+                const wellplateId = new ObjectId(req.params.id);
+                const item = await collection.findOne({ _id: wellplateId });
+
+                if (!item) {
+                    res.status(404).json({ message: 'Item not found' });
+                    return;
+                }
+
+                res.json(item);
+            } catch (error) {
+                console.error("Error fetching wellplate:", error);
                 res.status(500).json({ message: error.message });
             }
         });

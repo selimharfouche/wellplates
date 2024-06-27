@@ -25,7 +25,7 @@ function App() {
         <header className="App-header">
           <Routes>
             <Route path="/" element={<Search data={data.wellplates} />} />
-            <Route path="/item/:name" element={<ItemDetail data={data.wellplates} />} />
+            <Route path="/item/:id" element={<ItemDetail data={data.wellplates} />} />
             <Route path="*" element={<NotFound />} /> {/* Catch-all route for 404 page */}
             <Route path="/fetch-database" element={<FetchDatabase />} /> {/* Add the new route */}
           </Routes>

@@ -1,40 +1,43 @@
 // Search.js
 
 // Import necessary libraries and components
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import SearchInput from '../search/SearchInput';
 import FilterSelect from '../search/FilterSelect';
 import FilteredList from '../search/FilteredList';
-// eslint-disable-next-line
-import filters from '../../data/filters.json'; // to be used later on, for the first import of filters 
-
 
 /**
  * The Search component provides a search bar and filters to filter through the wellplates data.
  * 
- * @param {Object} props - The properties object
- * @param {Array} props.data - Array of wellplate objects passed as a prop
  * @returns {JSX.Element} The rendered Search component
  */
-const Search = ({ data }) => {
-  
-  /** 
-   * The useState hook returns an array with two elements:
-   * 1. The current state value
-   * 2. A function that lets us update the state value
-   * 
-   * @type {[string, Function]}
-   */
+const Search = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
-
-  /** @type {[string, Function]} */
   const [selectedMaterial, setSelectedMaterial] = useState("");
-
-  /** @type {[string, Function]} */
   const [selectedBrand, setSelectedBrand] = useState("");
-
-  /** @type {[string, Function]} */
   const [selectedNumberOfWells, setSelectedNumberOfWells] = useState("");
+
+  /**
+   * Fetch data from the server when the component mounts.
+   */
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/wellplates'); // Adjust the URL as needed
+        setData(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   /**
    * Event handler for updating the search query state.
@@ -115,6 +118,14 @@ const Search = ({ data }) => {
     (!selectedMaterial || item.material === selectedMaterial) && 
     (!selectedBrand || item.brand === selectedBrand)
   ).map(item => item.number_of_wells))];
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div>

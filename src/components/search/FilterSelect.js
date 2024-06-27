@@ -16,8 +16,8 @@ import React from 'react';
 const FilterSelect = ({ value, onChange, options, defaultOption }) => (
   <select value={value} onChange={onChange}>
     <option value="">{defaultOption}</option>
-    {options.map((option) => (
-      <option key={option} value={option}>
+    {options.map((option, index) => (
+      <option key={index} value={option}>
         {option}
       </option>
     ))}
