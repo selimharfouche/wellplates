@@ -11,15 +11,22 @@ features so far:
 
 **Fullscreen Mode**: View images and 3D models in fullscreen.
 
-What i am currently focus my work on:
-- Usage of a server and hosting the database on mongodb
-- JSDoc for the whole project
+
+# Whats new - 1
+I added a node server and uploaded the database on mongodb atlas. I also made the database of 1000 items. the app now works locally with the server
+
+# What i am currently focus my work on:
+- deploy the new app (that includes the server)
+- code refactoring 
+- JSDoc
 
 
-some features i'm thinking about implementing once i'm done, not in a specific order:
+# Next step, not in a specific order:
 - admin portal ? 
-- some sort of helper bot
+- helper bot
 - sorting, which will lead to a more extensive filtering (for example number of wells between 24 and 384)
 - compare wellplates
 - more user friendly
-- - allowing users to add wellplates 
+- allowing users to add wellplates
+- images and 3d model will also be delivered from somewhere else
+  
