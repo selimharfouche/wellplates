@@ -15,7 +15,7 @@ features so far:
 # Whats new - 1
 I added a node server and uploaded the database on mongodb atlas. I also made the database of 1000 items. the app now works locally with the server
 
-# What i am currently focus my work on:
+# What i am currently focusing on:
 - deploy the new app (that includes the server)
 - code refactoring 
 - JSDoc
