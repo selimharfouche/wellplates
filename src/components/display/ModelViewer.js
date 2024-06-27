@@ -1,4 +1,4 @@
-//ModelViewer.js
+// ModelViewer.js
 
 import React, { useRef, useState, useEffect } from 'react';
 import { addFullscreenChangeListener } from '../../utils/fullscreen';
@@ -24,10 +24,14 @@ const ModelViewer = ({ modelPath }) => {
     return cleanup;
   }, []);
 
+  // Construct the full path to the model
+  console.log("MODEL PATH"+ modelPath);
+  const fullModelPath = `/models/${modelPath}`;
+
   return (
     <div ref={canvasRef} style={{ position: 'relative' }}>
       <FullScreenButton isFullScreen={isFullScreen} toggleFullScreen={canvasRef} />
-      <ModelDisplay modelPath={modelPath} />
+      <ModelDisplay modelPath={fullModelPath} />
     </div>
   );
 };
