@@ -15,6 +15,7 @@ import data from './data/database.json';//wellplates database
 import Search from './components/views/Search'; //provides the interface for searching and filtering well plates.
 import ItemDetail from './components/views/ItemDetail';//displays detailed information about a selected well plate item.
 import NotFound from './components/views/NotFound';//when the requested item cannnot be found.
+import FetchDatabase from './components/views/FetchDatabase'; // Testing the server
 
 // The main App component that sets up the router and routes.
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<Search data={data.wellplates} />} />
             <Route path="/item/:name" element={<ItemDetail data={data.wellplates} />} />
             <Route path="*" element={<NotFound />} /> {/* Catch-all route for 404 page */}
+            <Route path="/fetch-database" element={<FetchDatabase />} /> {/* Add the new route */}
           </Routes>
         </header>
       </div>
