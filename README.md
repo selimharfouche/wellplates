@@ -19,9 +19,6 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 - database of 108 wellplates (not real)
 - the front end is deployed on vercel https://wellplates.vercel.app/ 
 - the server is deployed on vercel https://wellplates-server.vercel.app/api/
-- ! i am having a uri change, so depending on when you access the website, it might not open 
-(the uri is dependent on my current password. despite the fact that i changed the password, uri is only working on the old password at the moment)
-
 
 # What i am currently focusing on:
 - writing instructions onn how to run the app locally
