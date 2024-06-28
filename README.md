@@ -30,6 +30,7 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 
 
 # Next step, not in a specific order:
+- be able to refresh the page 
 - admin portal ? 
 - helper bot
 - sorting, which will lead to a more extensive filtering (for example number of wells between 24 and 384)
