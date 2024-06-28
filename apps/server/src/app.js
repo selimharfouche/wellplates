@@ -5,7 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const { MongoClient, ObjectId } = require('mongodb');
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000; 
 
 const uri = process.env.MONGODB_URI;
 
@@ -70,10 +70,5 @@ async function listDatabases(client) {
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
-// Listen on the specified port
-app.listen(port, () => {
-  console.log(`Server ready on port ${port}.`);
-});
-
-// Export the app for Vercel
+// Export the app
 module.exports = app;
