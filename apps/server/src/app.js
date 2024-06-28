@@ -5,7 +5,10 @@ const express = require('express');
 const cors = require('cors');
 const { MongoClient, ObjectId } = require('mongodb'); // Ensure ObjectId is imported
 const app = express();
-const port = process.env.PORT || 5000;
+
+
+////////
+//const port = process.env.PORT || 5000;
 
 const uri = process.env.MONGODB_URI;
 
@@ -74,6 +77,6 @@ async function listDatabases(client) {
     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
 }
 
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`Server is running on port: ${port}`);
+// });
