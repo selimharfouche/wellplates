@@ -6,6 +6,7 @@ import axios from 'axios';
 import SearchInput from '../search/SearchInput';
 import FilterSelect from '../search/FilterSelect';
 import FilteredList from '../search/FilteredList';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001';
 
 /**
  * The Search component provides a search bar and filters to filter through the wellplates data.
@@ -27,7 +28,7 @@ const Search = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/wellplates'); // Adjust the URL as needed
+        const response = await axios.get(`${API_BASE_URL}/api/wellplates`); 
         setData(response.data);
         setLoading(false);
       } catch (error) {

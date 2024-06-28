@@ -5,6 +5,8 @@ import axios from 'axios';
 import ModelViewer from '../display/ModelViewer'; 
 import ImageViewer from '../display/ImageViewer'; 
 import '../../styles/ItemDetail.css';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001';
+
 
 /**
  * ItemDetail Component
@@ -22,10 +24,11 @@ const ItemDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
   useEffect(() => {
     const fetchItem = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/wellplates/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/api/wellplates/${id}`);
         setItem(response.data);
         setLoading(false);
       } catch (error) {
