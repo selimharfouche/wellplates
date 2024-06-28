@@ -71,7 +71,7 @@ app.get('/api/wellplates/:id', async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+app.get("/api", (req, res) => res.send("Express on Vercel"));
 
 // Start the server
 app.listen(port, () => {
