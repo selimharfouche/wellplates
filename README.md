@@ -12,11 +12,18 @@ features so far:
 **Fullscreen Mode**: View images and 3D models in fullscreen.
 
 
-# Whats new - 1
+# Whats new -1-
 I added a node server and uploaded the database on mongodb atlas. I also made the database of 1000 items. the app now works locally with the server
 
+# Whats new -2- 
+- the server is deployed on vercel https://wellplates.vercel.app/ 
+- the front end is deployed on vercel https://wellplates-server.vercel.app/
+- ! i am having a uri change, so depending on when you access the website, it might not open (thing is uri is dependent on password, i changed the old password and waiting for the change to be reflected onn mongodb atlas side for the uri 
+inn other words, the uri is dependent on my currennt password. despite the fact that i changed the password, uri is only working on the old password
+
+)
 # What i am currently focusing on:
-- deploy the new app (that includes the server)
+- writing instructions onn how to run the app locally
 - code refactoring 
 - JSDoc
 
