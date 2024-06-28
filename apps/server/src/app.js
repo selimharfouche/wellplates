@@ -26,6 +26,7 @@ async function main() {
         // Connect to the MongoDB cluster
         await client.connect();
         console.log("Connected to MongoDB");
+        app.get("/", (req, res) => res.send("Express on Vercel"));
 
         // Set up your routes here
         app.get('/api/wellplates', async (req, res) => {
