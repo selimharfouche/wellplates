@@ -1,5 +1,3 @@
-// ItemDetail.js
-
 // Import necessary libraries and hooks
 import React, { useEffect, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
@@ -51,7 +49,8 @@ const ItemDetail = () => {
     return <Navigate to="/404" replace />;
   }
 
-  console.log("item id"+item.id);
+  console.log("item id" + item.id);
+
   return (
     <div>
       <h2>{item.name}</h2>
@@ -59,9 +58,8 @@ const ItemDetail = () => {
         if (key === 'name' || key === 'image' || key === 'model3D') return null;
         return <p key={key}>{`${key.charAt(0).toUpperCase() + key.slice(1)}: ${item[key]}`}</p>;
       })}
-      {<ImageViewer imagePath={item.id+".png"} altText={item.name} />}
-
-      {<ModelViewer modelPath={item.id+".glb"} />}
+      {item.image && <ImageViewer imagePath={item.id+".png"} altText={item.name} />}
+      {item.model3D && <ModelViewer  modelPath={item.id+".glb"} />}
     </div>
   );
 };
