@@ -30,6 +30,7 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 
 
 # Next step, not in a specific order:
+- remove the uri leak from github
 - be able to refresh the page 
 - admin portal ? 
 - helper bot
