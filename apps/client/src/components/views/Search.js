@@ -27,7 +27,7 @@ const Search = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/wellplates'); // Adjust the URL as needed
+        const response = await axios.get('http://localhost:3001/api/wellplates'); // Adjust the URL as needed
         setData(response.data);
         setLoading(false);
       } catch (error) {
