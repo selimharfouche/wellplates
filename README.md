@@ -16,7 +16,7 @@ features so far:
 I added a node server and uploaded the database on mongodb atlas. I also made the database of 1000 items. the app now works locally with the server
 
 # Whats new -2- 
-- database of 108 wellplates (not real)
+- database of 108 wellplates (not real), on mongodb atlas
 - the front end is deployed on vercel https://wellplates.vercel.app/ 
 - the server is deployed on vercel https://wellplates-server.vercel.app/api/
 
@@ -40,4 +40,5 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 - images and 3d model will also be delivered from somewhere else
 - dig deeper in data structure in javascript
 - structurize the docs: 1 directory for .md and 1 for JSDocs
+- networking concepts: errors, request, asynch ...optimize
   
