@@ -21,12 +21,14 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 - the server is deployed on vercel https://wellplates-server.vercel.app/api/
 
 # What i am currently focusing on:
-- writing instructions onn how to run the app locally
+- writing instructions on how to run the app locally -> docs/README.MD
 - code refactoring 
-- JSDoc
+- documentaion, JSDoc
 
 
 # Next step, not in a specific order:
+- Mozilla sops
+- npmjs secure-env
 - be able to refresh the page 
 - admin portal ? 
 - helper bot

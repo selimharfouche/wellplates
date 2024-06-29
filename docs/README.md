@@ -1,123 +1,95 @@
-# Wellplate Viewer React Application
+# Instructions to Clone and Set Up the Repository
 
-## Overview
-This React application allows users to search, filter, and view detailed information about wellplates. The application includes functionality for searching and filtering wellplates, as well as viewing detailed information including images and 3D models.
-
-## Table of Contents
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Components](#components)
-  - [Search Component](#search-component)
-  - [ItemDetail Component](#itemdetail-component)
-  - [NotFound Component](#notfound-component)
-  - [Common Components](#common-components)
-- [Data Flow](#data-flow)
-- [Documentation](#documentation)
+## Prerequisites
+1. **Node.js**: Ensure you have Node.js installed on your machine. You can download it from [nodejs.org](https://nodejs.org/).
+2. **Git**: Ensure you have Git installed. You can download it from [git-scm.com](https://git-scm.com/).
 
 
-## Installation
-To set up the project locally, follow these steps:
+## 1. Clone the Repository
+1. Open your terminal (Command Prompt, PowerShell, Git Bash, etc.).
+2. Navigate to the directory where you want to clone the repository.
+3. Run the following command to clone the repository:
 
-1. Clone the repository:
 ```sh
-    git clone https://github.com/selimharfouche/wellplates.git 
-```
-2. Navigate to the project directory:
-```sh
-    cd wellplates
-```
-3. Install dependencies:
-```sh
-    npm install
+git clone https://github.com/selimharfouche/wellplates.git
+cd wellplates
 ```
 
-4. Start the development server:
-```sh
-    npm start
-```
-## Usage
-After starting the development server, you can access the application in your web browser at `http://localhost:3000`.
+## 2. Set Up Environment Variables
 
-## Project Structure
-! MAY NOT BE UP TO DATE AS IT WILL ALWAYS BE UPDATED LAST
-```sh
-wellplates/
-├── public/
-│   ├── index.html
-│   └── ...
-├── src/
-│   ├── components/
-│   │   ├── common/
-│   │   │   ├── FullScreenButton.js
-│   │   │   └── ...
-│   │   ├── display/
-│   │   │   ├── ImageViewer.js
-│   │   │   ├── ModelViewer.js
-│   │   │   └── ModelDisplay.js
-│   │   ├── search/
-│   │   │   ├── FilterSelect.js
-│   │   │   ├── SearchInput.js
-│   │   │   └── FilteredList.js
-│   │   ├── views/
-│   │   │   ├── Search.js
-│   │   │   ├── ItemDetail.js
-│   │   │   └── NotFound.js
-│   │   └── ...
-│   ├── data/
-│   │   ├── database.json
-│   │   ├── filters.json
-│   │   └── ...
-│   ├── styles/
-│   │   └── ...
-│   ├── utils/
-│   │   ├── fullscreen.js
-│   │   └── ...
-│   ├── App.js
-│   ├── index.js
-│   └── ...
-└── package.json
+### 2.1. Create `.env` in the `apps/client` Directory
 
+Run the following commands to create the `.env` file and set the environment variable:
+
+```sh
+echo "REACT_APP_API_BASE_URL=http://localhost:3001" > apps/client/.env
 ```
 
-## Components
+### 2.2. Create `.env` in the `apps/server` Directory
 
-### Search Component
-- **Search.js**: Manages the state for search queries and filters, and passes down the necessary state and event handler functions as props to its subcomponents.
-- **SearchInput.js**: Renders a search input field and handles input changes.
-- **FilterSelect.js**: Renders a dropdown select element for filtering.
-- **FilteredList.js**: Renders a list of filtered wellplate items with links to their detail pages.
+Run the following commands to create the `.env` file and set the environment variables:
 
-### ItemDetail Component
-- **ItemDetail.js**: Displays detailed information about a specific wellplate item based on the URL parameter.
-- **ImageViewer.js**: Renders an image with fullscreen capability.
-- **ModelViewer.js**: Renders a 3D model with fullscreen capability.
-- **ModelDisplay.js**: Sets up the canvas for rendering a 3D model.
+```
+echo "MONGODB_URI=your-mongodb-connection-string" > apps/server/.env
+echo "PORT=3001" >> apps/server/.env
+```
 
-### NotFound Component
-- **NotFound.js**: Displays a custom 404 error page with a count-up animation for the "404" number.
+Replace `your-mongodb-connection-string` with your actual MongoDB connection string.
 
-### Common Components
-- **FullScreenButton.js**: Provides a button to toggle fullscreen mode for a given element.
+## 3. Install Dependencies
 
-## Data Flow
-### Search Component
-1. User types in the search input -> `SearchInput` calls `onChange` -> `Search` updates `query` state.
-2. User selects a filter option -> `FilterSelect` calls `onChange` -> `Search` updates the corresponding filter state.
-3. `Search` component filters the data based on `query` and selected filters -> passes filtered data to `FilteredList`.
-4. `FilteredList` renders the filtered items.
+You can install dependencies for both the client and server without changing directories by using the `--prefix` flag:
 
-### ItemDetail Component
-1. `ItemDetail` extracts the `name` parameter from the URL.
-2. `ItemDetail` finds the item in the data array that matches the decoded `name`.
-3. If the item has an `image` property:
-   - `ItemDetail` renders `ImageViewer`, passing `imagePath` and `altText` props.
-4. If the item has a `model3D` property:
-   - `ItemDetail` renders `ModelViewer`, passing the `modelPath` prop.
-   - `ModelViewer` internally uses `ModelDisplay` to set up the canvas and render the 3D model.
+```sh
+npm install --prefix apps/client && npm install --prefix apps/server
+```
 
-## Documentation
-For detailed documentation on the key components, refer to the following files in the `docs` directory:
-- [search.md](Search.md): Explains in depth how `Search.js` interacts with its subcomponents.
-- [itemdetail.md](./ItemDetail.md): Explains in depth how `ItemDetail.js` interacts with its subcomponents.
+## 4. Start App
 
+#### Use `npm start` for both server and client
+
+```sh
+(npm start --prefix apps/server) & (npm start --prefix apps/client)
+```
+
+### Alternative: Using `vercel dev` for both server and client
+
+```sh
+(vercel dev --cwd apps/server) & (vercel dev --cwd apps/client)
+```
+
+## What to Do If Port 3001 Is Already in Use
+
+If port 3001 is already in use, you can either kill the process using the port or change the ports in the configuration files.
+
+### Kill the Process Using the Port
+
+**On macOS or Linux:**
+
+```sh
+lsof -i :3001
+kill -9 <PID>
+```
+
+**On Windows:**
+
+```sh
+netstat -ano | findstr :3001
+taskkill /PID <PID> /F
+```
+
+### Alternatively, Change the Ports in the Configuration Files
+
+1. **Change the Port in the `.env` file:**
+
+Edit `apps/server/.env` to use a different port, e.g.,
+
+```sh
+PORT=3002
+```
+
+2. **Update the `REACT_APP_API_BASE_URL` in `apps/client/.env`:**
+
+```sh
+REACT_APP_API_BASE_URL=http://localhost:3002
+```
