@@ -42,4 +42,5 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 - structurize the docs: 1 directory for .md and 1 for JSDocs
 - networking concepts: errors, request, asynch ...optimize
 - lerna.js.org
+- server connnectiing twice ?
   
