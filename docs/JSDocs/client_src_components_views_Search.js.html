@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: client/src/components/views/Search.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: client/src/components/views/Search.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// Search.js
+
+// Import necessary libraries and components
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
+import SearchInput from '../search/SearchInput';
+import FilterSelect from '../search/FilterSelect';
+import FilteredList from '../search/FilteredList';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001';
+
+/**
+ * The Search component provides a search bar and filters to filter through the wellplates data.
+ * 
+ * @returns {JSX.Element} The rendered Search component
+ */
+const Search = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [query, setQuery] = useState("");
+  const [selectedMaterial, setSelectedMaterial] = useState("");
+  const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedNumberOfWells, setSelectedNumberOfWells] = useState("");
+
+  /**
+   * Fetch data from the server when the component mounts.
+   */
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/wellplates`); 
+        setData(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  /**
+   * Event handler for updating the search query state.
+   * 
+   * @param {React.ChangeEvent&lt;HTMLInputElement>} e - The input change event
+   */
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+  };
+
+  /**
+   * Event handler for updating the selected material state.
+   * 
+   * @param {React.ChangeEvent&lt;HTMLSelectElement>} e - The select change event
+   */
+  const handleMaterialChange = (e) => {
+    setSelectedMaterial(e.target.value);
+  };
+
+  /**
+   * Event handler for updating the selected brand state.
+   * 
+   * @param {React.ChangeEvent&lt;HTMLSelectElement>} e - The select change event
+   */
+  const handleBrandChange = (e) => {
+    setSelectedBrand(e.target.value);
+  };
+
+  /**
+   * Event handler for updating the selected number of wells state.
+   * 
+   * @param {React.ChangeEvent&lt;HTMLSelectElement>} e - The select change event
+   */
+  const handleNumberOfWellsChange = (e) => {
+    setSelectedNumberOfWells(e.target.value);
+  };
+
+  /**
+   * Filters the data array based on the current values of query, selectedMaterial, selectedBrand, and selectedNumberWells.
+   * 
+   * @returns {Array} The filtered data array
+   */
+  const filteredData = data.filter((item) => {
+    return (
+      item.name.toLowerCase().includes(query.toLowerCase()) &amp;&amp;
+      (selectedMaterial ? item.material === selectedMaterial : true) &amp;&amp;
+      (selectedBrand ? item.brand === selectedBrand : true) &amp;&amp;
+      (selectedNumberOfWells ? item.number_of_wells === parseInt(selectedNumberOfWells) : true)
+    );
+  });
+
+  /**
+   * Generates dynamic options for remaining filters based on current selection.
+   * 
+   * @returns {Array} The available materials array
+   */
+  const availableMaterials = [...new Set(data.filter(item => 
+    (!selectedBrand || item.brand === selectedBrand) &amp;&amp; 
+    (!selectedNumberOfWells || item.number_of_wells === parseInt(selectedNumberOfWells))
+  ).map(item => item.material))];
+
+  /**
+   * Generates dynamic options for remaining filters based on current selection.
+   * 
+   * @returns {Array} The available brands array
+   */
+  const availableBrands = [...new Set(data.filter(item => 
+    (!selectedMaterial || item.material === selectedMaterial) &amp;&amp; 
+    (!selectedNumberOfWells || item.number_of_wells === parseInt(selectedNumberOfWells))
+  ).map(item => item.brand))];
+
+  /**
+   * Generates dynamic options for remaining filters based on current selection.
+   * 
+   * @returns {Array} The available number of wells array
+   */
+  const availableNumberOfWells = [...new Set(data.filter(item => 
+    (!selectedMaterial || item.material === selectedMaterial) &amp;&amp; 
+    (!selectedBrand || item.brand === selectedBrand)
+  ).map(item => item.number_of_wells))];
+
+  if (loading) {
+    return &lt;div>Loading...&lt;/div>;
+  }
+
+  if (error) {
+    return &lt;div>Error: {error.message}&lt;/div>;
+  }
+
+  return (
+    &lt;div>
+      &lt;h1>Search App&lt;/h1>
+      &lt;SearchInput query={query} onChange={handleChange} />
+      &lt;FilterSelect value={selectedMaterial} onChange={handleMaterialChange} options={availableMaterials} defaultOption="All Materials" />
+      &lt;FilterSelect value={selectedBrand} onChange={handleBrandChange} options={availableBrands} defaultOption="All Brands" />
+      &lt;FilterSelect value={selectedNumberOfWells} onChange={handleNumberOfWellsChange} options={availableNumberOfWells} defaultOption="All Numbers of Wells" />
+      &lt;FilteredList filteredData={filteredData} />
+    &lt;/div>
+  );
+};
+
+export default Search;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-routes.html">routes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#FilterSelect">FilterSelect</a></li><li><a href="global.html#FilteredList">FilteredList</a></li><li><a href="global.html#FullScreenButton">FullScreenButton</a></li><li><a href="global.html#ImageViewer">ImageViewer</a></li><li><a href="global.html#ItemDetail">ItemDetail</a></li><li><a href="global.html#Model">Model</a></li><li><a href="global.html#ModelDisplay">ModelDisplay</a></li><li><a href="global.html#ModelViewer">ModelViewer</a></li><li><a href="global.html#Search">Search</a></li><li><a href="global.html#SearchInput">SearchInput</a></li><li><a href="global.html#addFullscreenChangeListener">addFullscreenChangeListener</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#con">con</a></li><li><a href="global.html#connect">connect</a></li><li><a href="global.html#cors">cors</a></li><li><a href="global.html#dotenv">dotenv</a></li><li><a href="global.html#exitFullscreen">exitFullscreen</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#port">port</a></li><li><a href="global.html#requestFullscreen">requestFullscreen</a></li><li><a href="global.html#uri">uri</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sat Jun 29 2024 16:02:35 GMT+0300 (Eastern European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
