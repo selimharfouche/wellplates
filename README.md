@@ -27,6 +27,8 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 
 
 # Next step, not in a specific order:
+- unit testing
+- swagger documentation
 - Mozilla sops
 - npmjs secure-env
 - be able to refresh the page 
@@ -37,4 +39,5 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 - more user friendly
 - allowing users to add wellplates
 - images and 3d model will also be delivered from somewhere else
+- dig deeper in data structure in javascript
   
