@@ -64,14 +64,15 @@ If port 3001 is already in use, you can either kill the process using the port o
 
 ### Kill the Process Using the Port
 
-**On macOS or Linux:**
+**On macOS or Linux:** 
 
 ```sh
 lsof -i :3001
-kill -9 <PID>
+kill <PID>
 ```
+<PID> being your process name
 
-**On Windows:**
+**On Windows:**(not tested)
 
 ```sh
 netstat -ano | findstr :3001
