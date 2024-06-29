@@ -9,6 +9,20 @@
       "destination": "./docs/JSDocs",
       "readme":"./docs/README.md",
       "template": "node_modules/better-docs"
-    }
+    },
+    "templates": {
+      "better-docs": {
+        "name": "Wellplates",
+        "navLinks": [
+          {
+            "label": "ZZZZZ",
+            "href": "zzzzz.html"
+          }
+        ]
+      }
+    },
+    "plugins":[
+      "node_modules/better-docs/category"
+    ]
   }
   

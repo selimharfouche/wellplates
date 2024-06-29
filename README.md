@@ -41,4 +41,5 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 - dig deeper in data structure in javascript
 - structurize the docs: 1 directory for .md and 1 for JSDocs
 - networking concepts: errors, request, asynch ...optimize
+- lerna.js.org
   

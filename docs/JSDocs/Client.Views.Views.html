@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> client/src/components/display/ModelViewer.js</title>
+  <title> Views</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -44,7 +42,7 @@
             
              
                 <a href="index.html">
-                    <h1 class="navbar-item">Wellplates</h1>
+                    <h1 class="navbar-item">AAAAAAA</h1>
                 </a>
             
         </div>
@@ -58,15 +56,6 @@
                     Documentation
                 </a>
                 
-                 
-                    
-                        <a
-                            class="link user-link "
-                            href="zzzzz.html"
-                        >
-                            ZZZZZ
-                        </a>
-                    
                 
                 
             </div>
@@ -81,65 +70,108 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-routes.html">routes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#FilterSelect">FilterSelect</a></li><li><a href="global.html#FilteredList">FilteredList</a></li><li><a href="global.html#FullScreenButton">FullScreenButton</a></li><li><a href="global.html#ImageViewer">ImageViewer</a></li><li><a href="global.html#Model">Model</a></li><li><a href="global.html#ModelDisplay">ModelDisplay</a></li><li><a href="global.html#ModelViewer">ModelViewer</a></li><li><a href="global.html#SearchInput">SearchInput</a></li><li><a href="global.html#addFullscreenChangeListener">addFullscreenChangeListener</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#con">con</a></li><li><a href="global.html#connect">connect</a></li><li><a href="global.html#cors">cors</a></li><li><a href="global.html#dotenv">dotenv</a></li><li><a href="global.html#exitFullscreen">exitFullscreen</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#port">port</a></li><li><a href="global.html#requestFullscreen">requestFullscreen</a></li><li><a href="global.html#uri">uri</a></li></ul></div><div class="category"><h2>Client</h2><h3>Namespaces</h3><ul><li><a href="ZZZ.YYYY.ZZZ.html">ZZZ</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ItemDetail">ItemDetail</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-routes.html">routes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#FilterSelect">FilterSelect</a></li><li><a href="global.html#FilteredList">FilteredList</a></li><li><a href="global.html#FullScreenButton">FullScreenButton</a></li><li><a href="global.html#ImageViewer">ImageViewer</a></li><li><a href="global.html#ItemDetail">ItemDetail</a></li><li><a href="global.html#Model">Model</a></li><li><a href="global.html#ModelDisplay">ModelDisplay</a></li><li><a href="global.html#ModelViewer">ModelViewer</a></li><li><a href="global.html#SearchInput">SearchInput</a></li><li><a href="global.html#addFullscreenChangeListener">addFullscreenChangeListener</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#con">con</a></li><li><a href="global.html#connect">connect</a></li><li><a href="global.html#cors">cors</a></li><li><a href="global.html#dotenv">dotenv</a></li><li><a href="global.html#exitFullscreen">exitFullscreen</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#port">port</a></li><li><a href="global.html#requestFullscreen">requestFullscreen</a></li><li><a href="global.html#uri">uri</a></li></ul></div><div class="category"><h2>Client</h2><h3>Namespaces</h3><ul><li><a href="Client.Views.Views.html">Views</a></li></ul></div>
                 
             </nav>
         </div>
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Source</p>
-                    <h1>client/src/components/display/ModelViewer.js</h1>
+                    <p>Namespace</p>
+                    <h1>Views</h1>
                 </header>
                 
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>// ModelViewer.js
+        <h2>Views</h2>
+        
+    
+</header>
 
-import React, { useRef, useState, useEffect } from 'react';
-import { addFullscreenChangeListener } from '../../utils/fullscreen';
-import FullScreenButton from '../common/FullScreenButton';
-import ModelDisplay from './ModelDisplay';
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">The Search component provides a search bar and filters to filter through the wellplates data.</div>
+        
 
-/**
- * ModelViewer component renders a 3D model with fullscreen capability.
- * 
- * @param {Object} props - Component properties.
- * @param {string} props.modelPath - Path to the 3D model file.
- * @returns {JSX.Element}
- */
-const ModelViewer = ({ modelPath }) => {
-  const canvasRef = useRef();
-  const [isFullScreen, setIsFullScreen] = useState(false);
+        
 
-  useEffect(() => {
-    const cleanup = addFullscreenChangeListener((isFullScreen) => {
-      setIsFullScreen(!!isFullScreen);
-    });
 
-    return cleanup;
-  }, []);
+<dl class="details">
 
-  // Construct the full path to the model
-  console.log("MODEL PATH"+ modelPath);
-  const fullModelPath = `/models/${modelPath}`;
+    
 
-  return (
-    &lt;div ref={canvasRef} style={{ position: 'relative' }}>
-      &lt;FullScreenButton isFullScreen={isFullScreen} toggleFullScreen={canvasRef} />
-      &lt;ModelDisplay modelPath={fullModelPath} />
-    &lt;/div>
-  );
-};
+    
 
-export default ModelViewer;
-</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_src_components_views_Search.js.html" class="button">View Source</a>
+            <span>
+                <a href="client_src_components_views_Search.js.html">client/src/components/views/Search.js</a>, <a href="client_src_components_views_Search.js.html#line11">line 11</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

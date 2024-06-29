@@ -10,7 +10,7 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:300
 
 /**
  * The Search component provides a search bar and filters to filter through the wellplates data.
- * 
+ * @category Client
  * @returns {JSX.Element} The rendered Search component
  */
 const Search = () => {
