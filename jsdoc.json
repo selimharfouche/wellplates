@@ -7,7 +7,8 @@
     },
     "opts": {
       "destination": "./docs/JSDocs",
-      "readme":"./docs/README.md"
+      "readme":"./docs/README.md",
+      "template": "node_modules/better-docs"
     }
   }
   

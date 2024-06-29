@@ -21,7 +21,7 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 - the server is deployed on vercel https://wellplates-server.vercel.app/api/
 
 # What I am currently focusing on:
-- documentation -> docs/README.MD , https://server-docs.vercel.app/
+- documentation -> https://wellplates-docs.vercel.app/
 - code refactoring 
 
 

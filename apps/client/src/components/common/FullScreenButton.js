@@ -1,14 +1,13 @@
-//FullScreenButton.js
+
 
 import React from 'react';
 import { requestFullscreen, exitFullscreen } from '../../utils/fullscreen';
 import '../../styles/FullScreenButton.css';
 
 /**
- * FullScreenButton Component
+ * Renders a button that toggles fullscreen mode for a referenced element.
  *
- * This component renders a button that toggles fullscreen mode for a referenced element.
- *
+ * @component
  * @param {Object} props - The props object containing component properties.
  * @param {boolean} props.isFullScreen - Indicates if the element is currently in fullscreen mode.
  * @param {Object} props.toggleFullScreen - Ref object for the element to toggle fullscreen mode.
