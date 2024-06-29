@@ -39,4 +39,5 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 - allowing users to add wellplates
 - images and 3d model will also be delivered from somewhere else
 - dig deeper in data structure in javascript
+- structurize the docs: 1 directory for .md and 1 for JSDocs
   
