@@ -5,7 +5,8 @@ import React from 'react';
 /**
  * FilterSelect Component
  * Renders a dropdown select element for filtering.
- *
+ * 
+ * @memberof AAA.Search
  * @param {Object} props - Component properties.
  * @param {string} props.value - The current selected value.
  * @param {function} props.onChange - Function to handle select value changes.

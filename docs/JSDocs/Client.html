@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: client/src/components/display/ModelDisplay.js</title>
+    <title>JSDoc: Namespace: Client</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,55 +17,97 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: client/src/components/display/ModelDisplay.js</h1>
+    <h1 class="page-title">Namespace: Client</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>//ModelDisplay.js
+        <h2>Client</h2>
+        
+    
+</header>
 
-import React, { Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF, Html } from '@react-three/drei';
+<article>
+    <div class="container-overview">
+    
+        
 
-/**
- * Model component loads and renders a 3D model.
- * 
- * @param {Object} props - Component properties.
- * @param {string} props.modelPath - Path to the GLTF model file.
- * @returns {JSX.Element}
- */
-const Model = ({ modelPath }) => {
-  const { scene } = useGLTF(modelPath);
-  return &lt;primitive object={scene} scale={[0.5, 0.5, 0.5]} />;
-};
+        
 
-/**
- * ModelDisplay component sets up the canvas and renders the 3D model with controls.
- * 
- * @param {Object} props - Component properties.
- * @param {string} props.modelPath - Path to the GLTF model file.
- * @returns {JSX.Element}
- */
-const ModelDisplay = ({ modelPath }) => (
-  &lt;Canvas className="model-display" camera={{ position: [0, 0, 100], fov: 50 }}>
-    &lt;Suspense fallback={&lt;Html>&lt;div>Loading...&lt;/div>&lt;/Html>}>
-      &lt;ambientLight intensity={0.5} />
-      &lt;directionalLight position={[10, 10, 5]} intensity={1} />
-      &lt;OrbitControls enableZoom={true} minDistance={10} maxDistance={100} />
-      &lt;Model modelPath={modelPath} />
-    &lt;/Suspense>
-  &lt;/Canvas>
-);
 
-export default ModelDisplay;
-</code></pre>
-        </article>
-    </section>
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client_src_App.js.html">client/src/App.js</a>, <a href="client_src_App.js.html#line17">line 17</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

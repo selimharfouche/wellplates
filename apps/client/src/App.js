@@ -14,7 +14,9 @@ import './styles/App.css'
 import Search from './components/views/Search'; //provides the interface for searching and filtering well plates.
 import ItemDetail from './components/views/ItemDetail';//displays detailed information about a selected well plate item.
 import NotFound from './components/views/NotFound';//when the requested item cannnot be found.
-
+/**
+ * @namespace Client
+ */
 // The main App component that sets up the router and routes.
 function App() {
   return (
