@@ -5,13 +5,16 @@ import '../../styles/FullScreenButton.css';
 /**
  * Renders a button that toggles fullscreen mode for a referenced element.
  *
- * @component
- * @param {Object} props - The props object containing component properties.
- * @param {Object} props.toggleFullScreen - Ref object for the element to toggle fullscreen mode.
+ * @param {Object} toggleFullScreen - Ref object for the element to toggle fullscreen mode.
+ * @returns {JSX.Element} A button element to toggle fullscreen mode.
  */
 const FullScreenButton = ({ toggleFullScreen }) => {
   const [isFullScreen, setIsFullScreen] = useState(false);
 
+  /**
+   * Sets up the fullscreen change listener when the component mounts.
+   * Cleans up the listener when the component unmounts.
+   */
   useEffect(() => {
     const cleanup = addFullscreenChangeListener((isFullScreen) => {
       setIsFullScreen(!!isFullScreen);
