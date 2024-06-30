@@ -1,6 +1,5 @@
 // Search.js
 
-// Import necessary libraries and components
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import SearchInput from '../search/SearchInput';
@@ -8,6 +7,12 @@ import FilterSelect from '../search/FilterSelect';
 import FilteredList from '../search/FilteredList';
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001';
 
+/**
+ * Search component allows users to search and filter wellplates.
+ *
+ * @component
+ * @returns {JSX.Element} The Search component.
+ */
 
 const Search = () => {
   const [data, setData] = useState([]);
@@ -36,48 +41,22 @@ const Search = () => {
     fetchData();
   }, []);
 
-  /**
-   * Event handler for updating the search query state.
-   * 
-   * 
-   * @param {React.ChangeEvent<HTMLInputElement>} e - The input change event
-   */
   const handleChange = (e) => {
     setQuery(e.target.value);
   };
 
-  /**
-   * Event handler for updating the selected material state.
-   * 
-   * @param {React.ChangeEvent<HTMLSelectElement>} e - The select change event
-   */
   const handleMaterialChange = (e) => {
     setSelectedMaterial(e.target.value);
   };
 
-  /**
-   * Event handler for updating the selected brand state.
-   * 
-   * @param {React.ChangeEvent<HTMLSelectElement>} e - The select change event
-   */
   const handleBrandChange = (e) => {
     setSelectedBrand(e.target.value);
   };
 
-  /**
-   * Event handler for updating the selected number of wells state.
-   * 
-   * @param {React.ChangeEvent<HTMLSelectElement>} e - The select change event
-   */
   const handleNumberOfWellsChange = (e) => {
     setSelectedNumberOfWells(e.target.value);
   };
 
-  /**
-   * Filters the data array based on the current values of query, selectedMaterial, selectedBrand, and selectedNumberWells.
-   * 
-   * @returns {Array} The filtered data array
-   */
   const filteredData = data.filter((item) => {
     return (
       item.name.toLowerCase().includes(query.toLowerCase()) &&
@@ -87,31 +66,16 @@ const Search = () => {
     );
   });
 
-  /**
-   * Generates dynamic options for remaining filters based on current selection.
-   * 
-   * @returns {Array} The available materials array
-   */
   const availableMaterials = [...new Set(data.filter(item => 
     (!selectedBrand || item.brand === selectedBrand) && 
     (!selectedNumberOfWells || item.number_of_wells === parseInt(selectedNumberOfWells))
   ).map(item => item.material))];
 
-  /**
-   * Generates dynamic options for remaining filters based on current selection.
-   * 
-   * @returns {Array} The available brands array
-   */
   const availableBrands = [...new Set(data.filter(item => 
     (!selectedMaterial || item.material === selectedMaterial) && 
     (!selectedNumberOfWells || item.number_of_wells === parseInt(selectedNumberOfWells))
   ).map(item => item.brand))];
 
-  /**
-   * Generates dynamic options for remaining filters based on current selection.
-   * 
-   * @returns {Array} The available number of wells array
-   */
   const availableNumberOfWells = [...new Set(data.filter(item => 
     (!selectedMaterial || item.material === selectedMaterial) && 
     (!selectedBrand || item.brand === selectedBrand)

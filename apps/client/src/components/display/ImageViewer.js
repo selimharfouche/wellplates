@@ -3,11 +3,13 @@ import FullScreenButton from '../common/FullScreenButton';
 
 /**
  * ImageViewer component renders an image with fullscreen capability.
- * 
+ *
+ * @component
  * @param {Object} props - Component properties.
  * @param {string} props.imagePath - Path to the image file.
  * @param {string} props.altText - Alt text for the image.
- * @returns {JSX.Element}
+ * @returns {JSX.Element} The ImageViewer component.
+ * @see {@link ItemDetail}
  */
 const ImageViewer = ({ imagePath, altText }) => {
   const imageRef = useRef();

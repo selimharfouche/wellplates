@@ -27,45 +27,34 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
+ * @file app.js
+ * @description Main application file for the server setup and routes.
+ * @module app
+ */
+
+/**
  * Import the dotenv module to load environment variables from a .env file into process.env.
  * The dotenv.config() function reads the .env file and sets the environment variables defined in that file into process.env.
  * 
  * @requires module:dotenv
- * @constant
- * @type {object}
- * @example
- * // .env file content:
- * // MONGODB_URI=mongodb://localhost:27017/mydatabase
- * // PORT=3001
- * 
- * // Usage:
- * const dotenv = require('dotenv');
- * dotenv.config();
- * console.log(process.env.MONGODB_URI); // Outputs: mongodb://localhost:27017/mydatabase
  */
 const dotenv = require('dotenv');
 dotenv.config();
 
 /**
  * Express framework module.
- * @constant
- * @type {function}
  * @requires express
  */
 const express = require('express');
 
 /**
  * CORS middleware module.
- * @constant
- * @type {function}
  * @requires cors
  */
 const cors = require('cors');
 
 /**
  * MongoDB client and ObjectId for interacting with MongoDB.
- * @constant
- * @type {object}
  * @requires mongodb
  */
 const { MongoClient, ObjectId } = require('mongodb');
@@ -74,6 +63,7 @@ const { MongoClient, ObjectId } = require('mongodb');
  * Express application instance.
  * @constant
  * @type {object}
+ * @memberof module:app
  */
 const app = express();
 
@@ -81,13 +71,15 @@ const app = express();
  * Server port number.
  * @constant
  * @type {number|string}
+ * @memberof module:app
  */
-const port = process.env.PORT || 3001; 
+const port = process.env.PORT || 3001;
 
 /**
  * MongoDB URI from environment variables.
  * @constant
  * @type {string}
+ * @memberof module:app
  */
 const uri = process.env.MONGODB_URI;
 
@@ -96,6 +88,7 @@ const uri = process.env.MONGODB_URI;
  * 
  * @type {MongoClient}
  * @default undefined
+ * @memberof module:app
  */
 let con;
 
@@ -103,7 +96,10 @@ let con;
  * Connect to MongoDB.
  * If the connection is not present, it will be established. Returns the connection.
  * 
- * @returns {Promise&lt;MongoClient>}
+ * @async
+ * @function
+ * @memberof module:app
+ * @returns {Promise&lt;MongoClient>} The MongoDB client connection.
  */
 async function connect() {
   if (con) {
@@ -116,10 +112,16 @@ async function connect() {
   return con;
 }
 
-// Middleware to parse JSON payloads in incoming requests
+/**
+ * Middleware to parse JSON payloads in incoming requests.
+ * @memberof module:app
+ */
 app.use(express.json());
 
-// Middleware to enable Cross-Origin Resource Sharing (CORS) for all routes
+/**
+ * Middleware to enable Cross-Origin Resource Sharing (CORS) for all routes.
+ * @memberof module:app
+ */
 app.use(cors());
 
 /**
@@ -135,6 +137,7 @@ app.use(cors());
  * @inner
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
+ * @returns {void}
  */
 app.get('/api/wellplates', async (req, res) => {
   try {
@@ -158,6 +161,7 @@ app.get('/api/wellplates', async (req, res) => {
  * @inner
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
+ * @returns {void}
  */
 app.get('/api/wellplates/:id', async (req, res) => {
   try {
@@ -188,15 +192,24 @@ app.get('/api/wellplates/:id', async (req, res) => {
  * @inner
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
+ * @returns {void}
  */
 app.get("/api", (req, res) => res.send("Express on Vercel"));
 
-// Start the server
+/**
+ * Start the server and listen on the specified port.
+ * @memberof module:app
+ * @function
+ */
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
 
-// Export the app for Vercel
+/**
+ * Export the app for Vercel
+ * @memberof module:app
+ * @type {object}
+ */
 module.exports = app;
 </code></pre>
         </article>
@@ -208,13 +221,13 @@ module.exports = app;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-routes.html">routes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#FilteredList">FilteredList</a></li><li><a href="global.html#FullScreenButton">FullScreenButton</a></li><li><a href="global.html#ImageViewer">ImageViewer</a></li><li><a href="global.html#ModelViewer">ModelViewer</a></li><li><a href="global.html#SearchInput">SearchInput</a></li><li><a href="global.html#addFullscreenChangeListener">addFullscreenChangeListener</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#con">con</a></li><li><a href="global.html#connect">connect</a></li><li><a href="global.html#cors">cors</a></li><li><a href="global.html#dotenv">dotenv</a></li><li><a href="global.html#exitFullscreen">exitFullscreen</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#port">port</a></li><li><a href="global.html#requestFullscreen">requestFullscreen</a></li><li><a href="global.html#uri">uri</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-routes.html">routes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#FilterSelect">FilterSelect</a></li><li><a href="global.html#FilteredList">FilteredList</a></li><li><a href="global.html#FullScreenButton">FullScreenButton</a></li><li><a href="global.html#ImageViewer">ImageViewer</a></li><li><a href="global.html#ItemDetail">ItemDetail</a></li><li><a href="global.html#ModelViewer">ModelViewer</a></li><li><a href="global.html#Search">Search</a></li><li><a href="global.html#SearchInput">SearchInput</a></li><li><a href="global.html#addFullscreenChangeListener">addFullscreenChangeListener</a></li><li><a href="global.html#exitFullscreen">exitFullscreen</a></li><li><a href="global.html#requestFullscreen">requestFullscreen</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun Jun 30 2024 08:21:35 GMT+0300 (Eastern European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun Jun 30 2024 10:20:12 GMT+0300 (Eastern European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -7,7 +7,14 @@ import ImageViewer from '../display/ImageViewer';
 import '../../styles/ItemDetail.css';
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001';
 
-
+/**
+ * ItemDetail component fetches and displays details of an item.
+ *
+ * @component
+ * @requires {@link ImageViewer}
+ * @requires {@link ModelViewer}
+ * @returns {JSX.Element} The ItemDetail component.
+ */
 
 const ItemDetail = () => {
   // useParams hook to access the URL parameters

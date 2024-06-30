@@ -1,43 +1,32 @@
 /**
+ * @file app.js
+ * @description Main application file for the server setup and routes.
+ * @module app
+ */
+
+/**
  * Import the dotenv module to load environment variables from a .env file into process.env.
  * The dotenv.config() function reads the .env file and sets the environment variables defined in that file into process.env.
  * 
  * @requires module:dotenv
- * @constant
- * @type {object}
- * @example
- * // .env file content:
- * // MONGODB_URI=mongodb://localhost:27017/mydatabase
- * // PORT=3001
- * 
- * // Usage:
- * const dotenv = require('dotenv');
- * dotenv.config();
- * console.log(process.env.MONGODB_URI); // Outputs: mongodb://localhost:27017/mydatabase
  */
 const dotenv = require('dotenv');
 dotenv.config();
 
 /**
  * Express framework module.
- * @constant
- * @type {function}
  * @requires express
  */
 const express = require('express');
 
 /**
  * CORS middleware module.
- * @constant
- * @type {function}
  * @requires cors
  */
 const cors = require('cors');
 
 /**
  * MongoDB client and ObjectId for interacting with MongoDB.
- * @constant
- * @type {object}
  * @requires mongodb
  */
 const { MongoClient, ObjectId } = require('mongodb');
@@ -46,6 +35,7 @@ const { MongoClient, ObjectId } = require('mongodb');
  * Express application instance.
  * @constant
  * @type {object}
+ * @memberof module:app
  */
 const app = express();
 
@@ -53,13 +43,15 @@ const app = express();
  * Server port number.
  * @constant
  * @type {number|string}
+ * @memberof module:app
  */
-const port = process.env.PORT || 3001; 
+const port = process.env.PORT || 3001;
 
 /**
  * MongoDB URI from environment variables.
  * @constant
  * @type {string}
+ * @memberof module:app
  */
 const uri = process.env.MONGODB_URI;
 
@@ -68,6 +60,7 @@ const uri = process.env.MONGODB_URI;
  * 
  * @type {MongoClient}
  * @default undefined
+ * @memberof module:app
  */
 let con;
 
@@ -75,7 +68,10 @@ let con;
  * Connect to MongoDB.
  * If the connection is not present, it will be established. Returns the connection.
  * 
- * @returns {Promise<MongoClient>}
+ * @async
+ * @function
+ * @memberof module:app
+ * @returns {Promise<MongoClient>} The MongoDB client connection.
  */
 async function connect() {
   if (con) {
@@ -88,10 +84,16 @@ async function connect() {
   return con;
 }
 
-// Middleware to parse JSON payloads in incoming requests
+/**
+ * Middleware to parse JSON payloads in incoming requests.
+ * @memberof module:app
+ */
 app.use(express.json());
 
-// Middleware to enable Cross-Origin Resource Sharing (CORS) for all routes
+/**
+ * Middleware to enable Cross-Origin Resource Sharing (CORS) for all routes.
+ * @memberof module:app
+ */
 app.use(cors());
 
 /**
@@ -107,6 +109,7 @@ app.use(cors());
  * @inner
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
+ * @returns {void}
  */
 app.get('/api/wellplates', async (req, res) => {
   try {
@@ -130,6 +133,7 @@ app.get('/api/wellplates', async (req, res) => {
  * @inner
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
+ * @returns {void}
  */
 app.get('/api/wellplates/:id', async (req, res) => {
   try {
@@ -160,13 +164,22 @@ app.get('/api/wellplates/:id', async (req, res) => {
  * @inner
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
+ * @returns {void}
  */
 app.get("/api", (req, res) => res.send("Express on Vercel"));
 
-// Start the server
+/**
+ * Start the server and listen on the specified port.
+ * @memberof module:app
+ * @function
+ */
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
 
-// Export the app for Vercel
+/**
+ * Export the app for Vercel
+ * @memberof module:app
+ * @type {object}
+ */
 module.exports = app;
