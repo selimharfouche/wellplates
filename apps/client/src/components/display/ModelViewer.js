@@ -1,18 +1,21 @@
 // ModelViewer.js
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, Suspense} from 'react';
 import { addFullscreenChangeListener } from '../../utils/fullscreen';
 import FullScreenButton from '../common/FullScreenButton';
-import ModelDisplay from './ModelDisplay';
+//import ModelDisplay from './ModelDisplay';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, useGLTF, Html } from '@react-three/drei';
 
 /**
  * ModelViewer component renders a 3D model with fullscreen capability.
- * 
+ * @component
  * @param {Object} props - Component properties.
  * @param {string} props.modelPath - Path to the 3D model file.
  * @returns {JSX.Element}
  */
 const ModelViewer = ({ modelPath }) => {
+  const { scene } = useGLTF(`/models/${modelPath}`);
   const canvasRef = useRef();
   const [isFullScreen, setIsFullScreen] = useState(false);
 
@@ -24,14 +27,18 @@ const ModelViewer = ({ modelPath }) => {
     return cleanup;
   }, []);
 
-  // Construct the full path to the model
-  console.log("MODEL PATH"+ modelPath);
-  const fullModelPath = `/models/${modelPath}`;
 
   return (
     <div ref={canvasRef} style={{ position: 'relative' }}>
       <FullScreenButton isFullScreen={isFullScreen} toggleFullScreen={canvasRef} />
-      <ModelDisplay modelPath={fullModelPath} />
+      <Canvas className="model-display" camera={{ position: [0, 0, 100], fov: 50 }}>
+      <Suspense fallback={<Html><div>Loading...</div></Html>}>
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[10, 10, 5]} intensity={1} />
+        <OrbitControls enableZoom={true} minDistance={10} maxDistance={100} />
+        <primitive object={scene} scale={[0.5, 0.5, 0.5]} />
+      </Suspense>
+    </Canvas>
     </div>
   );
 };

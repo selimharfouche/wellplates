@@ -3,11 +3,10 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Html } from '@react-three/drei';
 
 /**
- * ModelDisplay component loads and renders a 3D model, sets up the canvas, and provides controls.
- * 
- * @param {Object} props - Component properties.
- * @param {string} props.modelPath - Path to the GLTF model file.
- * @returns {JSX.Element}
+ * Displays a 3D model using react-three/fiber and drei
+ * @component
+ * @param {string} modelPath - Path to the GLTF model file.
+ * @returns {JSX.Element} Rendered 3D model
  */
 const ModelDisplay = ({ modelPath }) => {
   const { scene } = useGLTF(modelPath);
