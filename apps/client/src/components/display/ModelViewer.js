@@ -1,7 +1,6 @@
 // ModelViewer.js
 
-import React, { useRef, useState, useEffect, Suspense} from 'react';
-import { addFullscreenChangeListener } from '../../utils/fullscreen';
+import React, { useRef, Suspense} from 'react';
 import FullScreenButton from '../common/FullScreenButton';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Html } from '@react-three/drei';
@@ -15,20 +14,10 @@ import { OrbitControls, useGLTF, Html } from '@react-three/drei';
 const ModelViewer = ({ modelPath }) => {
   const { scene } = useGLTF(`/models/${modelPath}`);
   const canvasRef = useRef();
-  const [isFullScreen, setIsFullScreen] = useState(false);
-
-  useEffect(() => {
-    const cleanup = addFullscreenChangeListener((isFullScreen) => {
-      setIsFullScreen(!!isFullScreen);
-    });
-
-    return cleanup;
-  }, []);
-
 
   return (
     <div ref={canvasRef} style={{ position: 'relative' }}>
-      <FullScreenButton isFullScreen={isFullScreen} toggleFullScreen={canvasRef} />
+      <FullScreenButton toggleFullScreen={canvasRef} />
       <Canvas className="model-display" camera={{ position: [0, 0, 100], fov: 50 }}>
       <Suspense fallback={<Html><div>Loading...</div></Html>}>
         <ambientLight intensity={0.5} />

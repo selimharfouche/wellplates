@@ -1,7 +1,5 @@
-
-
-import React from 'react';
-import { requestFullscreen, exitFullscreen } from '../../utils/fullscreen';
+import React, { useEffect, useState } from 'react';
+import { requestFullscreen, exitFullscreen, addFullscreenChangeListener } from '../../utils/fullscreen';
 import '../../styles/FullScreenButton.css';
 
 /**
@@ -9,10 +7,18 @@ import '../../styles/FullScreenButton.css';
  *
  * @component
  * @param {Object} props - The props object containing component properties.
- * @param {boolean} props.isFullScreen - Indicates if the element is currently in fullscreen mode.
  * @param {Object} props.toggleFullScreen - Ref object for the element to toggle fullscreen mode.
  */
-const FullScreenButton = ({ isFullScreen, toggleFullScreen }) => {
+const FullScreenButton = ({ toggleFullScreen }) => {
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  useEffect(() => {
+    const cleanup = addFullscreenChangeListener((isFullScreen) => {
+      setIsFullScreen(!!isFullScreen);
+    });
+
+    return cleanup;
+  }, []);
 
   /**
    * Handles the click event for toggling fullscreen mode.
