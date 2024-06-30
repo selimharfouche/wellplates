@@ -19,6 +19,8 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 - database of 108 wellplates (not real), on mongodb atlas
 - the front end is deployed on vercel https://wellplates.vercel.app/ 
 - the server is deployed on vercel https://wellplates-server.vercel.app/api/
+- Image and 3D on Assay Plate 1.
+
 
 # What I am currently focusing on:
 - documentation -> https://wellplates-docs.vercel.app/

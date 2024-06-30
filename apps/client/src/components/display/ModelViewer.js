@@ -3,15 +3,13 @@
 import React, { useRef, useState, useEffect, Suspense} from 'react';
 import { addFullscreenChangeListener } from '../../utils/fullscreen';
 import FullScreenButton from '../common/FullScreenButton';
-//import ModelDisplay from './ModelDisplay';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Html } from '@react-three/drei';
 
 /**
  * ModelViewer component renders a 3D model with fullscreen capability.
- * @component
- * @param {Object} props - Component properties.
- * @param {string} props.modelPath - Path to the 3D model file.
+ *
+ * @param {string} modelPath - Path to the 3D model file.
  * @returns {JSX.Element}
  */
 const ModelViewer = ({ modelPath }) => {

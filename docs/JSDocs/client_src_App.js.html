@@ -26,35 +26,30 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// App.js
-
-// Summary:
-// This file sets up the main structure of the React application, including the router and routes.
-// It imports necessary components and data, and defines the main `App` component that wraps everything
-// within a router context and sets up the navigation.
-
-import React from 'react'; //Necessary for creating react components.
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; //handle client-side routing.
-//BrowserRouter (aliased as Router): manages the routing in the application using the HTML5 history API.
-//Route: Used to define individual routes in the application.
-//Routes: container for all the **Route** components.
-import './styles/App.css'
-import Search from './components/views/Search'; //provides the interface for searching and filtering well plates.
-import ItemDetail from './components/views/ItemDetail';//displays detailed information about a selected well plate item.
-import NotFound from './components/views/NotFound';//when the requested item cannnot be found.
-/**
- * @namespace Client
+            <pre class="prettyprint source linenums"><code>/**
+ * @file App.js
+ * @summary Sets up the main structure of the React application, including the router and routes.
+ * @component App
+ * @returns {JSX.Element} The application's main component with routing configured.
  */
-// The main App component that sets up the router and routes.
+
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './styles/App.css';
+import Search from './components/views/Search';
+import ItemDetail from './components/views/ItemDetail';
+import NotFound from './components/views/NotFound';
+
+
 function App() {
   return (
     &lt;Router>
       &lt;div className="App">
         &lt;header className="App-header">
           &lt;Routes>
-            &lt;Route path="/" element={&lt;Search/>} />
+            &lt;Route path="/" element={&lt;Search />} />
             &lt;Route path="/item/:id" element={&lt;ItemDetail />} />
-            &lt;Route path="*" element={&lt;NotFound />} /> {/* Catch-all route for 404 page */}
+            &lt;Route path="*" element={&lt;NotFound />} />
           &lt;/Routes>
         &lt;/header>
       &lt;/div>
@@ -62,7 +57,8 @@ function App() {
   );
 }
 
-export default App;</code></pre>
+export default App;
+</code></pre>
         </article>
     </section>
 
@@ -72,13 +68,13 @@ export default App;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-routes.html">routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="Client.html">Client</a></li></ul><h3>Global</h3><ul><li><a href="global.html#FilteredList">FilteredList</a></li><li><a href="global.html#FullScreenButton">FullScreenButton</a></li><li><a href="global.html#ImageViewer">ImageViewer</a></li><li><a href="global.html#ItemDetail">ItemDetail</a></li><li><a href="global.html#Model">Model</a></li><li><a href="global.html#ModelDisplay">ModelDisplay</a></li><li><a href="global.html#ModelViewer">ModelViewer</a></li><li><a href="global.html#Search">Search</a></li><li><a href="global.html#SearchInput">SearchInput</a></li><li><a href="global.html#addFullscreenChangeListener">addFullscreenChangeListener</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#con">con</a></li><li><a href="global.html#connect">connect</a></li><li><a href="global.html#cors">cors</a></li><li><a href="global.html#dotenv">dotenv</a></li><li><a href="global.html#exitFullscreen">exitFullscreen</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#port">port</a></li><li><a href="global.html#requestFullscreen">requestFullscreen</a></li><li><a href="global.html#uri">uri</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-routes.html">routes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#FilteredList">FilteredList</a></li><li><a href="global.html#FullScreenButton">FullScreenButton</a></li><li><a href="global.html#ImageViewer">ImageViewer</a></li><li><a href="global.html#ModelViewer">ModelViewer</a></li><li><a href="global.html#SearchInput">SearchInput</a></li><li><a href="global.html#addFullscreenChangeListener">addFullscreenChangeListener</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#con">con</a></li><li><a href="global.html#connect">connect</a></li><li><a href="global.html#cors">cors</a></li><li><a href="global.html#dotenv">dotenv</a></li><li><a href="global.html#exitFullscreen">exitFullscreen</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#port">port</a></li><li><a href="global.html#requestFullscreen">requestFullscreen</a></li><li><a href="global.html#uri">uri</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun Jun 30 2024 05:29:39 GMT+0300 (Eastern European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun Jun 30 2024 07:56:44 GMT+0300 (Eastern European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
