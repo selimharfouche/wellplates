@@ -1,23 +1,26 @@
 /**
  * @file App.js
  * @summary Sets up the main structure of the React application, including the router and routes.
- * @component App
  * @returns {JSX.Element} The application's main component with routing configured.
  */
 
 
 /**
  * @namespace views
+ * @description views directory
  */
 
 /**
  * @namespace utils
+ * @description utils directory
  */
 /**
  * @namespace components
+ * @description components directoy
  */
 /**
  * @namespace helpers
+ * @description helpers directory
  */
 
 

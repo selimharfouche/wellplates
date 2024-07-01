@@ -1,0 +1,51 @@
+function buildNav(members) {
+    let globalNav;
+    let nav = '<h2><a href="index.html">Home</a></h2>';
+    const seen = {};
+    const seenTutorials = {};
+    const parentNamespaces = [];
+    const childNamespaces = {};
+
+    // Categorize namespaces into parent and child namespaces
+    members.namespaces.forEach(ns => {
+        if (ns.memberof) {
+            if (!childNamespaces[ns.memberof]) {
+                childNamespaces[ns.memberof] = [];
+            }
+            childNamespaces[ns.memberof].push(ns);
+        } else {
+            parentNamespaces.push(ns);
+        }
+    });
+
+    // Build navigation for parent namespaces
+    nav += buildMemberNav(parentNamespaces, 'Namespaces', seen, linkto);
+
+    nav += buildMemberNav(members.modules, 'Modules', {}, linkto);
+    nav += buildMemberNav(members.externals, 'Externals', seen, linktoExternal);
+    nav += buildMemberNav(members.classes, 'Classes', seen, linkto);
+    nav += buildMemberNav(members.interfaces, 'Interfaces', seen, linkto);
+    nav += buildMemberNav(members.events, 'Events', seen, linkto);
+    nav += buildMemberNav(members.mixins, 'Mixins', seen, linkto);
+    nav += buildMemberNav(members.tutorials, 'Tutorials', seenTutorials, linktoTutorial);
+
+    if (members.globals.length) {
+        globalNav = '';
+
+        members.globals.forEach(({kind, longname, name}) => {
+            if (kind !== 'typedef' && !hasOwnProp.call(seen, longname)) {
+                globalNav += `<li>${linkto(longname, name)}</li>`;
+            }
+            seen[longname] = true;
+        });
+
+        if (!globalNav) {
+            // turn the heading into a link so you can actually get to the global page
+            nav += `<h3>${linkto('global', 'Global')}</h3>`;
+        } else {
+            nav += `<h3>Global</h3><ul>${globalNav}</ul>`;
+        }
+    }
+
+    return nav;
+}

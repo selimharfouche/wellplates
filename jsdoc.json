@@ -1,11 +1,14 @@
 {
+  
     "source": {
       "include": ["apps"],
       "exclude": ["apps/client/node_modules","apps/server/node_modules"],
       "includePattern": ".+\\.js(doc|x)?$",
       "excludePattern": "(^|\\/|\\\\)_"
     },
-    "plugins": ["plugins/markdown"], 
+    "plugins": [
+      "plugins/markdown"
+    ],
     "templates": {
       "cleverLinks": true,
       "monospaceLinks": true
@@ -14,4 +17,5 @@
       "destination": "./docs/JSDocs",
       "readme":"./docs/README.md"
     }
+  
 }

@@ -2,6 +2,7 @@
  * @file app.js
  * @description Main application file for the server setup and routes.
  * @module app
+ * @partof LOL
  */
 
 /**
