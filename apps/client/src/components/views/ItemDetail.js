@@ -1,10 +1,11 @@
 // Import necessary libraries and hooks
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import axios from 'axios';
-import ModelViewer from '../display/ModelViewer'; 
-import ImageViewer from '../display/ImageViewer'; 
+import ModelViewer from '../display/ModelViewer';
+import ImageViewer from '../display/ImageViewer';
+import useFetchData from '../../utils/fetchdata';
 import '../../styles/ItemDetail.css';
+
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001';
 
 /**
@@ -15,32 +16,13 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:300
  * @requires {@link ModelViewer}
  * @returns {JSX.Element} The ItemDetail component.
  */
-
 const ItemDetail = () => {
   // useParams hook to access the URL parameters
   const { id } = useParams();
   console.log("ID" + id);
 
-  // State to hold the item details
-  const [item, setItem] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-
-  useEffect(() => {
-    const fetchItem = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/api/wellplates/${id}`);
-        setItem(response.data);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-
-    fetchItem();
-  }, [id]);
+  // Fetch data using the custom hook
+  const [item, loading, error] = useFetchData(`${API_BASE_URL}/api/wellplates/${id}`);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -63,8 +45,8 @@ const ItemDetail = () => {
         if (key === 'name' || key === 'image' || key === 'model3D') return null;
         return <p key={key}>{`${key.charAt(0).toUpperCase() + key.slice(1)}: ${item[key]}`}</p>;
       })}
-      {item.image && <ImageViewer imagePath={item.id+".png"} altText={item.name} />}
-      {item.model3D && <ModelViewer  modelPath={item.id+".glb"} />}
+      {item.image && <ImageViewer imagePath={`${item.id}.png`} altText={item.name} />}
+      {item.model3D && <ModelViewer modelPath={`${item.id}.glb`} />}
     </div>
   );
 };

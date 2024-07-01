@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
  * @param {Object} props - Component properties.
  * @param {Array} props.filteredData - Array of filtered items.
  * @returns {JSX.Element} The rendered filtered list component.
+ * @see {@link Search}
  */
 const FilteredList = ({ filteredData }) => (
   <ul>
