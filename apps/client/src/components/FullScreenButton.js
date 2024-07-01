@@ -4,7 +4,7 @@ import '../styles/FullScreenButton.css';
 
 /**
  * @description Renders a button that toggles fullscreen mode for a referenced element.
- * @memberof common
+ * @memberof components
  * @param {Object} toggleFullScreen - Ref object for the element to toggle fullscreen mode.
  * @returns {JSX.Element} A button element to toggle fullscreen mode.
  */

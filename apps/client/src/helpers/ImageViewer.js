@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import FullScreenButton from '../components/FullScreenButton';
 
 /**
- * AAAA
  * @description ImageViewer component renders an image with fullscreen capability.
  * @namespace helpers.ImageViewer
  * 

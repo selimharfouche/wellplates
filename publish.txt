@@ -19,9 +19,11 @@ function buildNav(members) {
     });
 
     // Build navigation for parent namespaces
-    nav += buildMemberNav(parentNamespaces, 'Namespaces', seen, linkto);
+    // Namespace -> Client
+    // Module --> server
+    nav += buildMemberNav(parentNamespaces, 'Client', seen, linkto);
 
-    nav += buildMemberNav(members.modules, 'Modules', {}, linkto);
+    nav += buildMemberNav(members.modules, 'Server', {}, linkto);
     nav += buildMemberNav(members.externals, 'Externals', seen, linktoExternal);
     nav += buildMemberNav(members.classes, 'Classes', seen, linkto);
     nav += buildMemberNav(members.interfaces, 'Interfaces', seen, linkto);

@@ -7,9 +7,9 @@
  */
 
 import React, { useState } from "react";
-import SearchInput from "../helpers/Search/SearchInput";
-import FilterSelect from "../helpers/Search/FilterSelect";
-import FilteredList from "../helpers/Search/FilteredList";
+import SearchInput from "../helpers/SearchInput";
+import FilterSelect from "../helpers/FilterSelect";
+import FilteredList from "../helpers/FilteredList";
 import { handleChange } from '../utils/handlers';
 import useFetchData from '../utils/useFetchData';
 

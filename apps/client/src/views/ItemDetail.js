@@ -1,8 +1,8 @@
 /**
  * @namespace views.ItemDetail
  * @description This component fetches and displays the details of a wellplate item.
- * @requires {@link helpers.ItemDetailHelpers.ImageViewer}
- * @requires {@link helpers.ItemDetailHelpers.ModelViewer}
+ * @requires {@link helpers.ImageViewer}
+ * @requires {@link helpers.ModelViewer}
  */
 
 import React from 'react';
