@@ -3,3 +3,10 @@
 build
 RESSOURCES
 .DS_Store
+
+**/.vercel
+**/.vscode
+**/build
+**/.DS_Store
+**/node_modules
+**/.env
