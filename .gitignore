@@ -71,5 +71,6 @@ packages/react-devtools-timeline/dist
 
 .vercel
 documentation-template/
-./publish.txt
-publish.txt
+
+
+RESSOURCES/*
