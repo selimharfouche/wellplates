@@ -4,9 +4,14 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 /**
- * Custom hook to fetch data from the server.
+ * @description Custom hook to fetch data from the server.
+ * 
  * @param {string} url - The URL to fetch data from.
- * @returns {[Array, boolean, Error|null]} The fetched data, loading status, and error state.
+ * @returns {Array} The fetched data, loading status, and error state.
+ * @returns {Array.<Object>} The fetched data.
+ * @returns {boolean} The loading status.
+ * @returns {Error|null} The error state.
+ * @memberof utils
  */
 const useFetchData = (url) => {
   const [data, setData] = useState([]);

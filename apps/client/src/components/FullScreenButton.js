@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { requestFullscreen, exitFullscreen, addFullscreenChangeListener } from '../../utils/fullscreen';
-import '../../styles/FullScreenButton.css';
+import { requestFullscreen, exitFullscreen, addFullscreenChangeListener } from '../utils/fullscreen';
+import '../styles/FullScreenButton.css';
 
 /**
- * Renders a button that toggles fullscreen mode for a referenced element.
- *
+ * @description Renders a button that toggles fullscreen mode for a referenced element.
+ * @memberof common
  * @param {Object} toggleFullScreen - Ref object for the element to toggle fullscreen mode.
  * @returns {JSX.Element} A button element to toggle fullscreen mode.
  */

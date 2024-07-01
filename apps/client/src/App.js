@@ -5,12 +5,28 @@
  * @returns {JSX.Element} The application's main component with routing configured.
  */
 
+
+/**
+ * @namespace views
+ */
+
+/**
+ * @namespace utils
+ */
+/**
+ * @namespace components
+ */
+/**
+ * @namespace helpers
+ */
+
+
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './styles/App.css';
-import Search from './components/views/Search';
-import ItemDetail from './components/views/ItemDetail';
-import NotFound from './components/views/NotFound';
+import Search from './views/Search';
+import ItemDetail from './views/ItemDetail';
+import NotFound from './views/NotFound';
 
 
 function App() {

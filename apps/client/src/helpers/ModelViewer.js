@@ -1,15 +1,16 @@
 // ModelViewer.js
 
 import React, { useRef, Suspense} from 'react';
-import FullScreenButton from '../common/FullScreenButton';
+import FullScreenButton from '../components/FullScreenButton';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Html } from '@react-three/drei';
 
 /**
- * ModelViewer component renders a 3D model with fullscreen capability.
- *
+ * @description ModelViewer component renders a 3D model with fullscreen capability.
+ * @memberof ItemDetailHelpers
  * @param {string} modelPath - Path to the 3D model file.
  * @returns {JSX.Element}
+ * @see {@link views.ItemDetail}
  */
 const ModelViewer = ({ modelPath }) => {
   const { scene } = useGLTF(`/models/${modelPath}`);

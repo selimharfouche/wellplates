@@ -1,8 +1,13 @@
-//fullscreen.js
+/**
+ * @namespace utils.fullscreen
+ * @description Utility functions to manage fullscreen mode in browsers.
+ */
 
 /**
  * Adds a listener for fullscreen mode changes and invokes a callback with the fullscreen state.
- *
+ * 
+ * @function addFullscreenChangeListener
+ * @memberof utils.fullscreen
  * @param {function} callback - The callback function to invoke on fullscreen change.
  * @returns {function} A cleanup function to remove the event listeners.
  */
@@ -41,7 +46,9 @@ export const addFullscreenChangeListener = (callback) => {
 
 /**
  * Requests fullscreen mode for a given element.
- *
+ * 
+ * @function requestFullscreen
+ * @memberof utils.fullscreen
  * @param {Element} element - The element to request fullscreen mode for.
  */
 export const requestFullscreen = (element) => {
@@ -58,6 +65,9 @@ export const requestFullscreen = (element) => {
 
 /**
  * Exits fullscreen mode.
+ * 
+ * @function exitFullscreen
+ * @memberof utils.fullscreen
  */
 export const exitFullscreen = () => {
   if (document.exitFullscreen) {

@@ -1,42 +1,64 @@
-// Search.js
+/**
+ * @namespace views.Search
+ * @description Search component allows users to search and filter wellplates.
+ * @requires {@link helpers.Search.SearchInput}
+ * @requires {@link helpers.Search.FilterSelect}
+ * @requires {@link helpers.Search.FilteredList}
+ */
 
 import React, { useState } from "react";
-import SearchInput from "../search/SearchInput";
-import FilterSelect from "../search/FilterSelect";
-import FilteredList from "../search/FilteredList";
-import { handleChange } from '../../utils/handlers';
-import useFetchData from '../../utils/fetchdata';
+import SearchInput from "../helpers/Search/SearchInput";
+import FilterSelect from "../helpers/Search/FilterSelect";
+import FilteredList from "../helpers/Search/FilteredList";
+import { handleChange } from '../utils/handlers';
+import useFetchData from '../utils/useFetchData';
 
-const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
 
 /**
- * Search component allows users to search and filter wellplates.
- *
- * @component
- * @requires {@link SearchInput}
- * @requires {@link FilterSelect}
- * @requires {@link FilteredList}
+ * @memberof views.Search
+ * @description Fetches data for wellplates and initializes state variables.
  */
 const Search = () => {
+  /**
+   * @member {Array} data
+   * @memberof views.Search
+   * @description The data fetched from the server.
+   */
   const [data, loading, error] = useFetchData(`${API_BASE_URL}/api/wellplates`);
+  
+  /**
+   * @member {string} query
+   * @memberof views.Search
+   * @description The search query entered by the user.
+   */
   const [query, setQuery] = useState("");
+
+  /**
+   * @member {string} selectedMaterial
+   * @memberof views.Search
+   * @description The selected material filter.
+   */
   const [selectedMaterial, setSelectedMaterial] = useState("");
+
+  /**
+   * @member {string} selectedBrand
+   * @memberof views.Search
+   * @description The selected brand filter.
+   */
   const [selectedBrand, setSelectedBrand] = useState("");
+
+  /**
+   * @member {string} selectedNumberOfWells
+   * @memberof views.Search
+   * @description The selected number of wells filter.
+   */
   const [selectedNumberOfWells, setSelectedNumberOfWells] = useState("");
 
   /**
-   * Filtered and available options for the search component.
-   *
-   * @typedef {Object} FilteredOptions
-   * @property {Array} filteredData - Data filtered based on the search query and selected filters.
-   * @property {Array} availableMaterials - Available materials for the filter based on the selected brand and number of wells.
-   * @property {Array} availableBrands - Available brands for the filter based on the selected material and number of wells.
-   * @property {Array} availableNumberOfWells - Available numbers of wells for the filter based on the selected material and brand.
-   */
-
-  /**
-   * @type {FilteredOptions}
+   * @description Filter the data based on the search query and selected filters.
+   * @memberof views.Search
+   * @returns {Array} Data filtered based on the search query and selected filters.
    */
   const filteredData = data.filter((item) => {
     return (
@@ -49,6 +71,11 @@ const Search = () => {
     );
   });
 
+  /**
+   * Get available materials for the filter based on the selected brand and number of wells.
+   * @memberof views.Search
+   * @returns {Array} Available materials for the filter.
+   */
   const availableMaterials = [
     ...new Set(
       data
@@ -62,6 +89,11 @@ const Search = () => {
     ),
   ];
 
+  /**
+   * Get available brands for the filter based on the selected material and number of wells.
+   * @memberof views.Search
+   * @returns {Array} Available brands for the filter.
+   */
   const availableBrands = [
     ...new Set(
       data
@@ -75,6 +107,11 @@ const Search = () => {
     ),
   ];
 
+  /**
+   * Get available numbers of wells for the filter based on the selected material and brand.
+   * @memberof views.Search
+   * @returns {Array} Available numbers of wells for the filter.
+   */
   const availableNumberOfWells = [
     ...new Set(
       data

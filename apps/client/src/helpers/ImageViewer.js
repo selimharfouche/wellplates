@@ -1,15 +1,15 @@
 import React, { useRef } from 'react';
-import FullScreenButton from '../common/FullScreenButton';
+import FullScreenButton from '../components/FullScreenButton';
 
 /**
- * ImageViewer component renders an image with fullscreen capability.
- *
- * @component
+ * @description ImageViewer component renders an image with fullscreen capability.
+ * @namespace helpers.ImageViewer
+
  * @param {Object} props - Component properties.
  * @param {string} props.imagePath - Path to the image file.
  * @param {string} props.altText - Alt text for the image.
  * @returns {JSX.Element} The ImageViewer component.
- * @see {@link ItemDetail}
+ * @see {@link views.ItemDetail}
  */
 const ImageViewer = ({ imagePath, altText }) => {
   const imageRef = useRef();

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: client/src/App.js</title>
+    <title>JSDoc: Namespace: ImageViewer</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,66 +17,107 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: client/src/App.js</h1>
+    <h1 class="page-title">Namespace: ImageViewer</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @file App.js
- * @summary Sets up the main structure of the React application, including the router and routes.
- * @component App
- * @returns {JSX.Element} The application's main component with routing configured.
- */
+        <h2>
+            <span class="ancestors"><a href="helpers.html">helpers</a>.</span>ImageViewer</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>ImageViewer component renders an image with fullscreen capability.</p></div>
+        
+
+        
 
 
-/**
- * @namespace views
- */
+<dl class="details">
 
-/**
- * @namespace utils
- */
-/**
- * @namespace components
- */
-/**
- * @namespace helpers
- */
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client_src_helpers_ImageViewer.js.html">client/src/helpers/ImageViewer.js</a>, <a href="client_src_helpers_ImageViewer.js.html#line4">line 4</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="views.ItemDetail.html"><code>views.ItemDetail</code></a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
 
 
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './styles/App.css';
-import Search from './views/Search';
-import ItemDetail from './views/ItemDetail';
-import NotFound from './views/NotFound';
+        
+    
+    </div>
 
+    
 
-function App() {
-  return (
-    &lt;Router>
-      &lt;div className="App">
-        &lt;header className="App-header">
-          &lt;Routes>
-            &lt;Route path="/" element={&lt;Search />} />
-            &lt;Route path="/item/:id" element={&lt;ItemDetail />} />
-            &lt;Route path="*" element={&lt;NotFound />} />
-          &lt;/Routes>
-        &lt;/header>
-      &lt;/div>
-    &lt;/Router>
-  );
-}
+    
 
-export default App;
-</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

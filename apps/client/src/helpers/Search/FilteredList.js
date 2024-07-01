@@ -6,12 +6,13 @@ import { Link } from 'react-router-dom';
 
 /**
  * FilteredList Component
- * Renders a list of filtered items with links to their detail pages.
+ * @description Renders a list of filtered items with links to their detail pages.
  *
+ * @memberof helpers.Search
  * @param {Object} props - Component properties.
  * @param {Array} props.filteredData - Array of filtered items.
  * @returns {JSX.Element} The rendered filtered list component.
- * @see {@link Search}
+ * @see {@link views.Search}
  */
 const FilteredList = ({ filteredData }) => (
   <ul>

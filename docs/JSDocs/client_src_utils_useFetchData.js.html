@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: client/src/App.js</title>
+    <title>JSDoc: Source: client/src/utils/useFetchData.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: client/src/App.js</h1>
+    <h1 class="page-title">Source: client/src/utils/useFetchData.js</h1>
 
     
 
@@ -26,54 +26,45 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @file App.js
- * @summary Sets up the main structure of the React application, including the router and routes.
- * @component App
- * @returns {JSX.Element} The application's main component with routing configured.
- */
+            <pre class="prettyprint source linenums"><code>// useFetchData.js
 
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 /**
- * @namespace views
+ * @description Custom hook to fetch data from the server.
+ * 
+ * @param {string} url - The URL to fetch data from.
+ * @returns {Array} The fetched data, loading status, and error state.
+ * @returns {Array.&lt;Object>} The fetched data.
+ * @returns {boolean} The loading status.
+ * @returns {Error|null} The error state.
+ * @memberof utils
  */
+const useFetchData = (url) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-/**
- * @namespace utils
- */
-/**
- * @namespace components
- */
-/**
- * @namespace helpers
- */
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url);
+        setData(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
 
+    fetchData();
+  }, [url]);
 
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './styles/App.css';
-import Search from './views/Search';
-import ItemDetail from './views/ItemDetail';
-import NotFound from './views/NotFound';
+  return [data, loading, error];
+};
 
-
-function App() {
-  return (
-    &lt;Router>
-      &lt;div className="App">
-        &lt;header className="App-header">
-          &lt;Routes>
-            &lt;Route path="/" element={&lt;Search />} />
-            &lt;Route path="/item/:id" element={&lt;ItemDetail />} />
-            &lt;Route path="*" element={&lt;NotFound />} />
-          &lt;/Routes>
-        &lt;/header>
-      &lt;/div>
-    &lt;/Router>
-  );
-}
-
-export default App;
+export default useFetchData;
 </code></pre>
         </article>
     </section>

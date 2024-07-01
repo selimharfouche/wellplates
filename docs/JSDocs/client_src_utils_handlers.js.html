@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: client/src/App.js</title>
+    <title>JSDoc: Source: client/src/utils/handlers.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: client/src/App.js</h1>
+    <h1 class="page-title">Source: client/src/utils/handlers.js</h1>
 
     
 
@@ -26,55 +26,21 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @file App.js
- * @summary Sets up the main structure of the React application, including the router and routes.
- * @component App
- * @returns {JSX.Element} The application's main component with routing configured.
- */
-
+            <pre class="prettyprint source linenums"><code>// handlers.js
 
 /**
- * @namespace views
+ * @description Handle changes in various inputs.
+ *
+ * @param {Object} e - Event object.
+ * @param {string} type - Type of filter to be updated.
+ * @param {Function} setState - State setter function.
+ * @memberof utils
  */
-
-/**
- * @namespace utils
- */
-/**
- * @namespace components
- */
-/**
- * @namespace helpers
- */
-
-
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './styles/App.css';
-import Search from './views/Search';
-import ItemDetail from './views/ItemDetail';
-import NotFound from './views/NotFound';
-
-
-function App() {
-  return (
-    &lt;Router>
-      &lt;div className="App">
-        &lt;header className="App-header">
-          &lt;Routes>
-            &lt;Route path="/" element={&lt;Search />} />
-            &lt;Route path="/item/:id" element={&lt;ItemDetail />} />
-            &lt;Route path="*" element={&lt;NotFound />} />
-          &lt;/Routes>
-        &lt;/header>
-      &lt;/div>
-    &lt;/Router>
-  );
-}
-
-export default App;
-</code></pre>
+export const handleChange = (e, type, setState) => {
+    const value = e.target.value;
+    setState(value);
+  };
+  </code></pre>
         </article>
     </section>
 
