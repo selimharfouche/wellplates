@@ -5,7 +5,7 @@ import React from 'react';
 /**
  * FilterSelect Component
  * @description Renders a dropdown select element for filtering.
- * @memberof helpers.Search
+ * @memberof helpers
  * @param {string} value - The current selected value.
  * @param {function} onChange - Function to handle select value changes.
  * @param {Array<string>} options - Options to display in the dropdown.

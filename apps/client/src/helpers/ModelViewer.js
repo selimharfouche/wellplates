@@ -7,7 +7,7 @@ import { OrbitControls, useGLTF, Html } from '@react-three/drei';
 
 /**
  * @description ModelViewer component renders a 3D model with fullscreen capability.
- * @memberof ItemDetailHelpers
+ * @memberof helpers
  * @param {string} modelPath - Path to the 3D model file.
  * @returns {JSX.Element}
  * @see {@link views.ItemDetail}

@@ -29,6 +29,8 @@
 <header>
     
         
+            
+        
     
 </header>
 
@@ -36,6 +38,84 @@
     <div class="container-overview">
     
         
+            <div class="description"><p>Route definitions.</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server_src_routes_routes.js.html">server/src/routes/routes.js</a>, <a href="server_src_routes_routes.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         
     
@@ -64,7 +144,7 @@
     
 
     
-    <h4 class="name" id="~get/api"><span class="type-signature">(inner) </span>get/api<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id=".get/api"><span class="type-signature">(static) </span>get/api<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -188,7 +268,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server_src_app.js.html">server/src/app.js</a>, <a href="server_src_app.js.html#line159">line 159</a>
+        <a href="server_src_routes_routes.js.html">server/src/routes/routes.js</a>, <a href="server_src_routes_routes.js.html#line69">line 69</a>
     </li></ul></dd>
     
 
@@ -242,7 +322,7 @@
     
 
     
-    <h4 class="name" id="~get/api/wellplates"><span class="type-signature">(inner) </span>get/api/wellplates<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id=".get/api/wellplates"><span class="type-signature">(static) </span>get/api/wellplates<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -366,7 +446,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server_src_app.js.html">server/src/app.js</a>, <a href="server_src_app.js.html#line104">line 104</a>
+        <a href="server_src_routes_routes.js.html">server/src/routes/routes.js</a>, <a href="server_src_routes_routes.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -420,7 +500,7 @@
     
 
     
-    <h4 class="name" id="~get/api/wellplates/:id"><span class="type-signature">(inner) </span>get/api/wellplates/:id<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id=".get/api/wellplates/:id"><span class="type-signature">(static) </span>get/api/wellplates/:id<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -544,7 +624,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server_src_app.js.html">server/src/app.js</a>, <a href="server_src_app.js.html#line128">line 128</a>
+        <a href="server_src_routes_routes.js.html">server/src/routes/routes.js</a>, <a href="server_src_routes_routes.js.html#line39">line 39</a>
     </li></ul></dd>
     
 
@@ -593,6 +673,166 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="~setupRoutes"><span class="type-signature">(inner) </span>setupRoutes<span class="signature">(app, connect)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Setup routes for the Express app.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>app</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The Express app instance.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>connect</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Function to get MongoDB connection.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server_src_routes_routes.js.html">server/src/routes/routes.js</a>, <a href="server_src_routes_routes.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 
     
@@ -608,13 +848,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Client</h3><ul><li><a href="components.html">components</a></li><li><a href="helpers.html">helpers</a></li><li><a href="utils.html">utils</a></li><li><a href="views.html">views</a></li></ul><h3>Server</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-routes.html">routes</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-config.html">config</a></li><li><a href="module-database.html">database</a></li><li><a href="module-middlewares.html">middlewares</a></li><li><a href="module-routes.html">routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="components.html">components</a></li><li><a href="helpers.html">helpers</a></li><li><a href="utils.html">utils</a></li><li><a href="utils.fullscreen.html">fullscreen</a></li><li><a href="views.html">views</a></li><li><a href="views.ItemDetail.html">ItemDetail</a></li><li><a href="views.Search.html">Search</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Jul 01 2024 15:41:28 GMT+0300 (Eastern European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Jul 01 2024 20:54:30 GMT+0300 (Eastern European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

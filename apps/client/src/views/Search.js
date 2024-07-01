@@ -1,9 +1,9 @@
 /**
  * @namespace views.Search
  * @description Search component allows users to search and filter wellplates.
- * @requires {@link helpers.Search.SearchInput}
- * @requires {@link helpers.Search.FilterSelect}
- * @requires {@link helpers.Search.FilteredList}
+ * @requires {@link helpers.SearchInput}
+ * @requires {@link helpers.FilterSelect}
+ * @requires {@link helpers.FilteredList}
  */
 
 import React, { useState } from "react";
@@ -15,10 +15,7 @@ import useFetchData from '../utils/useFetchData';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
 
-/**
- * @memberof views.Search
- * @description Fetches data for wellplates and initializes state variables.
- */
+
 const Search = () => {
   /**
    * @member {Array} data

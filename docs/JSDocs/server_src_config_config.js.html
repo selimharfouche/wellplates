@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: client/src/utils/useFetchData.js</title>
+    <title>JSDoc: Source: server/src/config/config.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: client/src/utils/useFetchData.js</h1>
+    <h1 class="page-title">Source: server/src/config/config.js</h1>
 
     
 
@@ -26,45 +26,30 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// useFetchData.js
+            <pre class="prettyprint source linenums"><code>/**
+ * @file config.js
+ * @description Configuration and environment setup.
+ * @module config
+ */
 
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+const dotenv = require('dotenv');
+dotenv.config();
 
 /**
- * @description Custom hook to fetch data from the server.
- * 
- * @param {string} url - The URL to fetch data from.
- * @returns {Array} The fetched data, loading status, and error state.
- * @returns {Array.&lt;Object>} The fetched data.
- * @returns {boolean} The loading status.
- * @returns {Error|null} The error state.
- * @memberof utils
+ * Configuration object containing environment variables.
+ * @typedef {Object} Config
+ * @property {number|string} port - The port number on which the server will run.
+ * @property {string} mongoUri - The URI for connecting to MongoDB.
  */
-const useFetchData = (url) => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(url);
-        setData(response.data);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [url]);
-
-  return [data, loading, error];
+/**
+ * Configuration for the application.
+ * @type {Config}
+ */
+module.exports = {
+  port: process.env.PORT || 3001,
+  mongoUri: process.env.MONGODB_URI,
 };
-
-export default useFetchData;
 </code></pre>
         </article>
     </section>

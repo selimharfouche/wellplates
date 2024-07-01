@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: app</title>
+    <title>JSDoc: Module: database</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: app</h1>
+    <h1 class="page-title">Module: database</h1>
 
     
 
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Main application file for the server setup and routes.</p></div>
+            <div class="description"><p>Database connection logic.</p></div>
         
 
         
@@ -87,7 +87,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server_src_app.js.html">server/src/app.js</a>, <a href="server_src_app.js.html#line1">line 1</a>
+        <a href="server_src_database_database.js.html">server/src/database/database.js</a>, <a href="server_src_database_database.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -135,6 +135,121 @@
 
     
 
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".connect"><span class="type-signature">(async, static) </span>connect<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;MongoClient>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Connect to MongoDB.
+If the connection is not present, it will be established. Returns the connection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server_src_database_database.js.html">server/src/database/database.js</a>, <a href="server_src_database_database.js.html#line21">line 21</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The MongoDB client connection.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;MongoClient></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
