@@ -24,12 +24,14 @@
  */
 
 
+
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './styles/App.css';
 import Search from './views/Search';
 import ItemDetail from './views/ItemDetail';
 import NotFound from './views/NotFound';
+
 
 
 function App() {

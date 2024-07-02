@@ -35,55 +35,46 @@
  */
 
 import React, { useState } from "react";
-import SearchInput from "../helpers/SearchInput";
-import FilterSelect from "../helpers/FilterSelect";
-import FilteredList from "../helpers/FilteredList";
+import SearchInput from "../helpers/Search/SearchInput";
+import FilterSelect from "../helpers/Search/FilterSelect";
+import FilteredList from "../helpers/Search/FilteredList";
 import { handleChange } from '../utils/handlers';
 import useFetchData from '../utils/useFetchData';
+import useFilterOptions from '../helpers/Search/useFilterOptions';
 
+/**
+ * The base URL for the API.
+ * Defaults to "http://localhost:3001" if the environment variable REACT_APP_API_BASE_URL is not set.
+ * @constant {string}
+ */
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
 
-
+/**
+ * Search component allows users to search and filter wellplates.
+ * @function
+ * @memberof views.Search
+ * @returns {JSX.Element} The rendered component.
+ */
 const Search = () => {
+
   /**
-   * @member {Array} data
+   * State of the data fetched from the API.
+   * @constant {array}
    * @memberof views.Search
-   * @description The data fetched from the server.
    */
   const [data, loading, error] = useFetchData(`${API_BASE_URL}/api/wellplates`);
-  
-  /**
-   * @member {string} query
-   * @memberof views.Search
-   * @description The search query entered by the user.
-   */
+
   const [query, setQuery] = useState("");
-
-  /**
-   * @member {string} selectedMaterial
-   * @memberof views.Search
-   * @description The selected material filter.
-   */
   const [selectedMaterial, setSelectedMaterial] = useState("");
-
-  /**
-   * @member {string} selectedBrand
-   * @memberof views.Search
-   * @description The selected brand filter.
-   */
   const [selectedBrand, setSelectedBrand] = useState("");
-
-  /**
-   * @member {string} selectedNumberOfWells
-   * @memberof views.Search
-   * @description The selected number of wells filter.
-   */
   const [selectedNumberOfWells, setSelectedNumberOfWells] = useState("");
 
   /**
-   * @description Filter the data based on the search query and selected filters.
+   * Filters the data based on user input.
+   * @function
    * @memberof views.Search
-   * @returns {Array} Data filtered based on the search query and selected filters.
+   * @param {object} item - An item from the data array.
+   * @returns {boolean} - Whether the item matches the search criteria.
    */
   const filteredData = data.filter((item) => {
     return (
@@ -96,58 +87,9 @@ const Search = () => {
     );
   });
 
-  /**
-   * Get available materials for the filter based on the selected brand and number of wells.
-   * @memberof views.Search
-   * @returns {Array} Available materials for the filter.
-   */
-  const availableMaterials = [
-    ...new Set(
-      data
-        .filter(
-          (item) =>
-            (!selectedBrand || item.brand === selectedBrand) &amp;&amp;
-            (!selectedNumberOfWells ||
-              item.number_of_wells === parseInt(selectedNumberOfWells)),
-        )
-        .map((item) => item.material),
-    ),
-  ];
-
-  /**
-   * Get available brands for the filter based on the selected material and number of wells.
-   * @memberof views.Search
-   * @returns {Array} Available brands for the filter.
-   */
-  const availableBrands = [
-    ...new Set(
-      data
-        .filter(
-          (item) =>
-            (!selectedMaterial || item.material === selectedMaterial) &amp;&amp;
-            (!selectedNumberOfWells ||
-              item.number_of_wells === parseInt(selectedNumberOfWells)),
-        )
-        .map((item) => item.brand),
-    ),
-  ];
-
-  /**
-   * Get available numbers of wells for the filter based on the selected material and brand.
-   * @memberof views.Search
-   * @returns {Array} Available numbers of wells for the filter.
-   */
-  const availableNumberOfWells = [
-    ...new Set(
-      data
-        .filter(
-          (item) =>
-            (!selectedMaterial || item.material === selectedMaterial) &amp;&amp;
-            (!selectedBrand || item.brand === selectedBrand),
-        )
-        .map((item) => item.number_of_wells),
-    ),
-  ];
+  const { availableMaterials, availableBrands, availableNumberOfWells } = useFilterOptions(
+    data, selectedMaterial, selectedBrand, selectedNumberOfWells
+  );
 
   if (loading) {
     return &lt;div>Loading...&lt;/div>;
@@ -195,13 +137,13 @@ export default Search;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-config.html">config</a></li><li><a href="module-database.html">database</a></li><li><a href="module-middlewares.html">middlewares</a></li><li><a href="module-routes.html">routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="components.html">components</a></li><li><a href="helpers.html">helpers</a></li><li><a href="utils.html">utils</a></li><li><a href="utils.fullscreen.html">fullscreen</a></li><li><a href="views.html">views</a></li><li><a href="views.ItemDetail.html">ItemDetail</a></li><li><a href="views.Search.html">Search</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-config.html">config</a></li><li><a href="module-database.html">database</a></li><li><a href="module-middlewares.html">middlewares</a></li><li><a href="module-routes.html">routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="components.html">components</a></li><li><a href="helpers.html">helpers</a></li><li><a href="utils.html">utils</a></li><li><a href="utils.fullscreen.html">fullscreen</a></li><li><a href="views.html">views</a></li><li><a href="views.ItemDetail.html">ItemDetail</a></li><li><a href="views.Search.html">Search</a></li></ul><h3>Global</h3><ul><li><a href="global.html#API_BASE_URL">API_BASE_URL</a></li><li><a href="global.html#useFilterOptions">useFilterOptions</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Jul 01 2024 20:54:30 GMT+0300 (Eastern European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Tue Jul 02 2024 12:29:55 GMT+0300 (Eastern European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,7 +1,7 @@
 // ModelViewer.js
 
 import React, { useRef, Suspense} from 'react';
-import FullScreenButton from '../components/FullScreenButton';
+import FullScreenButton from '../../components/FullScreenButton';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Html } from '@react-three/drei';
 

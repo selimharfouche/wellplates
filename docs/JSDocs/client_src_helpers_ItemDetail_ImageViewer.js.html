@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: client/src/helpers/Search/FilterSelect.js</title>
+    <title>JSDoc: Source: client/src/helpers/ItemDetail/ImageViewer.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: client/src/helpers/Search/FilterSelect.js</h1>
+    <h1 class="page-title">Source: client/src/helpers/ItemDetail/ImageViewer.js</h1>
 
     
 
@@ -26,33 +26,34 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// FilterSelect.js
-
-import React from 'react';
+            <pre class="prettyprint source linenums"><code>import React, { useRef } from 'react';
+import FullScreenButton from '../../components/FullScreenButton';
 
 /**
- * FilterSelect Component
- * @description Renders a dropdown select element for filtering.
+ * @description ImageViewer component renders an image with fullscreen capability.
  * @memberof helpers
- * @param {string} value - The current selected value.
- * @param {function} onChange - Function to handle select value changes.
- * @param {Array&lt;string>} options - Options to display in the dropdown.
- * @param {string} defaultOption - Default option to display.
- * @returns {JSX.Element} The rendered filter select component.
- * @see {@link views.Search}
+ * @param {string} imagePath - Path to the image file.
+ * @param {string} altText - Alt text for the image.
+ * @returns {JSX.Element} The ImageViewer component.
+ * @see {@link views.ItemDetail}
  */
-const FilterSelect = ({ value, onChange, options, defaultOption }) => (
-  &lt;select value={value} onChange={onChange}>
-    &lt;option value="">{defaultOption}&lt;/option>
-    {options.map((option, index) => (
-      &lt;option key={index} value={option}>
-        {option}
-      &lt;/option>
-    ))}
-  &lt;/select>
-);
+const ImageViewer = ({ imagePath, altText }) => {
+  const imageRef = useRef();
+  const fullImagePath = `/images/${imagePath}`;
 
-export default FilterSelect;
+  return (
+    &lt;div ref={imageRef} style={{ position: 'relative', textAlign: 'center' }}>
+      &lt;FullScreenButton toggleFullScreen={imageRef} />
+      &lt;img 
+        src={fullImagePath} 
+        alt={altText} 
+        className={`image-display`}
+      />
+    &lt;/div>
+  );
+};
+
+export default ImageViewer;
 </code></pre>
         </article>
     </section>

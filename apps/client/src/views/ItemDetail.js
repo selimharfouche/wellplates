@@ -7,8 +7,8 @@
 
 import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import ModelViewer from '../helpers/ModelViewer';
-import ImageViewer from '../helpers/ImageViewer';
+import ModelViewer from '../helpers/ItemDetail/ModelViewer';
+import ImageViewer from '../helpers/ItemDetail/ImageViewer';
 import useFetchData from '../utils/useFetchData';
 import '../styles/ItemDetail.css';
 

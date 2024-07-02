@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: client/src/helpers/Search/FilterSelect.js</title>
+    <title>JSDoc: Source: client/src/helpers/ItemDetail/ModelViewer.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: client/src/helpers/Search/FilterSelect.js</h1>
+    <h1 class="page-title">Source: client/src/helpers/ItemDetail/ModelViewer.js</h1>
 
     
 
@@ -26,33 +26,40 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// FilterSelect.js
+            <pre class="prettyprint source linenums"><code>// ModelViewer.js
 
-import React from 'react';
+import React, { useRef, Suspense} from 'react';
+import FullScreenButton from '../../components/FullScreenButton';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, useGLTF, Html } from '@react-three/drei';
 
 /**
- * FilterSelect Component
- * @description Renders a dropdown select element for filtering.
+ * @description ModelViewer component renders a 3D model with fullscreen capability.
  * @memberof helpers
- * @param {string} value - The current selected value.
- * @param {function} onChange - Function to handle select value changes.
- * @param {Array&lt;string>} options - Options to display in the dropdown.
- * @param {string} defaultOption - Default option to display.
- * @returns {JSX.Element} The rendered filter select component.
- * @see {@link views.Search}
+ * @param {string} modelPath - Path to the 3D model file.
+ * @returns {JSX.Element}
+ * @see {@link views.ItemDetail}
  */
-const FilterSelect = ({ value, onChange, options, defaultOption }) => (
-  &lt;select value={value} onChange={onChange}>
-    &lt;option value="">{defaultOption}&lt;/option>
-    {options.map((option, index) => (
-      &lt;option key={index} value={option}>
-        {option}
-      &lt;/option>
-    ))}
-  &lt;/select>
-);
+const ModelViewer = ({ modelPath }) => {
+  const { scene } = useGLTF(`/models/${modelPath}`);
+  const canvasRef = useRef();
 
-export default FilterSelect;
+  return (
+    &lt;div ref={canvasRef} style={{ position: 'relative' }}>
+      &lt;FullScreenButton toggleFullScreen={canvasRef} />
+      &lt;Canvas className="model-display" camera={{ position: [0, 0, 100], fov: 50 }}>
+      &lt;Suspense fallback={&lt;Html>&lt;div>Loading...&lt;/div>&lt;/Html>}>
+        &lt;ambientLight intensity={0.5} />
+        &lt;directionalLight position={[10, 10, 5]} intensity={1} />
+        &lt;OrbitControls enableZoom={true} minDistance={10} maxDistance={100} />
+        &lt;primitive object={scene} scale={[0.5, 0.5, 0.5]} />
+      &lt;/Suspense>
+    &lt;/Canvas>
+    &lt;/div>
+  );
+};
+
+export default ModelViewer;
 </code></pre>
         </article>
     </section>

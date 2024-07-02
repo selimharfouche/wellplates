@@ -94,6 +94,83 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="API_BASE_URL"><span class="type-signature">(constant) </span>API_BASE_URL<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>The base URL for the API.
+Defaults to &quot;http://localhost:3001&quot; if the environment variable REACT_APP_API_BASE_URL is not set.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client_src_views_Search.js.html">client/src/views/Search.js</a>, <a href="client_src_views_Search.js.html#line22">line 22</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -104,7 +181,7 @@
     
 
     
-    <h4 class="name" id="applyMiddlewares"><span class="type-signature"></span>applyMiddlewares<span class="signature">(app)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="useFilterOptions"><span class="type-signature"></span>useFilterOptions<span class="signature">(data, selectedMaterial, selectedBrand, selectedNumberOfWells)</span><span class="type-signature"> &rarr; {Object|Array|Array|Array}</span></h4>
     
 
     
@@ -112,7 +189,7 @@
 
 
 <div class="description">
-    <p>Apply middlewares to the Express app.</p>
+    <p>Custom hook to compute available filter options based on the current selections.</p>
 </div>
 
 
@@ -148,13 +225,13 @@
 
         <tr>
             
-                <td class="name"><code>app</code></td>
+                <td class="name"><code>data</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">Array</span>
 
 
             
@@ -164,7 +241,76 @@
 
             
 
-            <td class="description last"><p>The Express app instance.</p></td>
+            <td class="description last"><p>The array of wellplate objects.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>selectedMaterial</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The currently selected material filter.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>selectedBrand</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The currently selected brand filter.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>selectedNumberOfWells</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The currently selected number of wells filter.</p></td>
         </tr>
 
     
@@ -205,7 +351,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server_src_middlewares_middlewares.js.html">server/src/middlewares/middlewares.js</a>, <a href="server_src_middlewares_middlewares.js.html#line8">line 8</a>
+        <a href="client_src_helpers_Search_useFilterOptions.js.html">client/src/helpers/Search/useFilterOptions.js</a>, <a href="client_src_helpers_Search_useFilterOptions.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -230,168 +376,95 @@
 
 
 
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="setupRoutes"><span class="type-signature"></span>setupRoutes<span class="signature">(app, connect)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Setup routes for the Express app.</p>
+<h5>Returns:</h5>
+<ul>
+        <li>
+<div class="param-desc">
+    <p>An object containing arrays of available materials, brands, and numbers of wells.</p>
 </div>
 
 
 
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
         
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>app</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The Express app instance.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>connect</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Function to get MongoDB connection.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server_src_routes_routes.js.html">server/src/routes/routes.js</a>, <a href="server_src_routes_routes.js.html#line9">line 9</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
+    </dd>
 </dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    <p>return.availableMaterials - Array of unique materials based on the selected filters.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    <p>return.availableBrands - Array of unique brands based on the selected filters.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    <p>return.availableNumberOfWells - Array of unique numbers of wells based on the selected filters.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+</li>
+    </ul>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const { availableMaterials, availableBrands, availableNumberOfWells } = useFilterOptions(data, selectedMaterial, selectedBrand, selectedNumberOfWells);</code></pre>
 
 
 
@@ -411,13 +484,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Client</h3><ul><li><a href="components.html">components</a></li><li><a href="helpers.html">helpers</a></li><li><a href="utils.html">utils</a></li><li><a href="views.html">views</a></li></ul><h3>Global</h3><ul><li><a href="global.html#applyMiddlewares">applyMiddlewares</a></li><li><a href="global.html#setupRoutes">setupRoutes</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-config.html">config</a></li><li><a href="module-database.html">database</a></li><li><a href="module-middlewares.html">middlewares</a></li><li><a href="module-routes.html">routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="components.html">components</a></li><li><a href="helpers.html">helpers</a></li><li><a href="utils.html">utils</a></li><li><a href="utils.fullscreen.html">fullscreen</a></li><li><a href="views.html">views</a></li><li><a href="views.ItemDetail.html">ItemDetail</a></li><li><a href="views.Search.html">Search</a></li></ul><h3>Global</h3><ul><li><a href="global.html#API_BASE_URL">API_BASE_URL</a></li><li><a href="global.html#useFilterOptions">useFilterOptions</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Jul 01 2024 20:38:50 GMT+0300 (Eastern European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Tue Jul 02 2024 12:29:55 GMT+0300 (Eastern European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

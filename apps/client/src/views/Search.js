@@ -7,55 +7,47 @@
  */
 
 import React, { useState } from "react";
-import SearchInput from "../helpers/SearchInput";
-import FilterSelect from "../helpers/FilterSelect";
-import FilteredList from "../helpers/FilteredList";
+import SearchInput from "../helpers/Search/SearchInput";
+import FilterSelect from "../helpers/Search/FilterSelect";
+import FilteredList from "../helpers/Search/FilteredList";
 import { handleChange } from '../utils/handlers';
 import useFetchData from '../utils/useFetchData';
+import useFilterOptions from '../helpers/Search/useFilterOptions';
 
+/**
+ * The base URL for the API.
+ * Defaults to "http://localhost:3001" if the environment variable REACT_APP_API_BASE_URL is not set.
+ * @constant {string}
+ */
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
 
 
 const Search = () => {
+
   /**
-   * @member {Array} data
-   * @memberof views.Search
-   * @description The data fetched from the server.
+   * Fetches data from the API and provides loading and error states.
+   * 
+   * @returns {[Array, boolean, Error]}
    */
   const [data, loading, error] = useFetchData(`${API_BASE_URL}/api/wellplates`);
-  
+
   /**
-   * @member {string} query
-   * @memberof views.Search
-   * @description The search query entered by the user.
+   * State variables for the search component.
+   * Each state variable is a string with a corresponding setter function.
+   * 
+   * @type {Array.<[string, Function]>}
    */
   const [query, setQuery] = useState("");
-
-  /**
-   * @member {string} selectedMaterial
-   * @memberof views.Search
-   * @description The selected material filter.
-   */
   const [selectedMaterial, setSelectedMaterial] = useState("");
-
-  /**
-   * @member {string} selectedBrand
-   * @memberof views.Search
-   * @description The selected brand filter.
-   */
   const [selectedBrand, setSelectedBrand] = useState("");
-
-  /**
-   * @member {string} selectedNumberOfWells
-   * @memberof views.Search
-   * @description The selected number of wells filter.
-   */
   const [selectedNumberOfWells, setSelectedNumberOfWells] = useState("");
 
   /**
-   * @description Filter the data based on the search query and selected filters.
+   * Filters the data based on user input.
+   * @function
    * @memberof views.Search
-   * @returns {Array} Data filtered based on the search query and selected filters.
+   * @param {object} item - An item from the data array.
+   * @returns {boolean} - Whether the item matches the search criteria.
    */
   const filteredData = data.filter((item) => {
     return (
@@ -68,58 +60,9 @@ const Search = () => {
     );
   });
 
-  /**
-   * Get available materials for the filter based on the selected brand and number of wells.
-   * @memberof views.Search
-   * @returns {Array} Available materials for the filter.
-   */
-  const availableMaterials = [
-    ...new Set(
-      data
-        .filter(
-          (item) =>
-            (!selectedBrand || item.brand === selectedBrand) &&
-            (!selectedNumberOfWells ||
-              item.number_of_wells === parseInt(selectedNumberOfWells)),
-        )
-        .map((item) => item.material),
-    ),
-  ];
-
-  /**
-   * Get available brands for the filter based on the selected material and number of wells.
-   * @memberof views.Search
-   * @returns {Array} Available brands for the filter.
-   */
-  const availableBrands = [
-    ...new Set(
-      data
-        .filter(
-          (item) =>
-            (!selectedMaterial || item.material === selectedMaterial) &&
-            (!selectedNumberOfWells ||
-              item.number_of_wells === parseInt(selectedNumberOfWells)),
-        )
-        .map((item) => item.brand),
-    ),
-  ];
-
-  /**
-   * Get available numbers of wells for the filter based on the selected material and brand.
-   * @memberof views.Search
-   * @returns {Array} Available numbers of wells for the filter.
-   */
-  const availableNumberOfWells = [
-    ...new Set(
-      data
-        .filter(
-          (item) =>
-            (!selectedMaterial || item.material === selectedMaterial) &&
-            (!selectedBrand || item.brand === selectedBrand),
-        )
-        .map((item) => item.number_of_wells),
-    ),
-  ];
+  const { availableMaterials, availableBrands, availableNumberOfWells } = useFilterOptions(
+    data, selectedMaterial, selectedBrand, selectedNumberOfWells
+  );
 
   if (loading) {
     return <div>Loading...</div>;

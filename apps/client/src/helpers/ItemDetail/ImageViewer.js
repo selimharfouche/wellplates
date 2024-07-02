@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import FullScreenButton from '../components/FullScreenButton';
+import FullScreenButton from '../../components/FullScreenButton';
 
 /**
  * @description ImageViewer component renders an image with fullscreen capability.
