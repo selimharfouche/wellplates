@@ -7,7 +7,6 @@
  */
 
 import React, { useState } from "react";
-import SearchInput from "../helpers/Search/SearchInput";
 import FilterSelect from "../helpers/Search/FilterSelect";
 import FilteredList from "../helpers/Search/FilteredList";
 import { handleChange } from '../utils/handlers';
@@ -25,29 +24,29 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:300
 const Search = () => {
 
   /**
-   * Fetches data from the API and provides loading and error states.
-   * 
-   * @returns {[Array, boolean, Error]}
+   * Fetches data from the API and manages loading and error states.
+   * @returns {Array} data - Array of wellplate objects.
+   * @returns {boolean} loading - Loading state.
+   * @returns {Object} error - Error state.
    */
   const [data, loading, error] = useFetchData(`${API_BASE_URL}/api/wellplates`);
+  
 
   /**
-   * State variables for the search component.
-   * Each state variable is a string with a corresponding setter function.
-   * 
-   * @type {Array.<[string, Function]>}
-   */
-  const [query, setQuery] = useState("");
-  const [selectedMaterial, setSelectedMaterial] = useState("");
-  const [selectedBrand, setSelectedBrand] = useState("");
-  const [selectedNumberOfWells, setSelectedNumberOfWells] = useState("");
+ * State variables for the search component.
+ * Each state variable is a string with a corresponding setter function.
+ * 
+ * @type {[string, Function]}
+ */
+const [query, setQuery] = useState("");
+const [selectedMaterial, setSelectedMaterial] = useState("");
+const [selectedBrand, setSelectedBrand] = useState("");
+const [selectedNumberOfWells, setSelectedNumberOfWells] = useState("");
+
 
   /**
-   * Filters the data based on user input.
-   * @function
-   * @memberof views.Search
-   * @param {object} item - An item from the data array.
-   * @returns {boolean} - Whether the item matches the search criteria.
+   * Filters the data based on the query and selected filters.
+   * @returns {Array} filteredData - Array of filtered wellplate objects.
    */
   const filteredData = data.filter((item) => {
     return (
@@ -60,9 +59,12 @@ const Search = () => {
     );
   });
 
+
+
   const { availableMaterials, availableBrands, availableNumberOfWells } = useFilterOptions(
     data, selectedMaterial, selectedBrand, selectedNumberOfWells
   );
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -75,7 +77,14 @@ const Search = () => {
   return (
     <div>
       <h1>Search App</h1>
-      <SearchInput query={query} onChange={(e) => handleChange(e, "query", setQuery)} />
+      <input
+    type="text"
+    placeholder="Search..."
+    value={query}
+    onChange={(e) => handleChange(e, "query", setQuery)}
+  />
+
+
       <FilterSelect
         value={selectedMaterial}
         onChange={(e) => handleChange(e, "material", setSelectedMaterial)}
