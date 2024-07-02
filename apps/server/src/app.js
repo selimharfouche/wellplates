@@ -5,10 +5,10 @@
  */
 
 const express = require('express');
-const { applyMiddlewares } = require('../middlewares/middlewares');
-const { setupRoutes } = require('../routes/routes');
-const { connect } = require('../database/database');
-const { port } = require('../config/config');
+const { applyMiddlewares } = require('./middlewares/middlewares');
+const { setupRoutes } = require('./routes/routes');
+const { connect } = require('./database/database');
+const { port } = require('./config/config');
 
 const app = express();
 
