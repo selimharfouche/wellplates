@@ -60,15 +60,7 @@ const Search = () => {
     );
   });
 
-  const { availableMaterials, availableBrands, availableNumberOfWells } = useFilterOptions(
-    data, filters.material[0], filters.brand[0], filters.number_of_wells[0]
-  );
-
-  const filterOptions = {
-    material: availableMaterials,
-    brand: availableBrands,
-    number_of_wells: availableNumberOfWells
-  };
+  const availableFilters = useFilterOptions(data, filters, filterKeys);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -89,12 +81,13 @@ const Search = () => {
       />
       {filterKeys.map(key => {
         const [selectedValue, setSelectedValue] = filters[key];
+        const optionsKey = `available${key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, '')}`;
         return (
           <FilterSelect
             key={key}
             value={selectedValue}
             onChange={(e) => handleChange(e, key, setSelectedValue)}
-            options={filterOptions[key]}
+            options={availableFilters[optionsKey]}
             defaultOption={`All ${key.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase())}`}
           />
         );
