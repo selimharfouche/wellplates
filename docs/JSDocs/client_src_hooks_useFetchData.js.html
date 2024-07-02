@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: server/src/database/database.js</title>
+    <title>JSDoc: Source: client/src/hooks/useFetchData.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: server/src/database/database.js</h1>
+    <h1 class="page-title">Source: client/src/hooks/useFetchData.js</h1>
 
     
 
@@ -26,40 +26,40 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @file database.js
- * @description Database connection logic.
- * @module database
- */
-
-const { MongoClient } = require('mongodb');
-const { mongoUri } = require('../config/config');
-
-let con;
+            <pre class="prettyprint source linenums"><code>import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 /**
- * Connect to MongoDB.
- * If the connection is not present, it will be established. Returns the connection.
+ * Custom hook to fetch data from a given URL.
  * 
- * @async
- * @function
- * @memberof module:database
- * @returns {Promise&lt;MongoClient>} The MongoDB client connection.
+ * @function useFetchData
+ * @param {string} url - The URL to fetch data from.
+ * @returns {Array} - Returns an array containing the fetched data, loading state, and error state.
  */
-const connect = async () => {
-  if (con) {
-    console.log("Returning existing MongoDB connection");
-    return con; // Return connection if already connected
-  }
-  const client = new MongoClient(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
-  con = await client.connect();
-  console.log("Established new MongoDB connection");
-  return con;
+const useFetchData = (url) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url);
+        setData(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [url]);
+
+  return [data, loading, error];
 };
 
-module.exports = {
-  connect,
-};
+export default useFetchData;
 </code></pre>
         </article>
     </section>

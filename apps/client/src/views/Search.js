@@ -1,21 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import useFetchData from '../utils/useFetchData';
-import {
-  FormControl,
-  Select,
-  MenuItem,
-  Checkbox,
-  ListItemText,
-  TextField,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper
-} from '@mui/material';
+import useFetchData from '../hooks/useFetchData';
+import useFilters from '../hooks/useFilters';
+import { TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import Filter from '../components/Filter';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
 
@@ -32,29 +20,11 @@ const Search = () => {
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedMaterials, setSelectedMaterials] = useState([]);
   const [selectedWells, setSelectedWells] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-
-  /**
-   * Filters the fetched data based on the search term, selected brands, selected materials, and selected number of wells.
-   * Updates the filtered data whenever the search term, selected brands, selected materials, selected wells, or the fetched data changes.
-   * @function
-   */
-  useEffect(() => {
-    if (data) {
-      let filtered = data.filter(item =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (selectedBrands.length === 0 || selectedBrands.includes(item.brand)) &&
-        (selectedMaterials.length === 0 || selectedMaterials.includes(item.material)) &&
-        (selectedWells.length === 0 || selectedWells.includes(item.number_of_wells.toString()))
-      );
-
-      setFilteredData(filtered);
-    }
-  }, [data, searchTerm, selectedBrands, selectedMaterials, selectedWells]);
+  const filteredData = useFilters(data, searchTerm, selectedBrands, selectedMaterials, selectedWells);
 
   /**
    * Handles the change of selected brands.
-   * @param {Event} e - The change event.
+   * @param {Event} event - The change event.
    */
   const handleBrandChange = (event) => {
     const { target: { value } } = event;
@@ -65,7 +35,7 @@ const Search = () => {
 
   /**
    * Handles the change of selected materials.
-   * @param {Event} e - The change event.
+   * @param {Event} event - The change event.
    */
   const handleMaterialChange = (event) => {
     const { target: { value } } = event;
@@ -76,7 +46,7 @@ const Search = () => {
 
   /**
    * Handles the change of selected number of wells.
-   * @param {Event} e - The change event.
+   * @param {Event} event - The change event.
    */
   const handleWellsChange = (event) => {
     const { target: { value } } = event;
@@ -85,107 +55,96 @@ const Search = () => {
     );
   };
 
+  /**
+   * Reflects the current state of the data fetching.
+   * Displays a loading message while data is being fetched.
+   */
   if (loading) {
     return <div>Loading...</div>;
   }
 
+  /**
+   * Reflects the current state of the data fetching.
+   * Displays an error message if there was an error during data fetching.
+   */
   if (error) {
     return <div>Error: {error.message}</div>;
   }
 
-  // Extract unique brands, materials, and number of wells for filter options
+  /**
+   * Extracts unique brands for filter options from the fetched data.
+   * @type {string[]}
+   */
   const brands = [...new Set(data.map(item => item.brand))];
+
+  /**
+   * Extracts unique materials for filter options from the fetched data.
+   * @type {string[]}
+   */
   const materials = [...new Set(data.map(item => item.material))];
+
+  /**
+   * Extracts unique number of wells for filter options from the fetched data.
+   * @type {string[]}
+   */
   const wellsOptions = [...new Set(data.map(item => item.number_of_wells.toString()))];
 
   return (
-    <div>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>
+              <TextField
+                label="Search by Name"
+                variant="outlined"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                fullWidth
+              />
+            </TableCell>
+            <TableCell>
+              <Filter
+                label="Brand"
+                options={brands}
+                selectedOptions={selectedBrands}
+                handleChange={handleBrandChange}
+              />
+            </TableCell>
+            <TableCell>
+              <Filter
+                label="Material"
+                options={materials}
+                selectedOptions={selectedMaterials}
+                handleChange={handleMaterialChange}
+              />
+            </TableCell>
+            <TableCell>
+              <Filter
+                label="Wells"
+                options={wellsOptions}
+                selectedOptions={selectedWells}
+                handleChange={handleWellsChange}
+              />
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {filteredData.map((item) => (
+            <TableRow key={item._id}>
               <TableCell>
-                <TextField
-                  label="Search by Name"
-                  variant="outlined"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  fullWidth
-                />
+                <Link to={`/item/${item._id}`}>
+                  {item.name}
+                </Link>
               </TableCell>
-              <TableCell>
-                <FormControl fullWidth>
-                  <Select
-                    multiple
-                    displayEmpty
-                    value={selectedBrands}
-                    onChange={handleBrandChange}
-                    renderValue={(selected) => selected.length === 0 ? "Filter by Brand" : selected.join(', ')}
-                  >
-                    {brands.map((brand) => (
-                      <MenuItem key={brand} value={brand}>
-                        <Checkbox checked={selectedBrands.indexOf(brand) > -1} />
-                        <ListItemText primary={brand} />
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </TableCell>
-              <TableCell>
-                <FormControl fullWidth>
-                  <Select
-                    multiple
-                    displayEmpty
-                    value={selectedMaterials}
-                    onChange={handleMaterialChange}
-                    renderValue={(selected) => selected.length === 0 ? "Filter by Material" : selected.join(', ')}
-                  >
-                    {materials.map((material) => (
-                      <MenuItem key={material} value={material}>
-                        <Checkbox checked={selectedMaterials.indexOf(material) > -1} />
-                        <ListItemText primary={material} />
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </TableCell>
-              <TableCell>
-                <FormControl fullWidth>
-                  <Select
-                    multiple
-                    displayEmpty
-                    value={selectedWells}
-                    onChange={handleWellsChange}
-                    renderValue={(selected) => selected.length === 0 ? "Filter by Wells" : selected.join(', ')}
-                  >
-                    {wellsOptions.map((wells) => (
-                      <MenuItem key={wells} value={wells}>
-                        <Checkbox checked={selectedWells.indexOf(wells) > -1} />
-                        <ListItemText primary={wells} />
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </TableCell>
+              <TableCell>{item.brand}</TableCell>
+              <TableCell>{item.material}</TableCell>
+              <TableCell>{item.number_of_wells}</TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredData.map((item) => (
-              <TableRow key={item._id}>
-                <TableCell>
-                  <Link to={`/item/${item._id}`}>
-                    {item.name}
-                  </Link>
-                </TableCell>
-                <TableCell>{item.brand}</TableCell>
-                <TableCell>{item.material}</TableCell>
-                <TableCell>{item.number_of_wells}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 

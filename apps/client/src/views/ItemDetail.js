@@ -1,5 +1,5 @@
 /**
- * @namespace views.ItemDetail
+ * @namespace ItemDetail
  * @description This component fetches and displays the details of a wellplate item.
  * @requires {@link helpers.ImageViewer}
  * @requires {@link helpers.ModelViewer}
@@ -9,19 +9,19 @@ import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import ModelViewer from '../helpers/ItemDetail/ModelViewer';
 import ImageViewer from '../helpers/ItemDetail/ImageViewer';
-import useFetchData from '../utils/useFetchData';
+import useFetchData from '../hooks/useFetchData';
 import '../styles/ItemDetail.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001';
 
 /**
- * @memberof views.ItemDetail
+ * @memberof ItemDetail
  * @description Fetches and displays the details of a wellplate item.
  */
 const ItemDetail = () => {
   /**
    * @member {Object} id
-   * @memberof views.ItemDetail
+   * @memberof ItemDetail
    * @description The ID parameter from the URL.
    */
   const { id } = useParams();
@@ -29,17 +29,17 @@ const ItemDetail = () => {
 
   /**
    * @member {Object} item
-   * @memberof views.ItemDetail
+   * @memberof ItemDetail
    * @description The wellplate item data fetched from the server.
    */
   /**
    * @member {boolean} loading
-   * @memberof views.ItemDetail
+   * @memberof ItemDetail
    * @description The loading state indicating whether data is being fetched.
    */
   /**
    * @member {Error|null} error
-   * @memberof views.ItemDetail
+   * @memberof ItemDetail
    * @description The error state indicating whether there was an error fetching the data.
    */
   const [item, loading, error] = useFetchData(`${API_BASE_URL}/api/wellplates/${id}`);

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: server/src/database/database.js</title>
+    <title>JSDoc: Source: client/src/components/Filter.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: server/src/database/database.js</h1>
+    <h1 class="page-title">Source: client/src/components/Filter.js</h1>
 
     
 
@@ -26,40 +26,42 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @file database.js
- * @description Database connection logic.
- * @module database
- */
-
-const { MongoClient } = require('mongodb');
-const { mongoUri } = require('../config/config');
-
-let con;
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { FormControl, Select, MenuItem, Checkbox, ListItemText } from '@mui/material';
 
 /**
- * Connect to MongoDB.
- * If the connection is not present, it will be established. Returns the connection.
- * 
- * @async
- * @function
- * @memberof module:database
- * @returns {Promise&lt;MongoClient>} The MongoDB client connection.
+ * Filter component renders a multi-select dropdown with checkboxes for filtering options.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string} props.label - The label for the filter dropdown.
+ * @param {Array&lt;string>} props.options - The array of options to display in the dropdown.
+ * @param {Array&lt;string>} props.selectedOptions - The array of currently selected options.
+ * @param {function} props.handleChange - The function to handle changes in the selected options.
+ * @returns {JSX.Element} The rendered component.
  */
-const connect = async () => {
-  if (con) {
-    console.log("Returning existing MongoDB connection");
-    return con; // Return connection if already connected
-  }
-  const client = new MongoClient(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
-  con = await client.connect();
-  console.log("Established new MongoDB connection");
-  return con;
+const Filter = ({ label, options, selectedOptions, handleChange }) => {
+  return (
+    &lt;FormControl fullWidth>
+      &lt;Select
+        multiple
+        displayEmpty
+        value={selectedOptions}
+        onChange={handleChange}
+        renderValue={(selected) => selected.length === 0 ? `Filter by ${label}` : selected.join(', ')}
+      >
+        {options.map((option) => (
+          &lt;MenuItem key={option} value={option}>
+            &lt;Checkbox checked={selectedOptions.indexOf(option) > -1} />
+            &lt;ListItemText primary={option} />
+          &lt;/MenuItem>
+        ))}
+      &lt;/Select>
+    &lt;/FormControl>
+  );
 };
 
-module.exports = {
-  connect,
-};
+export default Filter;
 </code></pre>
         </article>
     </section>

@@ -1,17 +1,12 @@
-// useFetchData.js
-
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 /**
- * @description Custom hook to fetch data from the server.
+ * Custom hook to fetch data from a given URL.
  * 
+ * @function useFetchData
  * @param {string} url - The URL to fetch data from.
- * @returns {Array} The fetched data, loading status, and error state.
- * @returns {Array.<Object>} The fetched data.
- * @returns {boolean} The loading status.
- * @returns {Error|null} The error state.
- * @memberof utils
+ * @returns {Array} - Returns an array containing the fetched data, loading state, and error state.
  */
 const useFetchData = (url) => {
   const [data, setData] = useState([]);

@@ -5,10 +5,6 @@
  */
 
 
-/**
- * @namespace views
- * @description views directory
- */
 
 /**
  * @namespace utils

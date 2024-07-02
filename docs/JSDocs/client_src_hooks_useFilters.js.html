@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: server/src/database/database.js</title>
+    <title>JSDoc: Source: client/src/hooks/useFilters.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: server/src/database/database.js</h1>
+    <h1 class="page-title">Source: client/src/hooks/useFilters.js</h1>
 
     
 
@@ -26,40 +26,39 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @file database.js
- * @description Database connection logic.
- * @module database
- */
-
-const { MongoClient } = require('mongodb');
-const { mongoUri } = require('../config/config');
-
-let con;
+            <pre class="prettyprint source linenums"><code>import { useState, useEffect } from "react";
 
 /**
- * Connect to MongoDB.
- * If the connection is not present, it will be established. Returns the connection.
+ * Custom hook to filter data based on search term, selected brands, selected materials, and selected number of wells.
  * 
- * @async
- * @function
- * @memberof module:database
- * @returns {Promise&lt;MongoClient>} The MongoDB client connection.
+ * @function useFilters
+ * @param {Array} data - The array of data to filter.
+ * @param {string} searchTerm - The search term to filter the data.
+ * @param {Array&lt;string>} selectedBrands - The selected brands to filter the data.
+ * @param {Array&lt;string>} selectedMaterials - The selected materials to filter the data.
+ * @param {Array&lt;string>} selectedWells - The selected number of wells to filter the data.
+ * @returns {Array} - The filtered data.
  */
-const connect = async () => {
-  if (con) {
-    console.log("Returning existing MongoDB connection");
-    return con; // Return connection if already connected
-  }
-  const client = new MongoClient(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
-  con = await client.connect();
-  console.log("Established new MongoDB connection");
-  return con;
+const useFilters = (data, searchTerm, selectedBrands, selectedMaterials, selectedWells) => {
+  const [filteredData, setFilteredData] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      let filtered = data.filter(item =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) &amp;&amp;
+        (selectedBrands.length === 0 || selectedBrands.includes(item.brand)) &amp;&amp;
+        (selectedMaterials.length === 0 || selectedMaterials.includes(item.material)) &amp;&amp;
+        (selectedWells.length === 0 || selectedWells.includes(item.number_of_wells.toString()))
+      );
+
+      setFilteredData(filtered);
+    }
+  }, [data, searchTerm, selectedBrands, selectedMaterials, selectedWells]);
+
+  return filteredData;
 };
 
-module.exports = {
-  connect,
-};
+export default useFilters;
 </code></pre>
         </article>
     </section>
