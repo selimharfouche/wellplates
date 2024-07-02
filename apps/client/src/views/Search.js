@@ -1,66 +1,39 @@
 /**
  * @namespace views.Search
  * @description Search component allows users to search and filter wellplates.
- * @requires {@link helpers.SearchInput}
- * @requires {@link helpers.FilterSelect}
- * @requires {@link helpers.FilteredList}
  */
 
-import React from "react";
-import FilterSelect from "../helpers/Search/FilterSelect";
-import FilteredList from "../helpers/Search/FilteredList";
-import { handleChange } from '../utils/handlers';
+import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
 import useFetchData from '../utils/useFetchData';
-import useFilterOptions from '../helpers/Search/useFilterOptions';
-import useDynamicFilters from '../utils/useDynamicFilters';
 
-/**
- * The base URL for the API.
- * Defaults to "http://localhost:3001" if the environment variable REACT_APP_API_BASE_URL is not set.
- * @constant {string}
- */
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
 
+/**
+ * Search component fetches wellplate data and allows users to filter the data by typing in a search input.
+ * @function
+ * @name Search
+ * @returns {JSX.Element} The rendered component.
+ */
 const Search = () => {
-
-  /**
-   * Fetches data from the API and manages loading and error states.
-   * @returns {Array} data - Array of wellplate objects.
-   * @returns {boolean} loading - Loading state.
-   * @returns {Object} error - Error state.
-   */
   const [data, loading, error] = useFetchData(`${API_BASE_URL}/api/wellplates`);
-  
-  /**
-   * The array of filter keys to be used in the search component.
-   * @constant {Array}
-   */
-  const filterKeys = ["material", "brand", "number_of_wells"]; // Add more filter keys as needed
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
   /**
-   * Uses the custom hook to dynamically generate state variables for the filters.
-   * @returns {Object} - Contains the query state and the filters object.
+   * Filters the fetched data based on the search term.
+   * Updates the filtered data whenever the search term or the fetched data changes.
+   * @function
    */
-  const { query, setQuery, filters } = useDynamicFilters(filterKeys);
-
-  /**
-   * Filters the data based on the query and selected filters.
-   * @returns {Array} filteredData - Array of filtered wellplate objects.
-   */
-  const filteredData = data.filter((item) => {
-    return (
-      item.name.toLowerCase().includes(query.toLowerCase()) &&
-      filterKeys.every(key => {
-        const [selectedValue] = filters[key];
-        if (key.startsWith("number")) {
-          return selectedValue ? item[key] === parseInt(selectedValue) : true;
-        }
-        return selectedValue ? item[key] === selectedValue : true;
-      })
-    );
-  });
-
-  const availableFilters = useFilterOptions(data, filters, filterKeys);
+  useEffect(() => {
+    if (data) {
+      setFilteredData(
+        data.filter(item =>
+          item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+    }
+  }, [data, searchTerm]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -72,27 +45,22 @@ const Search = () => {
 
   return (
     <div>
-      <h1>Search App</h1>
+      <h1>Wellplates Data</h1>
       <input
         type="text"
-        placeholder="Search..."
-        value={query}
-        onChange={(e) => handleChange(e, "query", setQuery)}
+        placeholder="Search by name"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
-      {filterKeys.map(key => {
-        const [selectedValue, setSelectedValue] = filters[key];
-        const optionsKey = `available${key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, '')}`;
-        return (
-          <FilterSelect
-            key={key}
-            value={selectedValue}
-            onChange={(e) => handleChange(e, key, setSelectedValue)}
-            options={availableFilters[optionsKey]}
-            defaultOption={`All ${key.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase())}`}
-          />
-        );
-      })}
-      <FilteredList filteredData={filteredData} />
+      <ul>
+        {filteredData.map((item) => (
+          <li key={item._id}>
+            <Link to={`/item/${item._id}`}>
+              {item.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
