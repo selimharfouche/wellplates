@@ -28,16 +28,74 @@
         <article>
             <pre class="prettyprint source linenums"><code>import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import useFetchData from '../hooks/useFetchData';
-import useFilters from '../hooks/useFilters';
-import { TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import Filter from '../components/Filter';
+import useFetchData from "../hooks/useFetchData";
+import useFilters from "../hooks/useFilters";
+import useFilterManager from "../hooks/useFilterManager";
+import {
+  TextField,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Button,
+  Box,
+} from "@mui/material";
+import FilterRow from "../components/FilterRow";
+import Header from "../components/Header";
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
+const API_BASE_URL =
+  process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
+
+/**
+ * Columns to display in the table.
+ * @type {Array&lt;{label: string, key: string}>}
+ * @property {string} label - The value displayed to the client.
+ * @property {string} key - The value used for querying the database.
+ * @remark This array can be modified to reflect the specific columns the developer wishes to display.
+ */
+const displayColumns = [
+  { label: "Name", key: "name" },
+  { label: "Brand", key: "brand" },
+  { label: "Material", key: "material" },
+  { label: "Number of Wells", key: "number_of_wells" },
+];
+
+/**
+ * Available filters for filtering the data.
+ * @type {Array&lt;{label: string, key: string}>}
+ * @property {string} label - The value displayed to the client.
+ * @property {string} key - The value used for querying the database.
+ * @remark This array can be modified to reflect the specific filters the developer wishes to offer.
+ */
+const availableFilters = [
+  { label: "ID", key: "id" },
+  { label: "Brand", key: "brand" },
+  { label: "Material", key: "material" },
+  { label: "Number of Wells", key: "number_of_wells" },
+];
+
+/**
+ * Generates filter options dynamically based on the data and available filters.
+ * @param {Array} data - The array of data items.
+ * @param {Array} filters - The array of available filters.
+ * @returns {Object} The filter options.
+ */
+const generateFilterOptions = (data, filters) => {
+  const options = {};
+  filters.forEach((filter) => {
+    options[filter.key] = [
+      ...new Set(data.map((item) => item[filter.key]?.toString())),
+    ];
+  });
+  return options;
+};
 
 /**
  * Search component fetches wellplate data and allows users to filter the data by typing in a search input.
- * Additionally, users can filter by brand, material, and number of wells.
+ * Additionally, users can filter by properties such as brand, material, number of wells...
  * @function
  * @name Search
  * @returns {JSX.Element} The rendered component.
@@ -45,134 +103,95 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:300
 const Search = () => {
   const [data, loading, error] = useFetchData(`${API_BASE_URL}/api/wellplates`);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedBrands, setSelectedBrands] = useState([]);
-  const [selectedMaterials, setSelectedMaterials] = useState([]);
-  const [selectedWells, setSelectedWells] = useState([]);
-  const filteredData = useFilters(data, searchTerm, selectedBrands, selectedMaterials, selectedWells);
+  const {
+    activeFilters,
+    filterValues,
+    sortOptions,
+    handleAddFilter,
+    handleFilterTypeChange,
+    handleFilterValueChange,
+    handleSortChange,
+    handleFilterRemove,
+  } = useFilterManager();
+  const filteredData = useFilters(data, searchTerm, filterValues, sortOptions);
 
-  /**
-   * Handles the change of selected brands.
-   * @param {Event} event - The change event.
-   */
-  const handleBrandChange = (event) => {
-    const { target: { value } } = event;
-    setSelectedBrands(
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
-
-  /**
-   * Handles the change of selected materials.
-   * @param {Event} event - The change event.
-   */
-  const handleMaterialChange = (event) => {
-    const { target: { value } } = event;
-    setSelectedMaterials(
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
-
-  /**
-   * Handles the change of selected number of wells.
-   * @param {Event} event - The change event.
-   */
-  const handleWellsChange = (event) => {
-    const { target: { value } } = event;
-    setSelectedWells(
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
-
-  /**
-   * Reflects the current state of the data fetching.
-   * Displays a loading message while data is being fetched.
-   */
   if (loading) {
     return &lt;div>Loading...&lt;/div>;
   }
 
-  /**
-   * Reflects the current state of the data fetching.
-   * Displays an error message if there was an error during data fetching.
-   */
   if (error) {
     return &lt;div>Error: {error.message}&lt;/div>;
   }
 
-  /**
-   * Extracts unique brands for filter options from the fetched data.
-   * @type {string[]}
-   */
-  const brands = [...new Set(data.map(item => item.brand))];
-
-  /**
-   * Extracts unique materials for filter options from the fetched data.
-   * @type {string[]}
-   */
-  const materials = [...new Set(data.map(item => item.material))];
-
-  /**
-   * Extracts unique number of wells for filter options from the fetched data.
-   * @type {string[]}
-   */
-  const wellsOptions = [...new Set(data.map(item => item.number_of_wells.toString()))];
+  const filterOptions = generateFilterOptions(data, availableFilters);
 
   return (
-    &lt;TableContainer component={Paper}>
-      &lt;Table>
-        &lt;TableHead>
-          &lt;TableRow>
-            &lt;TableCell>
-              &lt;TextField
-                label="Search by Name"
-                variant="outlined"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                fullWidth
-              />
-            &lt;/TableCell>
-            &lt;TableCell>
-              &lt;Filter
-                label="Brand"
-                options={brands}
-                selectedOptions={selectedBrands}
-                handleChange={handleBrandChange}
-              />
-            &lt;/TableCell>
-            &lt;TableCell>
-              &lt;Filter
-                label="Material"
-                options={materials}
-                selectedOptions={selectedMaterials}
-                handleChange={handleMaterialChange}
-              />
-            &lt;/TableCell>
-            &lt;TableCell>
-              &lt;Filter
-                label="Wells"
-                options={wellsOptions}
-                selectedOptions={selectedWells}
-                handleChange={handleWellsChange}
-              />
-            &lt;/TableCell>
-          &lt;/TableRow>
-        &lt;/TableHead>
-        &lt;TableBody>
-          {filteredData.map((item) => (
-            &lt;TableRow key={item._id}>
-              &lt;TableCell>
-                &lt;Link to={`/item/${item._id}`}>
-                  {item.name}
-                &lt;/Link>
-              &lt;/TableCell>
-              &lt;TableCell>{item.brand}&lt;/TableCell>
-              &lt;TableCell>{item.material}&lt;/TableCell>
-              &lt;TableCell>{item.number_of_wells}&lt;/TableCell>
+    &lt;div>
+      {/* Header component */}
+      &lt;Header />
+
+      {/* Search input field */}
+      &lt;Box sx={{ mb: 2 }}>
+        &lt;TextField
+          label="Search by Name"
+          variant="outlined"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          fullWidth
+        />
+      &lt;/Box>
+
+      {/* Dynamic filter rows */}
+      {activeFilters.map((filter, index) => (
+        &lt;FilterRow
+          key={index}
+          filter={filter}
+          index={index}
+          handleFilterTypeChange={handleFilterTypeChange}
+          handleSortChange={handleSortChange}
+          handleFilterValueChange={handleFilterValueChange}
+          handleFilterRemove={handleFilterRemove}
+          availableFilters={availableFilters}
+          filterOptions={filterOptions}
+          activeFilters={activeFilters}
+        />
+      ))}
+
+      {/* Button to add a new filter */}
+      &lt;Button onClick={handleAddFilter} sx={{ mb: 2 }}>
+        Add Filter
+      &lt;/Button>
+
+      {/* Table to display filtered data */}
+      &lt;TableContainer component={Paper}>
+        &lt;Table>
+          &lt;TableHead>
+            &lt;TableRow>
+              {/* Table headers */}
+              {displayColumns.map((column) => (
+                &lt;TableCell key={column.key}>{column.label}&lt;/TableCell>
+              ))}
             &lt;/TableRow>
-          ))}
-        &lt;/TableBody>
-      &lt;/Table>
-    &lt;/TableContainer>
+          &lt;/TableHead>
+          &lt;TableBody>
+            {/* Table rows with filtered data */}
+            {filteredData.map((item) => (
+              &lt;TableRow key={item._id}>
+                {displayColumns.map((column) => (
+                  &lt;TableCell key={column.key}>
+                    {column.key === "name" ? (
+                      &lt;Link to={`/item/${item._id}`}>{item[column.key]}&lt;/Link>
+                    ) : (
+                      item[column.key]
+                    )}
+                  &lt;/TableCell>
+                ))}
+              &lt;/TableRow>
+            ))}
+          &lt;/TableBody>
+        &lt;/Table>
+      &lt;/TableContainer>
+    &lt;/div>
   );
 };
 
@@ -187,13 +206,13 @@ export default Search;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-config.html">config</a></li><li><a href="module-database.html">database</a></li><li><a href="module-middlewares.html">middlewares</a></li><li><a href="module-routes.html">routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="components.html">components</a></li><li><a href="helpers.html">helpers</a></li><li><a href="utils.html">utils</a></li><li><a href="utils.fullscreen.html">fullscreen</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Filter">Filter</a></li><li><a href="global.html#ItemDetail">ItemDetail</a></li><li><a href="global.html#Search">Search</a></li><li><a href="global.html#useFetchData">useFetchData</a></li><li><a href="global.html#useFilters">useFilters</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-config.html">config</a></li><li><a href="module-database.html">database</a></li><li><a href="module-middlewares.html">middlewares</a></li><li><a href="module-routes.html">routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="ItemDetail.html">ItemDetail</a></li><li><a href="utils.fullscreen.html">fullscreen</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Filter">Filter</a></li><li><a href="global.html#Search">Search</a></li><li><a href="global.html#availableFilters">availableFilters</a></li><li><a href="global.html#displayColumns">displayColumns</a></li><li><a href="global.html#generateFilterOptions">generateFilterOptions</a></li><li><a href="global.html#isNumericFilter">isNumericFilter</a></li><li><a href="global.html#useFetchData">useFetchData</a></li><li><a href="global.html#useFilterManager">useFilterManager</a></li><li><a href="global.html#useFilters">useFilters</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Tue Jul 02 2024 22:23:04 GMT+0300 (Eastern European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Jul 03 2024 17:09:14 GMT+0300 (Eastern European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

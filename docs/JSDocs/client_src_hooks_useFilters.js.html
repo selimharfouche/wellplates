@@ -27,33 +27,61 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import { useState, useEffect } from "react";
+import isNumericFilter from '../utils/isNumericFilter';
 
 /**
- * Custom hook to filter data based on search term, selected brands, selected materials, and selected number of wells.
- * 
- * @function useFilters
- * @param {Array} data - The array of data to filter.
+ * Custom hook to filter and sort data based on search term, dynamic filter values, and sort options.
+ * @param {Array} data - The array of data to filter and sort.
  * @param {string} searchTerm - The search term to filter the data.
- * @param {Array&lt;string>} selectedBrands - The selected brands to filter the data.
- * @param {Array&lt;string>} selectedMaterials - The selected materials to filter the data.
- * @param {Array&lt;string>} selectedWells - The selected number of wells to filter the data.
- * @returns {Array} - The filtered data.
+ * @param {Object} filterValues - The dynamic filter values to filter the data.
+ * @param {Object} sortOptions - The dynamic sort options to sort the data.
+ * @returns {Array} - The filtered and sorted data.
  */
-const useFilters = (data, searchTerm, selectedBrands, selectedMaterials, selectedWells) => {
+const useFilters = (data, searchTerm, filterValues, sortOptions) => {
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     if (data) {
+      console.log("Original Data:", data);
+      console.log("Search Term:", searchTerm);
+      console.log("Filter Values:", filterValues);
+      console.log("Sort Options:", sortOptions);
+
       let filtered = data.filter(item =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase()) &amp;&amp;
-        (selectedBrands.length === 0 || selectedBrands.includes(item.brand)) &amp;&amp;
-        (selectedMaterials.length === 0 || selectedMaterials.includes(item.material)) &amp;&amp;
-        (selectedWells.length === 0 || selectedWells.includes(item.number_of_wells.toString()))
+        Object.keys(filterValues).every(key => {
+          const filterValue = filterValues[key];
+          if (filterValue.length === 0) return true;
+          if (isNumericFilter(key)) {
+            return filterValue.includes(item[key].toString());
+          }
+          return filterValue.includes(item[key]);
+        })
       );
+
+      console.log("Filtered Data before Sorting:", filtered);
+
+      // Apply sorting
+      Object.keys(sortOptions).forEach(key => {
+        if (sortOptions[key]) {
+          filtered = filtered.sort((a, b) => {
+            if (isNumericFilter(key)) {
+              return sortOptions[key] === 'asc'
+                ? a[key] - b[key]
+                : b[key] - a[key];
+            }
+            return sortOptions[key] === 'asc'
+              ? a[key].localeCompare(b[key])
+              : b[key].localeCompare(a[key]);
+          });
+        }
+      });
+
+      console.log("Filtered Data after Sorting:", filtered);
 
       setFilteredData(filtered);
     }
-  }, [data, searchTerm, selectedBrands, selectedMaterials, selectedWells]);
+  }, [data, searchTerm, filterValues, sortOptions]);
 
   return filteredData;
 };
@@ -69,13 +97,13 @@ export default useFilters;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-config.html">config</a></li><li><a href="module-database.html">database</a></li><li><a href="module-middlewares.html">middlewares</a></li><li><a href="module-routes.html">routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="components.html">components</a></li><li><a href="helpers.html">helpers</a></li><li><a href="utils.html">utils</a></li><li><a href="utils.fullscreen.html">fullscreen</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Filter">Filter</a></li><li><a href="global.html#ItemDetail">ItemDetail</a></li><li><a href="global.html#Search">Search</a></li><li><a href="global.html#useFetchData">useFetchData</a></li><li><a href="global.html#useFilters">useFilters</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-config.html">config</a></li><li><a href="module-database.html">database</a></li><li><a href="module-middlewares.html">middlewares</a></li><li><a href="module-routes.html">routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="ItemDetail.html">ItemDetail</a></li><li><a href="utils.fullscreen.html">fullscreen</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Filter">Filter</a></li><li><a href="global.html#Search">Search</a></li><li><a href="global.html#availableFilters">availableFilters</a></li><li><a href="global.html#displayColumns">displayColumns</a></li><li><a href="global.html#generateFilterOptions">generateFilterOptions</a></li><li><a href="global.html#isNumericFilter">isNumericFilter</a></li><li><a href="global.html#useFetchData">useFetchData</a></li><li><a href="global.html#useFilterManager">useFilterManager</a></li><li><a href="global.html#useFilters">useFilters</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Tue Jul 02 2024 22:23:04 GMT+0300 (Eastern European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Jul 03 2024 17:09:14 GMT+0300 (Eastern European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
