@@ -21,10 +21,16 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 - the server is deployed on vercel https://wellplates-server.vercel.app/api/
 - Image and 3D on Assay Plate 1.
 
-
+# Whats new -3-
+- Sorting (asc, desc)
+- in depth filtering 
 # What I am currently focusing on:
 - documentation -> https://wellplates-docs.vercel.app/
 - code refactoring 
+## to be done soon
+
+- put the data (image,3d model) somewhere else.
+
 
 
 # Next step, not in a specific order:
@@ -35,7 +41,6 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 - be able to refresh the page 
 - admin portal ? 
 - helper bot
-- sorting, which will lead to a more extensive filtering (for example number of wells between 24 and 384)
 - compare wellplates
 - more user friendly
 - allowing users to add wellplates
@@ -44,5 +49,6 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 - structurize the docs: 1 directory for .md and 1 for JSDocs
 - networking concepts: errors, request, asynch ...optimize
 - lerna.js.org
-- server connnectiing twice ?
+- server connnecting twice ?
+- when filters are shown, show them in order, this might arise when having "price" in the database.
   

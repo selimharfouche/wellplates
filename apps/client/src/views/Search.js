@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import FilterRow from "../components/FilterRow";
 import Header from "../components/Header";
-
+import generateFilterOptions from '../utils/generateFilterOptions';
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
 
@@ -43,7 +43,7 @@ const displayColumns = [
  * @remark This array can be modified to reflect the specific filters the developer wishes to offer.
  */
 const availableFilters = [
-  { label: "ID", key: "id" },
+  // { label: "ID", key: "id" },
   { label: "Brand", key: "brand" },
   { label: "Material", key: "material" },
   { label: "Number of Wells", key: "number_of_wells" },
@@ -55,15 +55,6 @@ const availableFilters = [
  * @param {Array} filters - The array of available filters.
  * @returns {Object} The filter options.
  */
-const generateFilterOptions = (data, filters) => {
-  const options = {};
-  filters.forEach((filter) => {
-    options[filter.key] = [
-      ...new Set(data.map((item) => item[filter.key]?.toString())),
-    ];
-  });
-  return options;
-};
 
 /**
  * Search component fetches wellplate data and allows users to filter the data by typing in a search input.
@@ -95,8 +86,7 @@ const Search = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  const filterOptions = generateFilterOptions(data, availableFilters);
-
+  const filterOptions = generateFilterOptions(data, availableFilters, activeFilters);
   return (
     <div>
       {/* Header component */}
