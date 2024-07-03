@@ -24,7 +24,9 @@ const Search = () => {
 
   /**
    * Handles the change of selected brands.
-   * @param {Event} event - The change event.
+   * Triggered when a brand filter is selected.
+   * @param {Event} event - The change event.     
+   * @see {@link Filter}
    */
   const handleBrandChange = (event) => {
     const { target: { value } } = event;
@@ -35,7 +37,9 @@ const Search = () => {
 
   /**
    * Handles the change of selected materials.
+   * Triggered when a material filter is selected.
    * @param {Event} event - The change event.
+   * @see {@link Filter}
    */
   const handleMaterialChange = (event) => {
     const { target: { value } } = event;
@@ -46,7 +50,9 @@ const Search = () => {
 
   /**
    * Handles the change of selected number of wells.
+   * Triggered when a well filter is selected.
    * @param {Event} event - The change event.
+   * @see {@link Filter}
    */
   const handleWellsChange = (event) => {
     const { target: { value } } = event;
