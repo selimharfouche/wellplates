@@ -5,22 +5,6 @@
  */
 
 
-
-/**
- * @namespace utils
- * @description utils directory
- */
-/**
- * @namespace components
- * @description components directoy
- */
-/**
- * @namespace helpers
- * @description helpers directory
- */
-
-
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './styles/App.css';
