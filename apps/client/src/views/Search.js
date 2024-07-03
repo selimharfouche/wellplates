@@ -8,7 +8,13 @@ import FilterRow from '../components/FilterRow';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
 
-// Columns to display in the table
+/**
+ * Columns to display in the table.
+ * @type {Array<{label: string, key: string}>}
+ * @property {string} label - The value displayed to the client.
+ * @property {string} key - The value used for querying the database.
+ * @remark This array can be modified to reflect the specific columns the developer wishes to display.
+ */
 const displayColumns = [
   { label: 'Name', key: 'name' },
   { label: 'Brand', key: 'brand' },
@@ -16,8 +22,16 @@ const displayColumns = [
   { label: 'Number of Wells', key: 'number_of_wells' },
 ];
 
-// Available filters for filtering the data
+
+/**
+ * Available filters for filtering the data.
+ * @type {Array<{label: string, key: string}>}
+ * @property {string} label - The value displayed to the client.
+ * @property {string} key - The value used for querying the database.
+ * @remark This array can be modified to reflect the specific filters the developer wishes to offer.
+ */
 const availableFilters = [
+  { label: 'ID', key: 'id' },
   { label: 'Brand', key: 'brand' },
   { label: 'Material', key: 'material' },
   { label: 'Number of Wells', key: 'number_of_wells' },
@@ -39,7 +53,7 @@ const generateFilterOptions = (data, filters) => {
 
 /**
  * Search component fetches wellplate data and allows users to filter the data by typing in a search input.
- * Additionally, users can filter by brand, material, and number of wells.
+ * Additionally, users can filter by properties such as brand, material, and number of wells.
  * @function
  * @name Search
  * @returns {JSX.Element} The rendered component.
@@ -82,7 +96,7 @@ const Search = () => {
           handleFilterRemove={handleFilterRemove}
           availableFilters={availableFilters}
           filterOptions={filterOptions}
-          activeFilters={activeFilters}  // Pass activeFilters as a prop
+          activeFilters={activeFilters}  
         />
       ))}
       <Button onClick={handleAddFilter} sx={{ mb: 2 }}>Add Filter</Button>

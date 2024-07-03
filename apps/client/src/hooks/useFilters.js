@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import isNumericFilter from '../utils/isNumericFilter';
 
 /**
  * Custom hook to filter and sort data based on search term, dynamic filter values, and sort options.
@@ -23,7 +24,7 @@ const useFilters = (data, searchTerm, filterValues, sortOptions) => {
         Object.keys(filterValues).every(key => {
           const filterValue = filterValues[key];
           if (filterValue.length === 0) return true;
-          if (key.startsWith('number_')) {
+          if (isNumericFilter(key)) {
             return filterValue.includes(item[key].toString());
           }
           return filterValue.includes(item[key]);
@@ -36,7 +37,7 @@ const useFilters = (data, searchTerm, filterValues, sortOptions) => {
       Object.keys(sortOptions).forEach(key => {
         if (sortOptions[key]) {
           filtered = filtered.sort((a, b) => {
-            if (key.startsWith('number_')) {
+            if (isNumericFilter(key)) {
               return sortOptions[key] === 'asc'
                 ? a[key] - b[key]
                 : b[key] - a[key];

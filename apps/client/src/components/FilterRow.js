@@ -2,6 +2,7 @@ import React from 'react';
 import { FormControl, Select, MenuItem, InputLabel, IconButton, Box } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Filter from './Filter';
+import isNumericFilter from '../utils/isNumericFilter';
 
 const FilterRow = ({ filter, index, handleFilterTypeChange, handleSortChange, handleFilterValueChange, handleFilterRemove, availableFilters, filterOptions, activeFilters }) => {
   const selectedFilterTypes = activeFilters.map(f => f.type);
@@ -33,7 +34,7 @@ const FilterRow = ({ filter, index, handleFilterTypeChange, handleSortChange, ha
             onChange={(e) => handleSortChange(index, e)}
             displayEmpty
           >
-            {filter.type.startsWith('number_') ? (
+            {isNumericFilter(filter.type) ? (
               [
                 <MenuItem key="asc" value="asc">Ascending</MenuItem>,
                 <MenuItem key="desc" value="desc">Descending</MenuItem>
