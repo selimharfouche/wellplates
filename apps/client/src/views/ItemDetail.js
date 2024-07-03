@@ -11,6 +11,7 @@ import ModelViewer from '../helpers/ItemDetail/ModelViewer';
 import ImageViewer from '../helpers/ItemDetail/ImageViewer';
 import useFetchData from '../hooks/useFetchData';
 import '../styles/ItemDetail.css';
+import Header from '../components/Header';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001';
 
@@ -60,6 +61,7 @@ const ItemDetail = () => {
 
   return (
     <div>
+      <Header />
       <h2>{item.name}</h2>
       {Object.keys(item).map((key) => {
         if (key === 'name' || key === 'image' || key === 'model3D') return null;

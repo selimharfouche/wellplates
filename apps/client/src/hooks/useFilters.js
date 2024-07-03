@@ -1,31 +1,58 @@
 import { useState, useEffect } from "react";
 
 /**
- * Custom hook to filter data based on search term, selected brands, selected materials, and selected number of wells.
- * 
- * @function useFilters
- * @param {Array} data - The array of data to filter.
+ * Custom hook to filter and sort data based on search term, dynamic filter values, and sort options.
+ * @param {Array} data - The array of data to filter and sort.
  * @param {string} searchTerm - The search term to filter the data.
- * @param {Array<string>} selectedBrands - The selected brands to filter the data.
- * @param {Array<string>} selectedMaterials - The selected materials to filter the data.
- * @param {Array<string>} selectedWells - The selected number of wells to filter the data.
- * @returns {Array} - The filtered data.
+ * @param {Object} filterValues - The dynamic filter values to filter the data.
+ * @param {Object} sortOptions - The dynamic sort options to sort the data.
+ * @returns {Array} - The filtered and sorted data.
  */
-const useFilters = (data, searchTerm, selectedBrands, selectedMaterials, selectedWells) => {
+const useFilters = (data, searchTerm, filterValues, sortOptions) => {
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     if (data) {
+      console.log("Original Data:", data);
+      console.log("Search Term:", searchTerm);
+      console.log("Filter Values:", filterValues);
+      console.log("Sort Options:", sortOptions);
+
       let filtered = data.filter(item =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (selectedBrands.length === 0 || selectedBrands.includes(item.brand)) &&
-        (selectedMaterials.length === 0 || selectedMaterials.includes(item.material)) &&
-        (selectedWells.length === 0 || selectedWells.includes(item.number_of_wells.toString()))
+        Object.keys(filterValues).every(key => {
+          const filterValue = filterValues[key];
+          if (filterValue.length === 0) return true;
+          if (key.startsWith('number_')) {
+            return filterValue.includes(item[key].toString());
+          }
+          return filterValue.includes(item[key]);
+        })
       );
+
+      console.log("Filtered Data before Sorting:", filtered);
+
+      // Apply sorting
+      Object.keys(sortOptions).forEach(key => {
+        if (sortOptions[key]) {
+          filtered = filtered.sort((a, b) => {
+            if (key.startsWith('number_')) {
+              return sortOptions[key] === 'asc'
+                ? a[key] - b[key]
+                : b[key] - a[key];
+            }
+            return sortOptions[key] === 'asc'
+              ? a[key].localeCompare(b[key])
+              : b[key].localeCompare(a[key]);
+          });
+        }
+      });
+
+      console.log("Filtered Data after Sorting:", filtered);
 
       setFilteredData(filtered);
     }
-  }, [data, searchTerm, selectedBrands, selectedMaterials, selectedWells]);
+  }, [data, searchTerm, filterValues, sortOptions]);
 
   return filteredData;
 };

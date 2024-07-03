@@ -10,6 +10,7 @@
     "@elastic/search-ui": "^1.21.5",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.21",
     "@mui/material": "^5.15.21",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",

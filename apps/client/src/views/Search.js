@@ -2,10 +2,27 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useFetchData from '../hooks/useFetchData';
 import useFilters from '../hooks/useFilters';
-import { TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, MenuItem, Select, FormControl, InputLabel, Box, IconButton } from '@mui/material';
 import Filter from '../components/Filter';
+import CloseIcon from '@mui/icons-material/Close';
+import Header from '../components/Header';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
+
+// Columns to display in the table
+const displayColumns = [
+  { label: 'Name', key: 'name' },
+  { label: 'Brand', key: 'brand' },
+  { label: 'Material', key: 'material' },
+  { label: 'Number of Wells', key: 'number_of_wells' },
+];
+
+// Available filters for filtering the data
+const availableFilters = [
+  { label: 'Brand', key: 'brand' },
+  { label: 'Material', key: 'material' },
+  { label: 'Number of Wells', key: 'number_of_wells' },
+];
 
 /**
  * Search component fetches wellplate data and allows users to filter the data by typing in a search input.
@@ -17,140 +34,165 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:300
 const Search = () => {
   const [data, loading, error] = useFetchData(`${API_BASE_URL}/api/wellplates`);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedBrands, setSelectedBrands] = useState([]);
-  const [selectedMaterials, setSelectedMaterials] = useState([]);
-  const [selectedWells, setSelectedWells] = useState([]);
-  const filteredData = useFilters(data, searchTerm, selectedBrands, selectedMaterials, selectedWells);
+  const [activeFilters, setActiveFilters] = useState([]);
+  const [filterValues, setFilterValues] = useState({});
+  const [sortOptions, setSortOptions] = useState({});
+  const filteredData = useFilters(data, searchTerm, filterValues, sortOptions);
 
-  /**
-   * Handles the change of selected brands.
-   * Triggered when a brand filter is selected.
-   * @param {Event} event - The change event.     
-   * @see {@link Filter}
-   */
-  const handleBrandChange = (event) => {
-    const { target: { value } } = event;
-    setSelectedBrands(
-      typeof value === 'string' ? value.split(',') : value,
-    );
+  const handleAddFilter = () => {
+    setActiveFilters([...activeFilters, { type: '', values: [], sort: '' }]);
   };
 
-  /**
-   * Handles the change of selected materials.
-   * Triggered when a material filter is selected.
-   * @param {Event} event - The change event.
-   * @see {@link Filter}
-   */
-  const handleMaterialChange = (event) => {
-    const { target: { value } } = event;
-    setSelectedMaterials(
-      typeof value === 'string' ? value.split(',') : value,
-    );
+  const handleFilterTypeChange = (index, type) => {
+    const newFilters = [...activeFilters];
+    newFilters[index].type = type;
+    newFilters[index].values = [];
+    newFilters[index].sort = '';
+    setActiveFilters(newFilters);
+    setFilterValues(prev => ({ ...prev, [type]: [] }));
+    setSortOptions(prev => ({ ...prev, [type]: '' }));
   };
 
-  /**
-   * Handles the change of selected number of wells.
-   * Triggered when a well filter is selected.
-   * @param {Event} event - The change event.
-   * @see {@link Filter}
-   */
-  const handleWellsChange = (event) => {
-    const { target: { value } } = event;
-    setSelectedWells(
-      typeof value === 'string' ? value.split(',') : value,
-    );
+  const handleFilterValueChange = (index, values) => {
+    const newFilters = [...activeFilters];
+    newFilters[index].values = values;
+    setActiveFilters(newFilters);
+    setFilterValues(prev => ({ ...prev, [newFilters[index].type]: values }));
   };
 
-  /**
-   * Reflects the current state of the data fetching.
-   * Displays a loading message while data is being fetched.
-   */
+  const handleSortChange = (index, event) => {
+    const sort = event.target.value;
+    console.log("Selected Sort Option:", sort);
+    const newFilters = [...activeFilters];
+    newFilters[index].sort = sort;
+    setActiveFilters(newFilters);
+    setSortOptions(prev => ({ ...prev, [newFilters[index].type]: sort }));
+    console.log("Updated Sort Options State:", sortOptions);
+  };
+
+  const handleFilterRemove = (index) => {
+    const newFilters = [...activeFilters];
+    const removedFilter = newFilters.splice(index, 1);
+    setActiveFilters(newFilters);
+    setFilterValues(prev => {
+      const newValues = { ...prev };
+      delete newValues[removedFilter[0].type];
+      return newValues;
+    });
+    setSortOptions(prev => {
+      const newSorts = { ...prev };
+      delete newSorts[removedFilter[0].type];
+      return newSorts;
+    });
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  /**
-   * Reflects the current state of the data fetching.
-   * Displays an error message if there was an error during data fetching.
-   */
   if (error) {
     return <div>Error: {error.message}</div>;
   }
 
-  /**
-   * Extracts unique brands for filter options from the fetched data.
-   * @type {string[]}
-   */
   const brands = [...new Set(data.map(item => item.brand))];
-
-  /**
-   * Extracts unique materials for filter options from the fetched data.
-   * @type {string[]}
-   */
   const materials = [...new Set(data.map(item => item.material))];
-
-  /**
-   * Extracts unique number of wells for filter options from the fetched data.
-   * @type {string[]}
-   */
   const wellsOptions = [...new Set(data.map(item => item.number_of_wells.toString()))];
 
+  const selectedFilterTypes = activeFilters.map(filter => filter.type);
+
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>
-              <TextField
-                label="Search by Name"
-                variant="outlined"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                fullWidth
-              />
-            </TableCell>
-            <TableCell>
-              <Filter
-                label="Brand"
-                options={brands}
-                selectedOptions={selectedBrands}
-                handleChange={handleBrandChange}
-              />
-            </TableCell>
-            <TableCell>
-              <Filter
-                label="Material"
-                options={materials}
-                selectedOptions={selectedMaterials}
-                handleChange={handleMaterialChange}
-              />
-            </TableCell>
-            <TableCell>
-              <Filter
-                label="Wells"
-                options={wellsOptions}
-                selectedOptions={selectedWells}
-                handleChange={handleWellsChange}
-              />
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {filteredData.map((item) => (
-            <TableRow key={item._id}>
-              <TableCell>
-                <Link to={`/item/${item._id}`}>
-                  {item.name}
-                </Link>
-              </TableCell>
-              <TableCell>{item.brand}</TableCell>
-              <TableCell>{item.material}</TableCell>
-              <TableCell>{item.number_of_wells}</TableCell>
+    <div>
+      <Header />
+      <Box sx={{ mb: 2 }}>
+        <TextField
+          label="Search by Name"
+          variant="outlined"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          fullWidth
+        />
+      </Box>
+      {activeFilters.map((filter, index) => (
+        <Box key={index} sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 2 }}>
+          <IconButton color="secondary" onClick={() => handleFilterRemove(index)}>
+            <CloseIcon />
+          </IconButton>
+          <FormControl sx={{ minWidth: 120 }}>
+            <InputLabel>Filter Type</InputLabel>
+            <Select
+              value={filter.type}
+              onChange={(e) => handleFilterTypeChange(index, e.target.value)}
+              displayEmpty
+            >
+              {availableFilters.map((option) => (
+                <MenuItem key={option.key} value={option.key} disabled={selectedFilterTypes.includes(option.key)}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          {filter.type && (
+            <FormControl sx={{ minWidth: 120 }}>
+              <InputLabel>Sort</InputLabel>
+              <Select
+                value={filter.sort}
+                onChange={(e) => handleSortChange(index, e)}
+                displayEmpty
+              >
+                {filter.type.startsWith('number_') ? (
+                  [
+                    <MenuItem key="asc" value="asc">Ascending</MenuItem>,
+                    <MenuItem key="desc" value="desc">Descending</MenuItem>
+                  ]
+                ) : (
+                  [
+                    <MenuItem key="asc" value="asc">A-Z</MenuItem>,
+                    <MenuItem key="desc" value="desc">Z-A</MenuItem>
+                  ]
+                )}
+              </Select>
+            </FormControl>
+          )}
+          {filter.type && (
+            <Filter
+              label={availableFilters.find(f => f.key === filter.type)?.label}
+              options={filter.type === 'brand' ? brands : filter.type === 'material' ? materials : wellsOptions}
+              selectedOptions={filter.values}
+              handleChange={(e) => handleFilterValueChange(index, e.target.value)}
+            />
+          )}
+        </Box>
+      ))}
+      <Button onClick={handleAddFilter} sx={{ mb: 2 }}>Add Filter</Button>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              {displayColumns.map((column) => (
+                <TableCell key={column.key}>{column.label}</TableCell>
+              ))}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {filteredData.map((item) => (
+              <TableRow key={item._id}>
+                {displayColumns.map((column) => (
+                  <TableCell key={column.key}>
+                    {column.key === 'name' ? (
+                      <Link to={`/item/${item._id}`}>
+                        {item[column.key]}
+                      </Link>
+                    ) : (
+                      item[column.key]
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 };
 
