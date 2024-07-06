@@ -1,5 +1,8 @@
 {
   "script": {
     "docs": "jsdoc -c jsdoc.json -r "
+  },
+  "dependencies": {
+    "react-ga4": "^2.1.0"
   }
 }

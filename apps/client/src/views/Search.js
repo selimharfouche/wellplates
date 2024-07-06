@@ -50,13 +50,6 @@ const availableFilters = [
 ];
 
 /**
- * Generates filter options dynamically based on the data and available filters.
- * @param {Array} data - The array of data items.
- * @param {Array} filters - The array of available filters.
- * @returns {Object} The filter options.
- */
-
-/**
  * Search component fetches wellplate data and allows users to filter the data by typing in a search input.
  * Additionally, users can filter by properties such as brand, material, number of wells...
  * @function

@@ -3,6 +3,9 @@
  * @description This component fetches and displays the details of a wellplate item.
  * @requires {@link helpers.ImageViewer}
  * @requires {@link helpers.ModelViewer}
+ * @description The database has a field id which is set by the programmer.
+ * This field is not to be confused with the _id field that is automatically created by mongodb.
+ * ItemDetail gets the id from the item and renders the image and the 3d model located in the directory with the same name.
  */
 
 import React from 'react';

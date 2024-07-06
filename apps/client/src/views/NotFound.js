@@ -1,6 +1,16 @@
 import React, { useEffect } from 'react';
 import '../styles/NotFound.css'; 
 
+/**
+ * NotFound component that renders a 404 error page.
+ *
+ * This component displays a 404 error message indicating that the requested page was not found.
+ * It includes a count-up animation effect to emphasize the "404" number.
+ * The animation is implemented using the `useEffect` hook to format and animate the number.
+ *
+ * @component
+ */
+
 const NotFound = () => {
   useEffect(() => {
     const formatThousandsNoRounding = (n, dp) => {
