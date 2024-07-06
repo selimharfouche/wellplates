@@ -24,11 +24,15 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 # Whats new -3-
 - Sorting (asc, desc)
 - in depth filtering 
+
+# Whats new -4-
+- google analytics 
+
 # What I am currently focusing on:
 - documentation -> https://wellplates-docs.vercel.app/
 - code refactoring 
 ## to be done soon
-
+- security login & testing, mozilla sops? secure-env?
 - put the data (image,3d model) somewhere else.
 
 
@@ -44,7 +48,6 @@ I added a node server and uploaded the database on mongodb atlas. I also made th
 - compare wellplates
 - more user friendly
 - allowing users to add wellplates
-- images and 3d model will also be delivered from somewhere else
 - dig deeper in data structure in javascript
 - structurize the docs: 1 directory for .md and 1 for JSDocs
 - networking concepts: errors, request, asynch ...optimize

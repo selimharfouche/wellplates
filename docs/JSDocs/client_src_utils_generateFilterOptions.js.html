@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: server/src/app.js</title>
+    <title>JSDoc: Source: client/src/utils/generateFilterOptions.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: server/src/app.js</h1>
+    <h1 class="page-title">Source: client/src/utils/generateFilterOptions.js</h1>
 
     
 
@@ -27,32 +27,38 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @file app.js
- * @description Main application file for the server setup and routes.
- * @module app
+ * Generates available filter options based on the current data and active filters.
+ *
+ * When a new filter is added, the available options for the new filter are constrained by the currently active filters.
+ *
+ * @param {Array&lt;Object>} data - The dataset to be filtered.
+ * @param {Array&lt;{label: string, key: string}>} filters - The available filters.
+ * @param {Array&lt;{type: string, values: Array&lt;string>}>} activeFilters - The currently active filters.
+ * @returns {Object} - Returns an object containing the available options for each filter key.
  */
+const generateFilterOptions = (data, filters, activeFilters) => {
+  const options = {};
 
-const express = require('express');
-const { applyMiddlewares } = require('./middlewares/middlewares');
-const { setupRoutes } = require('./routes/routes');
-const { connect } = require('./database/database');
-const { port } = require('./config/config');
+  filters.forEach(filter => {
+    let filteredData = data;
 
-const app = express();
+    // Apply active filters except for the current filter type
+    activeFilters.forEach(activeFilter => {
+      if (activeFilter.type &amp;&amp; activeFilter.type !== filter.key &amp;&amp; activeFilter.values.length > 0) {
+        filteredData = filteredData.filter(item =>
+          activeFilter.values.includes(item[activeFilter.type]?.toString())
+        );
+      }
+    });
 
-applyMiddlewares(app);
-setupRoutes(app, connect);
+    // Generate options based on filtered data
+    options[filter.key] = [...new Set(filteredData.map(item => item[filter.key]?.toString()))];
+  });
 
-/**
- * Start the server and listen on the specified port.
- * @memberof module:app
- * @function
- */
-app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
-});
+  return options;
+};
 
-module.exports = app;
+export default generateFilterOptions;
 </code></pre>
         </article>
     </section>

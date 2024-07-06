@@ -227,7 +227,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_src_views_Search.js.html">client/src/views/Search.js</a>, <a href="client_src_views_Search.js.html#line45">line 45</a>
+        <a href="client_src_views_Search.js.html">client/src/views/Search.js</a>, <a href="client_src_views_Search.js.html#line49">line 49</a>
     </li></ul></dd>
     
 
@@ -374,7 +374,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_src_views_Search.js.html">client/src/views/Search.js</a>, <a href="client_src_views_Search.js.html#line31">line 31</a>
+        <a href="client_src_views_Search.js.html">client/src/views/Search.js</a>, <a href="client_src_views_Search.js.html#line35">line 35</a>
     </li></ul></dd>
     
 
@@ -679,6 +679,97 @@
     
 
     
+    <h4 class="name" id="NotFound"><span class="type-signature"></span>NotFound<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>NotFound component that renders a 404 error page.</p>
+<p>This component displays a 404 error message indicating that the requested page was not found.
+It includes a count-up animation effect to emphasize the &quot;404&quot; number.
+The animation is implemented using the <code>useEffect</code> hook to format and animate the number.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client_src_views_NotFound.js.html">client/src/views/NotFound.js</a>, <a href="client_src_views_NotFound.js.html#line14">line 14</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="Search"><span class="type-signature"></span>Search<span class="signature">()</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
     
 
@@ -732,7 +823,7 @@ Additionally, users can filter by properties such as brand, material, number of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_src_views_Search.js.html">client/src/views/Search.js</a>, <a href="client_src_views_Search.js.html#line68">line 68</a>
+        <a href="client_src_views_Search.js.html">client/src/views/Search.js</a>, <a href="client_src_views_Search.js.html#line56">line 56</a>
     </li></ul></dd>
     
 
@@ -790,7 +881,7 @@ Additionally, users can filter by properties such as brand, material, number of 
     
 
     
-    <h4 class="name" id="generateFilterOptions"><span class="type-signature"></span>generateFilterOptions<span class="signature">(data, filters)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="generateFilterOptions"><span class="type-signature"></span>generateFilterOptions<span class="signature">(data, filters, activeFilters)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -798,7 +889,8 @@ Additionally, users can filter by properties such as brand, material, number of 
 
 
 <div class="description">
-    <p>Generates filter options dynamically based on the data and available filters.</p>
+    <p>Generates available filter options based on the current data and active filters.</p>
+<p>When a new filter is added, the available options for the new filter are constrained by the currently active filters.</p>
 </div>
 
 
@@ -840,7 +932,7 @@ Additionally, users can filter by properties such as brand, material, number of 
             <td class="type">
             
                 
-<span class="param-type">Array</span>
+<span class="param-type">Array.&lt;Object></span>
 
 
             
@@ -850,7 +942,7 @@ Additionally, users can filter by properties such as brand, material, number of 
 
             
 
-            <td class="description last"><p>The array of data items.</p></td>
+            <td class="description last"><p>The dataset to be filtered.</p></td>
         </tr>
 
     
@@ -863,7 +955,7 @@ Additionally, users can filter by properties such as brand, material, number of 
             <td class="type">
             
                 
-<span class="param-type">Array</span>
+<span class="param-type">Array.&lt;{label: string, key: string}></span>
 
 
             
@@ -873,7 +965,30 @@ Additionally, users can filter by properties such as brand, material, number of 
 
             
 
-            <td class="description last"><p>The array of available filters.</p></td>
+            <td class="description last"><p>The available filters.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>activeFilters</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;{type: string, values: Array.&lt;string>}></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The currently active filters.</p></td>
         </tr>
 
     
@@ -914,7 +1029,7 @@ Additionally, users can filter by properties such as brand, material, number of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_src_views_Search.js.html">client/src/views/Search.js</a>, <a href="client_src_views_Search.js.html#line58">line 58</a>
+        <a href="client_src_utils_generateFilterOptions.js.html">client/src/utils/generateFilterOptions.js</a>, <a href="client_src_utils_generateFilterOptions.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -943,7 +1058,9 @@ Additionally, users can filter by properties such as brand, material, number of 
 
         
 <div class="param-desc">
-    <p>The filter options.</p>
+    <ul>
+<li>Returns an object containing the available options for each filter key.</li>
+</ul>
 </div>
 
 
@@ -1815,13 +1932,13 @@ It considers keys that start with 'number_', as well as specific keys like 'id' 
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-config.html">config</a></li><li><a href="module-database.html">database</a></li><li><a href="module-middlewares.html">middlewares</a></li><li><a href="module-routes.html">routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="ItemDetail.html">ItemDetail</a></li><li><a href="utils.fullscreen.html">fullscreen</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Filter">Filter</a></li><li><a href="global.html#Search">Search</a></li><li><a href="global.html#availableFilters">availableFilters</a></li><li><a href="global.html#displayColumns">displayColumns</a></li><li><a href="global.html#generateFilterOptions">generateFilterOptions</a></li><li><a href="global.html#isNumericFilter">isNumericFilter</a></li><li><a href="global.html#useFetchData">useFetchData</a></li><li><a href="global.html#useFilterManager">useFilterManager</a></li><li><a href="global.html#useFilters">useFilters</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-config.html">config</a></li><li><a href="module-database.html">database</a></li><li><a href="module-middlewares.html">middlewares</a></li><li><a href="module-routes.html">routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="ItemDetail.html">ItemDetail</a></li><li><a href="utils.fullscreen.html">fullscreen</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Filter">Filter</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#Search">Search</a></li><li><a href="global.html#availableFilters">availableFilters</a></li><li><a href="global.html#displayColumns">displayColumns</a></li><li><a href="global.html#generateFilterOptions">generateFilterOptions</a></li><li><a href="global.html#isNumericFilter">isNumericFilter</a></li><li><a href="global.html#useFetchData">useFetchData</a></li><li><a href="global.html#useFilterManager">useFilterManager</a></li><li><a href="global.html#useFilters">useFilters</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Jul 03 2024 17:09:14 GMT+0300 (Eastern European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sat Jul 06 2024 20:48:09 GMT+0300 (Eastern European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
