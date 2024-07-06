@@ -18,6 +18,10 @@ import {
 import FilterRow from "../components/FilterRow";
 import Header from "../components/Header";
 import generateFilterOptions from '../utils/generateFilterOptions';
+
+import ReactGA from 'react-ga4';
+
+
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
 
@@ -57,6 +61,12 @@ const availableFilters = [
  * @returns {JSX.Element} The rendered component.
  */
 const Search = () => {
+ReactGA.send({
+  hitType:"pageview",
+  page:"/",
+  title:"Home",
+})
+
   const [data, loading, error] = useFetchData(`${API_BASE_URL}/api/wellplates`);
   const [searchTerm, setSearchTerm] = useState("");
   const {

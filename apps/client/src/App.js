@@ -11,10 +11,12 @@ import './styles/App.css';
 import Search from './views/Search';
 import ItemDetail from './views/ItemDetail';
 import NotFound from './views/NotFound';
-
+import ReactGA from 'react-ga4';
 
 
 function App() {
+  ReactGA.initialize('G-NJLCZ22Y1Y');
+  
   return (
     <Router>
       <div className="App">
